@@ -1,0 +1,39 @@
+<%
+Const SiteName="长沙市参天树装饰设计工程有限公司"        '网站名称
+Const EnSiteName=""        '网站名称
+Const SiteTitle="长沙市参天树装饰设计工程有限公司"        '网站标题
+Const EnSiteTitle=""        '网站标题
+Const SiteUrl="http://gz.cantianshu.cn/"        '网站地址
+Const EnterpriseMail="mail.ytnic.com"        '企业邮局
+Const LogoUrl="0731-89791391 89791200"        'Logo地址
+Const BannerUrl="Images/banner.gif"        'Banner地址
+Const EnBannerUrl="010-88888888"        'EnBanner地址
+Const Sitekey="长沙市参天树装饰设计工程有限公司"        '网站关键字
+Const Sitedes="长沙市参天树装饰设计工程有限公司"        '网站描述
+Const IsFlash="Yes"        '是否为FLASH
+Const High=40        '高度
+Const WebmasterName="CEO"        '站长姓名
+Const WebmasterEmail="vip@ytnic.com"        '站长信箱
+Const Copyright="Copyright&copy;2011-2013 <a href='http://www.wts2008.com/' target='_blank'>wts2008.com</a> All Rights Reserved. | <a href='http://www.miitbeian.gov.cn' target='_blank'>ICP证00520号 </a>   版权所有   长沙市参天树装饰设计工程有限公司"        '版权信息
+Const EnCopyright=""        '版权信息
+Const MaxPerPage_Default=9        '首页每页产品或文章数
+Const New_count=5        '首面新闻资讯条数
+Const Product_count=8        '首面产品列表数
+Const MaxPerPage_Search=10        '文章搜索页每页文章数
+Const MaxPerPage_Content=200000        '每页显示大约字符数
+Const NewsComment="Yes"        '是否启用新闻评论功能
+Const EnableProductCheck="Yes"        '是否启用文章审核功能
+Const EnableUploadFile="Yes"        '是否开放文件上传
+Const PopAnnounce="Yes"        '是否弹出公告窗口
+Const HitsOfHot=500        '热门文章点击数
+Const MaxFileSize=300        '上传文件大小限制
+Const SaveUpFilesPath="UploadFiles"        '存放上传文件的目录
+Const UpFileType="gif|jpg|bmp|png|swf|doc|rar"        '允许的上传文件类型
+Const DelUpFiles="Yes"        '删除文章时是否同时删除文章中的上传文件
+Const SessionTimeout=30        'Session会话的保持时间
+Const MailObject="Jmail"        '邮件发送组件
+Const MailServer="smtp.163.com"        '用来发送邮件的SMTP服务器
+Const MailServerUserName="smtp"        '登录用户名
+Const MailServerPassWord="3837312"        '登录密码
+Const MailDomain="163.com"        '域名
+%>

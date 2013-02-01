@@ -4,10 +4,59 @@
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>无标题文档</title>
 <LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+<script type="text/javascript" language="javascript"> 
+	/* 显示代码内容 */
+	function formatCode()
+	{
+		var list = new Array();
+		var obj = document.getElementById("codeare");
+		list = obj.innerHTML.split("\n");
+		
+		obj.innerHTML = "<ol>";
+	 	for(var i=0; i<list.length; i++)
+			obj.innerHTML += "<li>"+list[i]+"</li>";
+		
+		obj.innerHTML += "</ol>"
+	}
+</script> 
 </head>
 
 <body>
 <h2>Hello World</h2>
-<p>Thh zvxc, ljvzc alks kcv asdf nvi zx e q ka vklv knad zxcvnm,nxcaskld jsklajfkxz,vn slkdsajdfj </p>
+<p>代码测试 </p>
+<pre id="codeare">
+ENCODE( order.auctionStrategy); // ver 9 field
+ENCODE( order.startingPrice); // ver 9 field
+ENCODE( order.stockRefPrice); // ver 9 field
+ENCODE( order.delta); // ver 9 field
+ENCODE( order.stockRangeLower); // ver 9 field
+ENCODE( order.stockRangeUpper); // ver 9 field
+ENCODE( order.displaySize); // ver 9 field
+ENCODE( order.blockOrder); // ver 9 field
+ENCODE( order.sweepToFill); // ver 9 field
+ENCODE( order.allOrNone); // ver 9 field
+ENCODE( order.minQty); // ver 9 field
+ENCODE( order.ocaType); // ver 9 field
+ENCODE( order.eTradeOnly); // ver 9 field
+ENCODE( order.firmQuoteOnly); // ver 9 field
+ENCODE( order.nbboPriceCap); // ver 9 field
+
+ENCODE( order.parentId); // ver 10 field
+ENCODE( order.triggerMethod); // ver 10 field
+
+ENCODE( order.volatility); // ver 11 field
+ENCODE( order.volatilityType); // ver 11 field
+ENCODE( order.deltaNeutralOrderType); // ver 11 field (had a hack for ver 11)
+ENCODE( order.deltaNeutralAuxPrice); // ver 12 field
+ENCODE( order.continuousUpdate); // ver 11 field
+
+ENCODE( order.referencePriceType); // ver 11 field
+
+ENCODE( order.trailStopPrice); // ver 13 field
+</pre>
+<script type="text/javascript" language="javascript"> 
+	formatCode();
+</script> 
 </body>
 </html>
+

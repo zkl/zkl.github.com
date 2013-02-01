@@ -9,6 +9,16 @@ background-repeat:repeat-x;
 color:#FFFFFF;
 }
 
+pre, code {
+	display: block;
+	overflow: auto;
+	padding: 5px 10px;
+	border: 1px solid #666666;
+	word-wrap:break-word; /* Internet Explorer 5.5+ */
+	white-space: pre-wrap; /* Firefox */
+	background-color: #333300;
+}
+
 #page {
 width:900px;
 background-image:url(images/page.png);

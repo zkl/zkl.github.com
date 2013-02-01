@@ -18,10 +18,8 @@
 		} 
 	} 
 
-	/* 改变正文内容 */
-	function changeContext(el, contextfile)
+	function activeFocus(obj)
 	{
-		document.getElementById('iframepage').src=contextfile;
 		var alnk=document.getElementsByTagName('a');
 		for (var i=0; i<alnk.length; i++)
 		{
@@ -31,10 +29,14 @@
 				break;
 			}
 		}
-		
-		el.className = "active";
+		obj.className = "active";
 	}
-
+	
+	/* 显示部分代码内容 */
+	function s()
+	{
+	 	alert(document.getElementById("ss").innerHTML);
+	}
 </script> 
 	
 </head>
@@ -51,16 +53,16 @@
 	<div id="mainarea">
 	
 	<div id="contentarea">
-	<iframe id="iframepage" src="home.html" width="530"  frameborder="no" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" onLoad="iFrameHeight()" >
+	<iframe id="iframepage" src="home.html" width="530"  frameborder="no" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" onLoad="iFrameHeight()" name="contextframe" >
 	</iframe>
 	</div>
 	
 	<div id="sidebar">
 		<div id="sidebarnav">
-		<a href="javascript:void(0);" onclick="changeContext(this, 'home.html')" class="active">Home</a>
-		<a href="javascript:void(0);" onclick="changeContext(this, 'codetest.html')" >Codes Test </a>
-		<a href="javascript:void(0);" onclick="changeContext(this, 'codetest.html')" >Pricing</a>
-		<a href="javascript:void(0);" onclick="changeContext(this, 'codetest.html')" >Contact Us</a>
+		<a href="home.html"     onclick="activeFocus(this)" target="contextframe" class="active">Home</a>
+		<a href="codetest.html" onclick="activeFocus(this)" target="contextframe">Codes Test </a>
+		<a href="codetest.html" onclick="activeFocus(this)" target="contextframe">Pricing</a>
+		<a href="codetest.html" onclick="activeFocus(this)" target="contextframe">Contact Us</a>
 		</div>
 		
 		<div class="widget">
@@ -76,7 +78,6 @@
 	<div id="footer">
 		Designed by <a href="http://www.free-css-templates.com/">Free CSS Templates</a>, Thanks to <a href="http://www.openwebdesign.org/">web design</a> download from  <a href="http://www.mianfeimoban.com.com/">mianfeimoban.com</a>
 	</div>
-
 
 </div>
 

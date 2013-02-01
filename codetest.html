@@ -12,11 +12,12 @@
 		var obj = document.getElementById("codeare");
 		list = obj.innerHTML.split("\n");
 		
-		obj.innerHTML = "<ol>";
+		var html = "<ol>";
 	 	for(var i=0; i<list.length; i++)
-			obj.innerHTML += "<li>"+list[i]+"</li>";
+			html += "<li>"+list[i]+"</li>";
 		
-		obj.innerHTML += "</ol>"
+		html += "</ol>"
+		obj.innerHTML = html;
 	}
 </script> 
 </head>

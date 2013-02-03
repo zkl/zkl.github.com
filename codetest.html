@@ -2,30 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>无标题文档</title>
-<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
-<script type="text/javascript" language="javascript"> 
-	/* 显示代码内容 */
-	function formatCode()
-	{
-		var list = new Array();
-		var obj = document.getElementById("codeare");
-		list = obj.innerHTML.split("\n");
-		
-		var html = "<ol>";
-	 	for(var i=0; i<list.length; i++)
-			html += "<li>"+list[i]+"</li>";
-		
-		html += "</ol>"
-		obj.innerHTML = html;
-	}
-</script> 
+<title>&#x65e0;&#x6807;&#x9898;&#x6587;&#x6863;</title>
+<link REL="StyleSheet" HREF="style.css" TYPE="text/css" MEDIA="screen" />
+<script type="text/javascript" language="javascript" src="javascript/formatCode.js"></script> 
 </head>
 
 <body>
 <h2>Hello World</h2>
-<p>代码测试 </p>
-<pre id="codeare">
+<p>&#x4ee3;&#x7801;&#x6d4b;&#x8bd5;</p>
+<pre class="code" id="codeare">
 ENCODE( order.auctionStrategy); // ver 9 field
 ENCODE( order.startingPrice); // ver 9 field
 ENCODE( order.stockRefPrice); // ver 9 field
@@ -52,11 +37,10 @@ ENCODE( order.deltaNeutralAuxPrice); // ver 12 field
 ENCODE( order.continuousUpdate); // ver 11 field
 
 ENCODE( order.referencePriceType); // ver 11 field
-
 ENCODE( order.trailStopPrice); // ver 13 field
 </pre>
 <script type="text/javascript" language="javascript"> 
-	formatCode();
+	formatCode("codeare");
 </script> 
 </body>
 </html>

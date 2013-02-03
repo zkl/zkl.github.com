@@ -9,7 +9,7 @@ background-repeat:repeat-x;
 color:#FFFFFF;
 }
 
-pre, code {
+.code {
 	display: block;
 	overflow: auto;
 	padding: 5px 10px;
@@ -19,7 +19,7 @@ pre, code {
 	background-color: #333300;
 }
 
-pre .shellCode {
+.shellCode {
 	display: block;
 	overflow: auto;
 	padding: 5px 10px;
@@ -27,6 +27,15 @@ pre .shellCode {
 	word-wrap:break-word; /* Internet Explorer 5.5+ */
 	white-space: pre-wrap; /* Firefox */
 	background-color: #000000;
+}
+
+.shellCode .cmd {
+	color: #eafada;
+	font-weight:bold;
+}
+
+.shellCode .prompt {
+	color: #a4a404;
 	font-weight:bold;
 }
 

@@ -18,9 +18,16 @@ function formatShellCode(codeare)
 	var obj = document.getElementById(codeare);
 	list = obj.innerHTML.split("\n");
 	
-	var html = "";
- 	for(var i=0; i<list.length; i++)
-		html += "zkl@zkl$ "+list[i]+"\n";
+	var html = "<table><tr><td><table>";
 	
+	for(var i=0; i<list.length; i++)
+		html+= "<tr class='prompt'><td>dameon@zkl$</td></tr>";
+
+	html += "</table></td><td><table>";
+
+ 	for(var i=0; i<list.length; i++)
+		html += "<tr class='cmd'><td>"+list[i]+"</td></tr>";
+	
+	html += "</td></tr></table>";
 	obj.innerHTML = html;
 }

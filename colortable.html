@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>Color Table</title>
+<link REL="StyleSheet" HREF="style.css" TYPE="text/css" MEDIA="screen" />
+<link REL="StyleSheet" HREF="colortable.css" TYPE="text/css" MEDIA="screen" />
+<script type="text/javascript" language="javascript" >
+
+/* 将数字转换为定长的字符串 */	
+function atos(n, len)
+{
+	var str = n.toString(16);
+	for(;str.length<len;)
+		str = "0"+str;
+	
+	return str;
+}
+
+/* 显示颜色表 */
+function showColorTable(id)
+{
+	var obj = document.getElementById(id);
+	var html= "";
+
+	for(var r=0; r<256; r+=16)
+	{
+		html += "<h2>COLOR TABLE RED = " + atos(r, 2) + "</h2><table>"
+		for(var g=0; g<256; g+=16)
+		{
+			html += "<tr>";
+			for(var b=0; b<256; b+=16)
+			{
+				var color = atos(r, 2) + atos(g, 2) + atos(b, 2);
+				html += "<td width=55px bgcolor=#";
+				html +=	color;
+				html += "><div onmouseover=\"highLevel(this)\" onmouseout=\"lowLevel(this)\" ";
+				html += " id=" + color + ">";
+				html += color + "</div></td>";
+			}
+			html += "</tr>";
+		}
+		html += "</table>";
+	}
+	obj.innerHTML = html;
+}
+
+/* 高亮 */
+function highLevel(obj)
+{
+	var par = obj.parentNode;
+}
+function lowLevel(obj)
+{
+	obj.className = "";
+
+}
+
+</script> 
+</head>
+
+<body>
+	<div id="info"></div>
+<center id="centerare"></center>
+<script type="text/javascript" language="javascript"> 
+	showColorTable("centerare");
+</script> 
+</body>
+</html>
+

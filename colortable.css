@@ -1,0 +1,12 @@
+.highLevel {
+	top: 100px;
+	left:100px;
+	width: 70px;
+	height: 30px;
+	color: #9a9a55;
+	background-color: #213423;
+	text-align: center;
+	z-index: 2;
+	position: absolute;
+}
+

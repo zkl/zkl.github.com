@@ -4,35 +4,6 @@
 
 <head>
 <title>Daemon's blogging</title>
-<LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
-
-<script type="text/javascript" language="javascript"> 
-	/* 自动调整 iframe 标记的高度 */
-	function iFrameHeight() 
-	{ 
-		var ifm= document.getElementById("iframepage"); 
-		var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument; 
-		if(ifm != null && subWeb != null) 
-		{ 
-			ifm.height = subWeb.body.scrollHeight+50; 
-		} 
-	} 
-
-	function activeFocus(obj)
-	{
-		var alnk=document.getElementsByTagName('a');
-		for (var i=0; i<alnk.length; i++)
-		{
-			if(alnk[i].className == "active")
-			{
-				alnk[i].className = "";
-				break;
-			}
-		}
-		obj.className = "active";
-	}
-</script> 
-	
 </head>
 
 <body>

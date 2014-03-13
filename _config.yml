@@ -4,7 +4,7 @@ logo:             site-logo.png
 disqus_shortname: 
 search:           true
 # Change url to your domain. Leave localhost server or blank when working locally.
-url:              http://zkl.github.io
+url:              http://127.0.0.1:4000
 
 # Owner/author information
 owner:
@@ -21,7 +21,7 @@ owner:
   flickr:         
   tumblr:         
   # For Google Authorship https://plus.google.com/authorship
-  google_plus:    
+  google_plus: https://google.com/+KunlunZhang
 
 # Analytics and webmaster tools stuff goes here
 google_analytics:   

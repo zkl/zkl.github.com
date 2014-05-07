@@ -1,6 +1,14 @@
 <!-- UY BEGIN -->
 <div id="uyan_frame"></div>
-<script type="text/javascript" 
-	src="http://v2.uyan.cc/code/uyan.js?uid=1926680">
+<script type="text/javaScript" >
+(function() {
+        var dsq = document.createElement('meta'); 
+        dsq.name = "uyan_auth"
+        dsq.content = '{{ site.JB.comments.youyan.verifyid }}';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<script type="text/javaScript" 
+	src="http://v2.uyan.cc/code/uyan.js?uid={{ site.JB.comments.youyan.uid }}">
 </script>
 <!-- UY END -->

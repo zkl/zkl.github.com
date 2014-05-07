@@ -3,10 +3,10 @@ layout: post
 title: "Lua编程"
 description: ""
 category: 技术分享
-tags: [install jekyll]
+tags: [Lua]
 ---
 {% include JB/setup %}
-# install jekyll 流程
+# Lua 编程
 ---
 
 
@@ -23,7 +23,7 @@ tags: [install jekyll]
  gem install rdiscount --platform=ruby
 ```
 
-* DevKit安装完后，即可安装jekyll：`gem install jekyll`.
+* Lua C 编程案例
 
  
 

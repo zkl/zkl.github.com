@@ -2,23 +2,25 @@ body{ background: url("img/body_bg.png") repeat;}
  
 /*navbar bgcolor -- float*/
 .navbar .navbar-inner{ 
-  background-color: rgba(0,173,207,1);
+  background-color: rgba(0,173,207,50);
 }
 
 .navbar .nav {  
-  float: right; }
+  float: right; 
+}
 
 
 
 /*page container -- card style -- */
-.nav-narrow{  
+.nav-narrow {  
   margin: 0 auto;
-  max-width: 800px;}
+  max-width: 800px;
+}
 
 .container-narrow {
   margin: 100px auto;
   max-width: 800px; 
-  }
+}
 
 .card { 
   max-width: 800px;

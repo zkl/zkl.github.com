@@ -83,13 +83,13 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : jekyllbootstrap
+      short_name : zkl
     livefyre :
       site_id : 123
     intensedebate :
-      account : 123abc
+      account : zkl
     facebook :
-      appid : 123
+      appid : zkl
       num_posts: 5
       width: 580
       colorscheme: light

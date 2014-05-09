@@ -1,4 +1,4 @@
-#jekylll blog
+#Daemon Blog
 
-###_site里面修改相关的css路劲。
-###_config.yml修改markdown。
+###修改日志
+####增加友言评论模块

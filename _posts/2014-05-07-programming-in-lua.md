@@ -26,6 +26,13 @@ tags: [Lua]
 	for(i=0; i<100; i++)
 		sync(ni);
 {% endhighlight %}
+
+* Lua 代码 
+{% highlight lua %}
+	for i=0; 100; do
+		sync(ni);
+	end
+{% endhighlight %}
  
 
 

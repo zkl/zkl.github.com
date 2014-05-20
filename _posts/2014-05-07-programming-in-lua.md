@@ -9,7 +9,16 @@ tags: [Lua]
 # Lua 编程
 ---
 
-* Lua 程序设计实例
+* Lua 程序设计实例 第一个实例实现了一个简化版的正弦函数：
+{% highlight lua %}
+static int l_sin(lua_State *L)
+{
+	double d = lua_tonumber(L, 1); /* 获取参数 */
+	lua_pushnumber(L, sin(d)); /* 压入结果 */
+	return 1; /* 返回结果数量 */ 
+}
+{% endhighlight %}
+
 
 <!--break-->
 

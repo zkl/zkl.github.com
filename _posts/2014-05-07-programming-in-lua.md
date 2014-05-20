@@ -17,11 +17,19 @@ tags: [Lua]
 
 * 第一种情况Lua调用C代码
 
-* C代码想要被Lua脚本调用必须按照Lua接口中的方式定义lua_CFunction定义如下
-
+* C代码想要被Lua脚本调用必须按照Lua接口中的方式定义，lua_CFunction函数指针定义如
+下
 {% highlight c %}
-typedef int \(*lua_CFunction\) \(lua_State *L\);
+	typedef int (*lua_CFunction) (lua_State *L);
 {% endhighlight %}
+使用这种格式定义的函数才可以被Lua库识别。示例代码如下:
+{% highlight c %}
+	lua_pushcfunction(L, &cfunction);  /* 函数地址入栈 */
+	lua_setglobal(L, "fun"); /* 设置全局变量，内容是刚才入栈的函数地址 */
+{% endhighlight %}
+这样就可以在Lua中访问调用fun来访问cfunction函数了
+
+
 
 
 <!--break-->

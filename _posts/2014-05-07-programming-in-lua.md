@@ -27,6 +27,13 @@ tags: [Lua]
 	lua_pushcfunction(L, &cfunction);  /* 函数地址入栈 */
 	lua_setglobal(L, "fun"); /* 设置全局变量，内容是刚才入栈的函数地址 */
 {% endhighlight %}
+cfunction 定义如下
+{% highlight c %}
+	int cfunction(lua_State * L)
+	{
+		/* 函数内容 */
+	}
+{% endhighlight %}
 这样就可以在Lua中访问调用fun来访问cfunction函数了
 
 

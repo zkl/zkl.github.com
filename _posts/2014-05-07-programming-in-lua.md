@@ -14,6 +14,7 @@ tags: [Lua]
 
 * Lua脚本和C语言交互时，参数全部通过栈的方式传递。与栈相关的操作包括获取栈的大小，
 获取栈中数据，判断数据类型等。
+<!--break-->
 
 * 第一种情况Lua调用C代码
 
@@ -34,33 +35,15 @@ cfunction 定义如下
 		/* 函数内容 */
 	}
 {% endhighlight %}
-这样就可以在Lua中访问调用fun来访问cfunction函数了
-
-
-
-
-<!--break-->
-
-```
- ruby dk.rb init
- ruby dk.rb review 
- ruby dk.rb install
- gem install rdiscount --platform=ruby
-```
-
-* Lua C 编程案例
-
+这样就可以在Lua中访问调用fun来访问cfunction函数了,完整的示例代码
+C 函数main.c定义如下
 {% highlight c %}
-	for(i=0; i<100; i++)
-		sync(ni);
+	int main(int argc, char * argv[])
+	{
+		return 0;
+	}
 {% endhighlight %}
 
-* Lua 代码 
-{% highlight lua %}
-	for i=0; 100; do
-		sync(ni);
-	end
-{% endhighlight %}
- 
+
 
 

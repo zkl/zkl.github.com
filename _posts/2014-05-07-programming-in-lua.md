@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Lua编程"
+title: "Lua编程 - C API"
 description: ""
 category: 技术分享
 tags: [Lua]
 ---
 {% include JB/setup %}
-# Lua 编程
+# Lua编程 - C API
 ---
 
-* Lua 程序设计实例 第一个实例实现了一个简化版的正弦函数：
+* Lua 调用C函数， 第一个实例实现了一个简化版的正弦函数：
 {% highlight c %}
 static int l_sin(lua_State *L)
 {

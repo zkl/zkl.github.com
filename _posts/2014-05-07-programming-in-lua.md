@@ -9,18 +9,18 @@ tags: [Lua]
 # Lua编程 - C API
 ---
 
-* Lua脚本和C语言交互是，参数全部通过栈的方式传递。与栈相关的操作包括获取栈的大小，
-获取栈中数据， 判断数据类型等。
-Lua和C交互，C代码是“库代码”还是“应用程序代码”，都包括Lua 调用 C 代码 和 C 代码调
-用Lua函数两部分。
+* Lua和C交互，无论C代码是“库代码”还是“应用程序代码”，调用方式都包括Lua调用C代码
+和C代码调用Lua函数两部分。
+
+* Lua脚本和C语言交互时，参数全部通过栈的方式传递。与栈相关的操作包括获取栈的大小，
+获取栈中数据，判断数据类型等。
+
+* 第一种情况Lua调用C代码
+
+* C代码想要被Lua脚本调用必须按照Lua接口中的方式定义lua_CFunction定义如下
 
 {% highlight c %}
-static int l_sin(lua_State *L)
-{
-	double d = lua_tonumber(L, 1); /* 获取参数 */
-	lua_pushnumber(L, sin(d)); /* 压入结果 */
-	return 1; /* 返回结果数量 */ 
-}
+typedef int \(*lua_CFunction\) \(lua_State *L\);
 {% endhighlight %}
 
 

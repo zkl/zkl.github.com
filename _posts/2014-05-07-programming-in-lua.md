@@ -23,7 +23,8 @@ tags: [Lua]
 {% highlight c %}
 	typedef int (*lua_CFunction) (lua_State *L);
 {% endhighlight %}
-使用这种格式定义的函数才可以被Lua库识别。示例代码如下:
+使用这种格式定义的函数才可以被Lua库识别，函数的返回值表示Lua函数返回值的个数。示
+例代码如下:
 {% highlight c %}
 	lua_pushcfunction(L, &cfunction);  /* 函数地址入栈 */
 	lua_setglobal(L, "fun"); /* 设置全局变量，内容是刚才入栈的函数地址 */

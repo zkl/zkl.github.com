@@ -79,13 +79,13 @@ main.c定义如下
 {% endhighlight %}
 
 test.lua脚本内容
-{% highlight lua %}
+{% highlight c %}
 	print("in test.lua");
 	fun();
 {% endhighlight %}
 
 main.c编译执行过程
-{% highlight bash %}
+{% highlight sh %}
 	gcc -o test main.c -l lua51
 	./test test.lua
 {% endhighlight %}

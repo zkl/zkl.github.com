@@ -35,15 +35,59 @@ cfunction 定义如下
 		return 0; /* 参数个数 */
 	}
 {% endhighlight %}
-这样就可以在Lua中访问调用fun来访问cfunction函数了,完整的示例代码
-C 函数main.c定义如下
+这样就可以在Lua中访问调用fun来访问cfunction函数了，下面给出一个完成的示例代码
+main.c定义如下
 {% highlight c %}
+	/**
+	* @file main.c
+	* @brief lua编程示例代码
+	* @author Zhang Kunlun(zkl), zkl.1880@gmail.com
+	* @version 1.0.0
+	* @date 2014-05-21
+	*/
+	#include <stdio.h>
+	#include "Lua/include/lua.h"
+	#include "Lua/include/lauxlib.h"
+	#include "Lua/include/lualib.h"
+
+
+	int fun(lua_State * l)
+	{
+		printf("This function is called by lua");	
+		return 0;
+	}
+
 	int main(int argc, char * argv[])
 	{
+		lua_State * l = 0;
+		if(argc < 2)
+			return -1;
+
+		l = luaL_newstate();
+		luaL_openlibs(api->st); /* 打开标准库 */ 
+	
+		lua_pushcfunction(l, &fun);
+		lua_setglobal(l, "fun");
+	
+		/* 载入并执行Lua脚本 */
+		if(luaL_loadfile(l, argv[1]) || lua_pcall(l, 0, 0, 0))
+			printf("%s", lua_tostring(l, -1));
+
+		lua_close(l);
 		return 0;
 	}
 {% endhighlight %}
 
+test.lua脚本内容
+{% highlight lua %}
+	print("in test.lua");
+	fun();
+{% endhighlight %}
 
+main.c编译执行过程
+{% highlight bash %}
+	gcc -o test main.c -l lua51
+	./test test.lua
+{% endhighlight %}
 
 

@@ -79,18 +79,21 @@ body{ background: url("img/body_bg.png") repeat;}
   margin: 2px;
   background: rgb(0,173,207);
   color: #fff;
-  border-radius: 5px;
+  border-radius: 2px;
   text-decoration: none;
-                 }
+}
 
 .tag_box a span {
   vertical-align: super;
-  font-size: 0.8em; }
+  font-size: 0.8em; 
+}
 
 .tag_box a:hover {
-  background-color: #e5e5e5; }
+  background-color: #e5e5e5; 
+}
 
 .tag_box a.active {
   background: #57A957;
   border: 1px solid #4c964d;
-  color: #FFF; }
+  color: #FFF; 
+}

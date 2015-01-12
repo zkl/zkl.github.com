@@ -78,6 +78,10 @@ body .navbar {
 .tag_box.inline li { 
   float: left; }
 
+.navbar .nav > li > a {
+	text-shadow: none;
+}
+
 .tag_box a {
   padding: 3px 6px;
   margin: 2px;

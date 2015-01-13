@@ -6,6 +6,10 @@ body .navbar {
   z-index:20;
 }
 
+div.figure {
+	text-align: center;
+}
+
 .navbar .navbar-inner{ 
   background-color: rgba(0,120,120,255);
 }

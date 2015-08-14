@@ -10,6 +10,23 @@ div.figure {
 	text-align: center;
 }
 
+/* 字体大小 */
+h2 { 
+	font-size: 27px;
+}
+
+h3 { 
+	font-size: 24px;
+}
+
+h4 { 
+	font-size: 19px;
+}
+
+h5 { 
+	font-size: 17px;
+}
+
 .navbar .navbar-inner{ 
   background-color: rgba(0,120,120,255);
 }
@@ -49,9 +66,6 @@ div.figure {
 
 
 /* posts index */
-h2 { 
-	font-size: 25px;
-}
 
 .post > h3.title { 
   position: relative;

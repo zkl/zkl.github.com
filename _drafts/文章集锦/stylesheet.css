@@ -13,6 +13,10 @@ figure figcaption{
 	text-align: center;
 }
 
+.right {
+	text-align: right;
+}
+
 h1.title { 
 	margin-top: 40px;
 	margin-bottom: 120px;

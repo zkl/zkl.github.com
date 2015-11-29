@@ -36,9 +36,11 @@ h2.author {
 	text-align: center;
 }
 
+/*
 h1 {
 	display: none;
 }
+*/
 
 h1.show{
 	margin-top: 40px;

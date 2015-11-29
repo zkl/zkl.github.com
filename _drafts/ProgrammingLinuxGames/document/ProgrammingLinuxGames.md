@@ -198,15 +198,8 @@ StarCraft is by far the most successful RTS game, combining pleasing graphics, a
 ```
 Deceptively Complex
 
-I once thought that TBS games were easy to write, but then I saw the
-source code to Sid Meier’s Alpha Centauri (SMAC). Most players don’t
-realize it, but SMAC actually uses a 3D technique called voxels to
-render its units on the fly and to draw a height-sensitive landscape with
-perspective texture mapping and dynamic palette mapping (made
-possible by self-modifying assembly code). Sid Meier’s Alpha Centauri
-was obviously not easy to port to Linux. While it’s possible to write a
-good TBS game without such sophistication, don’t think of the TBS
-genre as an easy way out—its complexity can be deceiving.
+I once thought that TBS games were easy to write, but then I saw the source code to Sid Meier’s Alpha Centauri (SMAC). Most players don’t realize it, but SMAC actually uses a 3D technique called voxels to render its units on the fly and to draw a height-sensitive landscape with perspective texture mapping and dynamic palette mapping (made possible by self-modifying assembly code). Sid Meier’s Alpha Centauri was obviously not easy to port to Linux. While it’s possible to write a good TBS game without such sophistication, don’t think of the TBS genre as an easy way out—its complexity can be deceiving.
+
 ```
 
 ### Role-Playing Games
@@ -251,21 +244,9 @@ Most games have a lot in common behind the scenes. The engine, or main code, of 
 ```
 This Code Is Awful!
 
-If you ever get a peek at the code behind a major commercial game,
-please do not take it as a treatise on proper software design or coding!
-Games often start out as well-designed software, and they sometimes
-even make it to the shelves in a tolerable state of internal organization,
-but more often than not a game’s code falls into disarray during the last
-few months of development.
+If you ever get a peek at the code behind a major commercial game, please do not take it as a treatise on proper software design or coding!  Games often start out as well-designed software, and they sometimes even make it to the shelves in a tolerable state of internal organization, but more often than not a game’s code falls into disarray during the last few months of development.
 
-Why, you might ask? The gaming industry is volatile, dangerous, and
-extremely competitive. Game studios seem to find themselves in a
-perpetual struggle to meet release deadlines, get their games out ahead
-of their competitors, and implement the features that players demand,
-lest they be left in the dust with a stack of unsold games. This often
-results in extremely hurried and sloppy code. Unfortunately, this often
-causes serious problems if someone later tries to add an expansion pack
-to the game or port the game to another operating system.
+Why, you might ask? The gaming industry is volatile, dangerous, and extremely competitive. Game studios seem to find themselves in a perpetual struggle to meet release deadlines, get their games out ahead of their competitors, and implement the features that players demand, lest they be left in the dust with a stack of unsold games. This often results in extremely hurried and sloppy code. Unfortunately, this often causes serious problems if someone later tries to add an expansion pack to the game or port the game to another operating system.
 
 ```
 

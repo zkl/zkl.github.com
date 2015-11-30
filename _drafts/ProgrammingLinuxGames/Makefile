@@ -3,7 +3,7 @@ DOCFILE = ProgrammingLinuxGames
 
 $(DOCFILE) : 
 	cat $(DOCPATH)/* > $@.md
-	pandoc -o $(DOCFILE).epub -t epub3 --toc --toc-depth=2 --epub-stylesheet=css/style.css $(DOCFILE).md
+	pandoc -o $(DOCFILE).epub -t epub3 --toc --toc-depth=2  --epub-chapter-level=2 --epub-stylesheet=css/style.css $(DOCFILE).md
 	! kindlegen $(DOCFILE).epub
 
 clean : 

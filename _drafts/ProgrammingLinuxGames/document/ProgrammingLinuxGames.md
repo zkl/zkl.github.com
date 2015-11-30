@@ -2,61 +2,6 @@
 % Loki Software, Inc.
 % with John R. Hall
 
-**Programming Linux Games.** Copyright c 2001 by Loki Software, Inc.
-
-All rights reserved. No part of this work may be reproduced or transmitted in any form or by any means, electronic or mechanical, including photocopying, recording, or by any information storage or retrieval system, without the prior written permission of the copyright owner and the publisher.
-
-Printed in the United States of America
-
-1 2 3 4 5 6 7 8 9 10—04 03 02 01
-
-Trademarked names are used throughout this book. Rather than including a funny little trademark symbol with every occurrence of a trademarked name, we are using the names only in an editorial fashion and to the benefit of the trademark owner, with no intention of infringement of the trademark.
-
-**Co-publishers**: William Pollock and Phil Hughes
-
-**Project Editor**: Karol Jurado
-
-**Assistant Editor**: Nick Hoff
-
-**Cover and Interior Design**: Octopod Studios
-
-**Copyeditor**: Rebecca Pepper
-
-**Proofreader**: Ken DellaPenta
-
-Distributed to the book trade in the United States by Publishers Group West, 1700 Fourth Street, Berkeley, California 94710, phone: 800–788–3123 or 510–528–1444, fax: 510–528–3444
-
-Distributed to the book trade in Canada by Jacqueline Gross & Associates, Inc., One Atlantic Avenue, Suite 105, Toronto, Ontario M6K E7 Canada, phone: 416–531-06737, fax: 416–531–4259
-
-For information on translations or book distributors outside the United States, please contact
-
-```
-No Starch Press, Inc. directly:
-No Starch Press, Inc.
-555 De Haro Street, Suite 250
-San Francisco, CA 94107
-phone: 415–863–9900; fax: 415–863–9950;
-info@nostarch.com; http://www.nostarch.com
-```
-
-The information in this book is distributed on an “As Is” basis, without warranty. While every
-precaution has been taken in the preparation of this work, neither the author nor No Starch Press, Inc.
-shall have any liability to any person or entity with respect to any loss or damage caused or alleged to
-be caused directly or indirectly by the information contained in it.
-
-**Library of Congress Cataloging-in-Publication Data**
-
-```
-	Programming linux games / Loki Software, Inc.
-			p. cm.
-		Includes index.
-		ISB	N 1-886411-48-4 (pbk.)
-		1. Computer games--programming. 2. Linux. I. Loki Software, Inc.
-
-		QA76.76.C672 .L56 2001
-		794.8’15268--dc21 00-052689
-```
-
 # Foreword
 
 I was honored when John asked me to write the foreword for this book. I’ve spent the last few years in an opportunity that few have had, the opportunity to get up close and personal with the source code to quite a few of the world’s most popular (and some less popular) games. I’ve had the chance to port these games to the Linux operating system, something that has been a source of sweat and sometimes swearing, but always of pride and joy.
@@ -114,7 +59,7 @@ Atlanta, GA
 
 # Chapter 1
 
-## The Anatomy of a Game
+# The Anatomy of a Game
 
 In 1991 a Finnish university student named Linus Torvalds began working on a new operating system in his spare time. He didn’t work in isolation, nor did he make a big deal about what he was doing; rather, he modestly invited programmers from all over the world to join his project, which he dubbed“Linux.” This loosely knit team of students, professionals, and hobbyists collaborated through the Internet, with the expectation of learning a bit about programming and having a good time. Linus never thought that his project would spawn an entire industry.
 
@@ -150,11 +95,7 @@ Heavy Gear II from Activision is a good example of an action simulator. It puts 
 
 1
 
-One of the first rules of game design (and, to some extent, of computer graphics in general)
-is that it doesn’t matter if something is realistic as long as it looks realistic. Unfortunately,
-most people don’t have 5-terahertz machines, so game creators have to take a few shortcuts.
-Most flight simulators really aren’t that realistic when it comes down to it, but they sure
-seem realistic.
+One of the first rules of game design (and, to some extent, of computer graphics in general) is that it doesn’t matter if something is realistic as long as it looks realistic. Unfortunately, most people don’t have 5-terahertz machines, so game creators have to take a few shortcuts.  Most flight simulators really aren’t that realistic when it comes down to it, but they sure seem realistic.
 
 2
 
@@ -237,7 +178,7 @@ MUDs are relatively easy to create, though writing a MUD server is not trivial, 
 If you’ve never been “mudding,” give it a try. A good MUD can provide a truly interesting experience. You can find MUDs all over the Internet; just search the Web for the word “mud.”
 
 
-# A Quick Look Under the Hood
+## A Quick Look Under the Hood
 
 Most games have a lot in common behind the scenes. The engine, or main code, of a “typical” game (if there is such a thing) can be logically divided into several subsystems: the input subsystem, the display subsystem, the audio subsystem, the networking subsystem, the update subsystem, and the main loop. These subsystems are rarely labelled as such, but you are likely to find all of these components in any given game engine. Each subsystem is most often implemented with several separate source files; two or three in small games, but easily a hundred or more in a large production. We’ll look briefly at each of these subsystems now, and throughout the rest of the book we will explore possible ways to implement each.
 
@@ -250,7 +191,7 @@ Why, you might ask? The gaming industry is volatile, dangerous, and extremely co
 
 ```
 
-## The Input Subsystem
+### The Input Subsystem
 
 The input subsystem receives the user’s commands through an input device (like the keyboard or a joystick) and records these commands for further processing.  While input device programming is not difficult, it should be done carefully, because flawed input processing can easily ruin an otherwise excellent game. The first version of Apogee’s Rise of the Triad (a first-person shooter from several years ago) suffered from particularly bad input handling, and the game was aggravating to play until this problem was fixed.
 
@@ -258,7 +199,7 @@ One of the input subsystem’s most important jobs is to simultaneously support 
 
 Nearly every game on the market allows you to remap the keyboard and other input devices to your liking, and this is a feature that players demand. Many people have non-US keyboards with different key locations, and you’ll end up cutting off a lot of would-be players unless you allow them to configure the game to work with their keyboards. Fortunately, this is not difficult; it can be accomplished with a simple lookup table. It is also a good idea to allow the player to store and retrieve multiple key mappings, in case a friend prefers a different configuration.
 
-## The Display Subsystem
+### The Display Subsystem
 
 The display subsystem conveys the game’s status to the player in a visually impressive way, whether through simple 2D graphics, or advanced 3D rendering (the type of graphics you use doesn’t matter, as long as they are appropriate for the game). Regardless of the type of graphics produced by the display subsystem, the structure of the code is substantially the same.
 
@@ -266,7 +207,7 @@ The display subsystem is responsible for taking advantage of the available displ
 
 Before you can show off your graphics code, you’ll need something to display.  Although it is common for programmers to develop temporary artwork for testing purposes, few are skilled artists, and they usually find it necessary to enlist the help of a skilled digital artist to produce acceptable game artwork.  Players are a finicky bunch, and they are most intolerant of subpar graphics.  Game programmers should spend a great deal of time developing a good graphics engine, and a designer should place a high priority on obtaining quality artwork for a game.
 
-## The Audio Subsystem
+### The Audio Subsystem
 
 Although computer audio technology has not been hyped as much as computer rendering technology during the past few years, a game’s audio subsystem is every bit as important as its graphics subsystem. Fortunately, producing high-quality sound on a computer is not as difficult as producing high-quality graphics.
 
@@ -274,7 +215,7 @@ Sound is easy to play back (usually a simple matter of a few function calls with
 
 3D enhanced audio is one of the latest trends in computer sound technology with modern sound cards (like Creative’s SB Live! series) supporting four-speaker surround-sound, and 3D-aware sound-processing to simulate the Doppler effect and other complex sound wave interactions. (Simple two-channel stereo sound just falls short of the immersive environments of today’s 3D games.) In fact, some sound cards can even accelerate these effects in hardware. Several competing 3D sound APIs have emerged, and we will discuss one of these (OpenAL) in Chapter 5.
 
-## The Network Subsystem
+### The Network Subsystem
 
 Multiplayer gaming is very popular these days, and it is reasonable to assume that this trend will continue. The network subsystem connects a game to other computers over a network so that multiple players can participate in the action.  Network programming is not as difficult as it used to be, especially with the advent of the Internet as we know it. Still, the network subsystem must be extremely robust and flexible, as, not surprisingly, gamers are rather intolerant of network failures during games.
 
@@ -282,7 +223,7 @@ Basically, the network subsystem informs the other computers in a network of the
 
 Above all, do not implement network support as an afterthought, because it often affects the entire design of the game. Decide whether your game lends itself to netwok play and build this requirement into the fundamental game design; doing so will save headaches later on when the designer invariably demands that multiplayer capabilities be added.
 
-## The Update Subsystem
+### The Update Subsystem
 
 Games generally have to track a lot of rapidly changing data, including the state of the player and the condition of each enemy—information that must be updated frame by frame to keep the game moving. The update subsystem manages this data.
 
@@ -292,7 +233,7 @@ The update subsystem is the game’s brain. It enforces the game’s rules for m
 
 Although it may be tempting to haphazardly throw the update subsystem into the game loop (discussed in the next section), do not do so. Game projects tend to get out of hand quickly if they are not kept in a reasonable amount of order, and the update subsystem usually grows steadily throughout the development cycle; make the update system a separate module to begin with. If you don’t pay attention to code organization, you’ll end up with code that looks like the 500,000 lines of spaghetti behind (no offense, Activision) Civilization: Call To Power.  
 
-## The Game Loop
+### The Game Loop
 
 The game (see Figure 1–1) loop is the “glue” that binds the various game subsystems. It is simply a while loop that runs throughout the entire game, looping anywhere from 30 to 60 times per second. The game loop invokes the correct routines to gather input from the player and from the network, updates the status of all objects in the game, draws the next frame of graphics, and produces audio. While this process may sound complicated, it is actually quite trivial, because all of this functionality is provided by the game’s input, network, graphics, and audio subsystems.
 
@@ -304,105 +245,40 @@ As you can see, a game engine is conceptually simple, but the devil is in the de
 
 # Chapter 2
 
-## Linux Development Tools
+# Linux Development Tools
 
-As an operating system created by computer geeks, Linux provides a particularly
-nice programming environment. Although it may be a bit intimidating and
-confusing at first, it provides a great deal of power after the initial learning
-curve. In this chapter we will examine the basic Linux programming tools from
-the perspective of a game developer.
-If you are already experienced with Linux or UNIX programming, some parts of
-this chapter will be of less interest to you. We will cover specific details of these
-tools later as we encounter them, so you will not be at a loss for skipping over
-sections of this chapter.
+As an operating system created by computer geeks, Linux provides a particularly nice programming environment. Although it may be a bit intimidating and confusing at first, it provides a great deal of power after the initial learning curve. In this chapter we will examine the basic Linux programming tools from the perspective of a game developer.
 
-Programming Editors
-Before we can dive into the subject of Linux game coding, we’ll need a way to
-write our source code. Although simple editors such as pico and joe are sufficient
-for some simple tasks, they are inadequate for programming. It would be
-preferable to use a text editor with support for syntax highlighting, brace
-matching, and other features. Let’s take a look at several of the more popular
-code editors. If you have never written code with a UNIX-like system, it would
-be a good idea to try out these editors to see which one best suits your
-programming style. This chapter is not meant to be a reference manual or
-tutorial for these editors; rather, it is starting point for those who have never
-written code on a UNIX-like platform.
+If you are already experienced with Linux or UNIX programming, some parts of this chapter will be of less interest to you. We will cover specific details of these tools later as we encounter them, so you will not be at a loss for skipping over sections of this chapter.
 
-18
+## Programming Editors
 
-CHAPTER 2
+Before we can dive into the subject of Linux game coding, we’ll need a way to write our source code. Although simple editors such as pico and joe are sufficient for some simple tasks, they are inadequate for programming. It would be preferable to use a text editor with support for syntax highlighting, brace matching, and other features. Let’s take a look at several of the more popular code editors. If you have never written code with a UNIX-like system, it would be a good idea to try out these editors to see which one best suits your programming style. This chapter is not meant to be a reference manual or tutorial for these editors; rather, it is starting point for those who have never written code on a UNIX-like platform.
 
-vi
-vi (pronounced “vee-eye” or “vie”) is a rather old text editor with a strong
-following. It is difficult to master, but once you have learned its keystrokes and
-its quirks, it is hard to use anything else. vi works well on just about any Linux
-configuration; it requires almost no processor power and very little memory. It
-also has the nice advantage of being present on nearly every UNIX-like system
-you’ll encounter, including most Linux systems. vi is a standard component of
-every major Linux distribution.
-Although vi is an old editor from the days when everyone worked over slow text
-terminals, it has been improved substantially by its users, and some modern
-versions (such as vim) are capable of syntax highlighting and other niceties.
-Several versions of this editor are also available for the X Window System,
-featuring pull-down menus and convenient shortcuts. However, these versions
-defeat one of the greatest features of vi: that it can be used over nearly any type
-of terminal. vi can be used efficiently over low-speed telnet connections, within
-local terminals, and even from Palm Pilots and other unusual devices. Its
-minimalistic interface requires very little functionality from the terminal.
-Graphical versions of vi throw this feature away and so can hardly be considered
-substitutes for the original vi editor.
-vi is actually a full-screen interface to the command-based ex editing engine. ex
-can also be used outside of the vi editor as a command-line tool, and it can be
-used to add editing capabilities to shell scripts. For instance, a shell script might
-invoke ex to edit a configuration file automatically. ex commands can be
-specified within the vi editor, although a tutorial on the nuts and bolts of ex is
-beyond the scope of this chapter.
-vi is a mode-based editor, and this is a major source of confusion. vi has two
-main modes: command mode and insertion mode. Command mode is strictly for
-issuing commands to vi. For instance, one might use this mode to move to a
-certain line in the document and delete a word. Command mode may not be
-used for typing text into the document. Anything you type in command mode
-will be interpreted as a vi command (and indeed there are so many possible vi
-commands that nearly anything you type in command mode will do something).
-Insertion mode, on the other hand, is strictly for typing text into the document.
-Most commands are not recognized in this mode, and anything you type will be
-inserted into the document.
 
-LINUX DEVELOPMENT TOOLS
+### vi
 
-19
+vi (pronounced “*vee-eye*” or “*vie*”) is a rather old text editor with a strong following. It is difficult to master, but once you have learned its keystrokes and its quirks, it is hard to use anything else. vi works well on just about any Linux configuration; it requires almost no processor power and very little memory. It also has the nice advantage of being present on nearly every UNIX-like system you’ll encounter, including most Linux systems. vi is a standard component of every major Linux distribution.
 
-vi initially starts up into command mode. To enter insertion mode, press i. To
-switch back into command mode, press Escape. This mode switching may seem
-like quite a hassle, but it becomes second nature after a bit of practice.
+Although vi is an old editor from the days when everyone worked over slow text terminals, it has been improved substantially by its users, and some modern versions (such as vim) are capable of syntax highlighting and other niceties.  Several versions of this editor are also available for the X Window System, featuring pull-down menus and convenient shortcuts. However, these versions defeat one of the greatest features of vi: that it can be used over nearly any type of terminal. vi can be used efficiently over low-speed telnet connections, within local terminals, and even from Palm Pilots and other unusual devices. Its minimalistic interface requires very little functionality from the terminal.  Graphical versions of vi throw this feature away and so can hardly be considered substitutes for the original vi editor.
 
-Emacs
-GNU Emacs is uncontested as the behemoth of text editors (indeed, some think
-of it as an operating system in itself). It is based on its own variant of the Lisp
-programming language; almost all of the editor’s functionality is implemented in
-customizable Emacs Lisp. Emacs has a loyal following among programmers,
-partly because absolutely every aspect of this editor can be changed by the user.
-I started writing this book with NEdit, but I eventually switched over to Emacs
-because it works well on the Linux console and doesn’t require a mouse. (I’m
-also a bit of a Lisp enthusiast, and in that regard Emacs is a perfect match.)
-Emacs is not as difficult as vi to learn initially; there is simply a lot more to
-learn. Its basic commands and keystrokes are not hard to get used to, but
-becoming fluent with Emacs is a major undertaking. Emacs includes a mail and
-news client, editing modes for nearly every language you’d ever want to use,
-several types of documentation readers, and even optional IRC clients and web
-browsers. Many of these features define their own sets of command keys, leaving
-much for the would-be user to learn. In return for this hassle, Emacs provides an
-enormous amount of power; it’s quite literally possible to set your login shell to
-Emacs and never leave its environment.
-To get started with Emacs, run the editor (the command is usually emacs), press
-Ctrl-h, and then t. The Emacs tutorial will open, and you can use it to learn
-the basic keys and editing modes.
-In addition to the “real” GNU Emacs, there are several other editors that are
-very similar in capabilities and usage. XEmacs1 is a code fork from GNU Emacs
-with a number of added features and an improved interface. JED2 is a
-programmer’s editor that closely resembles Emacs but has fewer features and a
-smaller memory footprint.
+vi is actually a full-screen interface to the command-based ex editing engine. ex can also be used outside of the vi editor as a command-line tool, and it can be used to add editing capabilities to shell scripts. For instance, a shell script might invoke ex to edit a configuration file automatically. ex commands can be specified within the vi editor, although a tutorial on the nuts and bolts of ex is beyond the scope of this chapter.  
 
+vi is a mode-based editor, and this is a major source of confusion. vi has two main modes: command mode and insertion mode. Command mode is strictly for issuing commands to vi. For instance, one might use this mode to move to a certain line in the document and delete a word. Command mode may not be used for typing text into the document. Anything you type in command mode will be interpreted as a vi command (and indeed there are so many possible vi commands that nearly anything you type in command mode will do something).  Insertion mode, on the other hand, is strictly for typing text into the document.  Most commands are not recognized in this mode, and anything you type will be inserted into the document.
+
+vi initially starts up into command mode. To enter insertion mode, press i. To switch back into command mode, press Escape. This mode switching may seem like quite a hassle, but it becomes second nature after a bit of practice.  
+
+### Emacs
+
+GNU Emacs is uncontested as the behemoth of text editors (indeed, some think of it as an operating system in itself). It is based on its own variant of the Lisp programming language; almost all of the editor’s functionality is implemented in customizable Emacs Lisp. Emacs has a loyal following among programmers, partly because absolutely every aspect of this editor can be changed by the user.  I started writing this book with NEdit, but I eventually switched over to Emacs because it works well on the Linux console and doesn’t require a mouse. (I’m also a bit of a Lisp enthusiast, and in that regard Emacs is a perfect match.)
+
+Emacs is not as difficult as vi to learn initially; there is simply a lot more to learn. Its basic commands and keystrokes are not hard to get used to, but becoming fluent with Emacs is a major undertaking. Emacs includes a mail and news client, editing modes for nearly every language you’d ever want to use, several types of documentation readers, and even optional IRC clients and web browsers. Many of these features define their own sets of command keys, leaving much for the would-be user to learn. In return for this hassle, Emacs provides an enormous amount of power; it’s quite literally possible to set your login shell to Emacs and never leave its environment.
+
+To get started with Emacs, run the editor (the command is usually emacs), press **Ctrl-h**, and then **t**. The Emacs tutorial will open, and you can use it to learn the basic keys and editing modes.
+
+In addition to the “real” GNU Emacs, there are several other editors that are very similar in capabilities and usage. XEmacs(1) is a code fork from GNU Emacs with a number of added features and an improved interface. JED(2) is a programmer’s editor that closely resembles Emacs but has fewer features and a smaller memory footprint.
+
+<-- 注释
 1
 
 http://www.xemacs.org
@@ -411,1008 +287,544 @@ http://www.xemacs.org
 
 http://space.mit.edu/%7Edavis/jed.html
 
-20
+-->
 
-CHAPTER 2
+Emacs is an ideal editor for people who appreciate a large (perhaps overwhelming) amount of functionality and don’t mind a bit of a learning curve.  It is excellent for those who would like to use a scripting language to add custom abilities to their editor (entire applications have in fact been written in Emacs Lisp). Emacs is available as part of nearly every Linux distribution, and it can also be obtained directly from the GNU project’s FTP server(3) or one of its mirrors.
 
-Emacs is an ideal editor for people who appreciate a large (perhaps
-overwhelming) amount of functionality and don’t mind a bit of a learning curve.
-It is excellent for those who would like to use a scripting language to add custom
-abilities to their editor (entire applications have in fact been written in Emacs
-Lisp). Emacs is available as part of nearly every Linux distribution, and it can
-also be obtained directly from the GNU project’s FTP server3 or one of its
-mirrors.
+### NEdit
 
-NEdit
-NEdit, the “Nirvana Editor,” is a very slick code editor from Fermilab.4 It is
-neither as absurdly customizable as Emacs nor as ubiquitous as vi, but it is
-much easier to learn (since its keystrokes are similar to those of many popular
-word processors) and powerful enough for serious work. NEdit’s main downside
-is that it requires the X Window System to run. It is a good idea to have at
-least a working knowledge of another editor if you choose to use NEdit for your
-daily work. This book was written partly with NEdit (though I later switched to
-Emacs). Although previous versions of NEdit were encumbered by a license that
-was not palatable to most Linux distributors, the NEdit license was changed to
-the GNU General Public License with the 5.1 release. The editor is now truly
-free software, and it is currently under active development by a team of
-volunteers.
+NEdit, the “Nirvana Editor,” is a very slick code editor from Fermilab.4 It is neither as absurdly customizable as Emacs nor as ubiquitous as vi, but it is much easier to learn (since its keystrokes are similar to those of many popular word processors) and powerful enough for serious work. NEdit’s main downside is that it requires the X Window System to run. It is a good idea to have at least a working knowledge of another editor if you choose to use NEdit for your daily work. This book was written partly with NEdit (though I later switched to Emacs). Although previous versions of NEdit were encumbered by a license that was not palatable to most Linux distributors, the NEdit license was changed to the GNU General Public License with the 5.1 release. The editor is now truly free software, and it is currently under active development by a team of volunteers.
 
-Compiling Programs Under Linux
-We’re here to talk about game programming, not the basics of C programming,
-so we won’t discuss the language itself; however, it’s quite possible that you’ve
-never worked with a C compiler under UNIX. This section demonstrates how to
-compile and link programs in the Linux (or more accurately, GNU/Linux)
-programming environment. There really isn’t much to it; the compiler provides
-hundreds of possible command-line options, but most of them aren’t necessary
-for our purposes.
+## Compiling Programs Under Linux
 
-3
+We’re here to talk about game programming, not the basics of C programming, so we won’t discuss the language itself; however, it’s quite possible that you’ve never worked with a C compiler under UNIX. This section demonstrates how to compile and link programs in the Linux (or more accurately, GNU/Linux) programming environment. There really isn’t much to it; the compiler provides hundreds of possible command-line options, but most of them aren’t necessary for our purposes.
 
-ftp://ftp.gnu.org
+[The Nirvana Editor](none.jpg)
 
-4
+gcc is the most popular C compiler for Linux. It was developed by the Free Software Foundation for the GNU project, and it is available on many platforms.  gcc is free software, and it is included as a standard component of nearly every Linux distribution. There are several other C/C++ compilers for Linux (such as Kai C++ and the as-yet-unreleased Metrowerks CodeWarrior), but gcc is used for the vast majority of Linux software development. Some eschew gcc (and its C++ brother, g++) as quirky or incomplete, but in reality it’s at least as good as the other mainstream C compilers.
 
-http://www.nedit.org
+gcc’s basic job is to compile C source code into executable programs. To compile one or more files, simply pass them to gcc on the command line as follows:
 
-LINUX DEVELOPMENT TOOLS
-
-21
-
-The Nirvana Editor
-
-gcc is the most popular C compiler for Linux. It was developed by the Free
-Software Foundation for the GNU project, and it is available on many platforms.
-gcc is free software, and it is included as a standard component of nearly every
-Linux distribution. There are several other C/C++ compilers for Linux (such as
-Kai C++ and the as-yet-unreleased Metrowerks CodeWarrior), but gcc is used
-for the vast majority of Linux software development. Some eschew gcc (and its
-C++ brother, g++) as quirky or incomplete, but in reality it’s at least as good as
-the other mainstream C compilers.
-gcc’s basic job is to compile C source code into executable programs. To compile
-one or more files, simply pass them to gcc on the command line as follows:
+```
 $ gcc file1.c file2.c file3.c
+```
 
-If there are no serious errors, gcc will create an executable file named a.out in
-the current directory. Otherwise, you will receive warning and error messages
-describing the problems the compiler encountered, and gcc will not produce any
-compiled output. If you list multiple files on the command line, gcc will compile
-them separately and attempt to link them into one executable, stopping if any
+If there are no serious errors, gcc will create an executable file named a.out in the current directory. Otherwise, you will receive warning and error messages describing the problems the compiler encountered, and gcc will not produce any compiled output. If you list multiple files on the command line, gcc will compile them separately and attempt to link them into one executable, stopping if any individual file produces an error. If gcc is given files that end in .o (object files) or .a (static libraries), it will link them directly into the executable. This allows gcc to serve as a simple interface to the linker.
 
-22
-
-CHAPTER 2
-
-individual file produces an error. If gcc is given files that end in .o (object files)
-or .a (static libraries), it will link them directly into the executable. This allows
-gcc to serve as a simple interface to the linker.
-
+```
 Warning
-You may be in the habit of using the shell’s tab-completion feature to
-fill in filenames. Be careful when you do this with gcc; it’s easy to
-accidentally overwrite your source files by accidentally tab-completing
-the wrong filenames. This may seem obvious, but I’ve lost work because
-of it.
 
-It is often useful to compile a C source file into an object file instead of an
-executable. Object files are not directly executable, but they contain the
-machine code translation of the source, and multiple object files can be pieced
-together into complete programs. To create object files, supply gcc with the -c
-option. This will instruct gcc to skip its final linking phase and to write one
-object file for each source file listed on the command line.
-gcc is a complex and capable tool, and it supports a large number of
-command-line options. We list the most important ones here.
--ansi
+You may be in the habit of using the shell’s tab-completion feature to fill in filenames. Be careful when you do this with gcc; it’s easy to accidentally overwrite your source files by accidentally tab-completing the wrong filenames. This may seem obvious, but I’ve lost work because of it.
+```
 
-Disable non-ANSI extensions, such as the asm and inline
-keywords. This option might be a good idea if you are concerned
-with portability between ANSI C compilers. However, most
-programmers aren’t this careful about standards, and strict ANSI
-mode tends to break a lot of existing software.
+It is often useful to compile a C source file into an object file instead of an executable. Object files are not directly executable, but they contain the machine code translation of the source, and multiple object files can be pieced together into complete programs. To create object files, supply gcc with the -c option. This will instruct gcc to skip its final linking phase and to write one object file for each source file listed on the command line.
 
--c
+gcc is a complex and capable tool, and it supports a large number of command-line options. We list the most important ones here.
 
-Compiles to an object (.o) file instead of an executable. This is
-important for creating libraries.
+* **-ansi**
+	*Disable non-ANSI extensions, such as the asm and inline keywords. This option might be a good idea if you are concerned with portability between ANSI C compilers. However, most programmers aren’t this careful about standards, and strict ANSI mode tends to break a lot of existing software.*
 
--D symbol
+* **-c**
+	*Compiles to an object (.o) file instead of an executable. This is important for creating libraries.*
 
-Define the given symbol in the preprocessor. This option is
-convenient for setting up conditional compilation based on the
-system’s configuration. We’ll use it in some of our examples to
-switch between different versions of code.
+* **-D symbol**
+	*Define the given symbol in the preprocessor. This option is convenient for setting up conditional compilation based on the system’s configuration. We’ll use it in some of our examples to switch between different versions of code.*
 
-LINUX DEVELOPMENT TOOLS
+* **-o filename**
+	*Outputs to the given filename instead of the default a.out. For instance, -o foo will cause the program to be compiled into an executable named foo (or foo.exe under Windows).*
 
-23
+* **-l libname**
+	*Attempts to link in the given library, following the standard library naming convention. For instance, -lSDL would link in libSDL.so. See the discussion of shared libraries later in this chapter for more information.*
 
--o filename
-Outputs to the given filename instead of the default a.out. For
-instance, -o foo will cause the program to be compiled into an
-executable named foo (or foo.exe under Windows).
--l libname
+* **-L path**
+	*Specifies an additional directory for libraries. For instance, /usr/X11R6/lib is not normally in the library path, so it is common for X programs to specify -L/usr/X11R6/lib.*
 
-Attempts to link in the given library, following the standard
-library naming convention. For instance, -lSDL would link in
-libSDL.so. See the discussion of shared libraries later in this
-chapter for more information.
+* **-O n**
+	*Sets the optimization level (from 1 to 6). The default is to perform no optimization. It’s reasonable to make a practice of compiling code with -O2; it doesn’t mess with the structure of the code too much, and you can still (usually) debug it with gdb. In some cases this option can really speed up the compiled code.  Finished products should almost always be compiled with optimization enabled.*
 
--L path
-
-Specifies an additional directory for libraries. For instance,
-/usr/X11R6/lib is not normally in the library path, so it is
-common for X programs to specify -L/usr/X11R6/lib.
-
--O n
-
-Sets the optimization level (from 1 to 6). The default is to
-perform no optimization. It’s reasonable to make a practice of
-compiling code with -O2; it doesn’t mess with the structure of the
-code too much, and you can still (usually) debug it with gdb. In
-some cases this option can really speed up the compiled code.
-Finished products should almost always be compiled with
-optimization enabled.
-
--pedantic
-
-Enables a strict interpretation of the ANSI C Standard. Compile
-with -pedantic -W -Wall if you want gcc to nag you about
-sloppy programming.
+* **-pedantic**
+	*Enables a strict interpretation of the ANSI C Standard. Compile with -pedantic -W -Wall if you want gcc to nag you about sloppy programming.*
 
 That’s it for gcc! It has a few quirks and obscure features, but we’ll get to those
-as we need them.5 Like most GNU tools, gcc comes with excellent online
+as we need them. Like most GNU tools, gcc comes with excellent online
 documentation. In particular, refer to the manpage or info node for a description
 of gcc’s command-line options.
 
-5
+## Using the Make Utility
 
-Richard Stallman’s book Using and Porting gcc is the authoritative guide to hacking gcc.
+Most game development projects consist of multiple source files, for the simple reason that it is impractical to manage thousands of lines of code in a single file.  Since a large project can involve many source files, it would be wasteful to recompile everything if only one file had been changed since the program was last compiled. This happens, however, if all of the files are given to gcc at once on the command line. For instance, the Linux version of Civilization: Call To Power consists of more than 500,000 lines of C++ code in well over 100 files, and a full recompile of the entire source tree takes nearly an hour (whereas a partial rebuild assisted by Make usually takes 15 to 20 minutes).  
 
-24
+The Make utility speeds up software development by automatically determining which files actually need to be recompiled after changes have been made. Make also eliminates the need to type long command lines to rebuild programs, since it stores all of the required commands and invokes them as needed.  
 
-CHAPTER 2
+Although Make has a lot of functionality, its basic usage is quite simple. It is based on *targets*, which are sets of directions for maintaining the components (object files, libraries, and so on) of a program. Targets specify the name of the component to track, the source files and other targets that the component depends on, and the commands for rebuilding the target. The instructions for building a component are called *rules*, and the list of files that a component depends on are called *dependencies*. When make is invoked upon a certain target, it checks that target’s dependency list first. If any of the dependencies have been changed since the target was last rebuilt, the target’s rules are executed. Make also recursively rebuilds any out-of-date targets in the dependency list. This is extremely convenient for large, modular programming projects.
 
-Using the Make Utility
-Most game development projects consist of multiple source files, for the simple
-reason that it is impractical to manage thousands of lines of code in a single file.
-Since a large project can involve many source files, it would be wasteful to
-recompile everything if only one file had been changed since the program was
-last compiled. This happens, however, if all of the files are given to gcc at once
-on the command line. For instance, the Linux version of Civilization: Call To
-Power consists of more than 500,000 lines of C++ code in well over 100 files, and
-a full recompile of the entire source tree takes nearly an hour (whereas a partial
-rebuild assisted by Make usually takes 15 to 20 minutes).
-The Make utility speeds up software development by automatically determining
-which files actually need to be recompiled after changes have been made. Make
-also eliminates the need to type long command lines to rebuild programs, since it
-stores all of the required commands and invokes them as needed.
-Although Make has a lot of functionality, its basic usage is quite simple. It is
-based on targets, which are sets of directions for maintaining the components
-(object files, libraries, and so on) of a program. Targets specify the name of the
-component to track, the source files and other targets that the component
-depends on, and the commands for rebuilding the target. The instructions for
-building a component are called rules, and the list of files that a component
-depends on are called dependencies. When make is invoked upon a certain target,
-it checks that target’s dependency list first. If any of the dependencies have been
-changed since the target was last rebuilt, the target’s rules are executed. Make
-also recursively rebuilds any out-of-date targets in the dependency list. This is
-extremely convenient for large, modular programming projects.
+### Creating Makefiles
 
-Creating Makefiles
-Make looks for targets and rules in a file called Makefile or makefile. This file
-can contain any number of targets. If Make is started with no command-line
-options, it automatically attempts to rebuild the first target it encounters.
-Consider the following makefile:
+Make looks for targets and rules in a file called **Makefile** or *makefile*. This file can contain any number of targets. If Make is started with no command-line options, it automatically attempts to rebuild the first target it encounters.  Consider the following makefile:
+
+```
 program: file1.c file2.c graphics.a
-gcc -c file1.c file2.c
-gcc file1.o file2.o graphics.a -lSDL -o program
-
-LINUX DEVELOPMENT TOOLS
-
-25
+	gcc -c file1.c file2.c
+	gcc file1.o file2.o graphics.a -lSDL -o program
 
 graphics.a: graphics.c draw.c
-gcc -c graphics.c draw.c
-ar rcs graphics.a graphics.o draw.o
-ranlib graphics.a
+	gcc -c graphics.c draw.c
+	ar rcs graphics.a graphics.o draw.o
+	ranlib graphics.a
+```
 
-This file describes how to build an executable called program and a static
-library called graphics.a. (Don’t worry about the commands for building the
-library—we’ll discuss libraries later in this chapter.) program depends on
-file1.c, file2.c, and graphics.a. If any of these have been modified since
-program was last built, Make will rebuild program. graphics.a is also a target,
-and it depends on graphics.c and draw.c. The indented lines under each target
-are rules. If program needs to be rebuilt, Make will execute the two rules that
-have been provided. These lines must be indented with tab characters; spaces
-will not work. Make is rather particular about syntax.
+This file describes how to build an executable called **program** and a static library called **graphics.a**. (Don’t worry about the commands for building the library—we’ll discuss libraries later in this chapter.) program depends on **file1.c**, **file2.c**, and **graphics.a**. If any of these have been modified since **program** was last built, Make will rebuild program. **graphics.a** is also a target, and it depends on **graphics.c** and **draw.c**. The indented lines under each target are rules. If program needs to be rebuilt, Make will execute the two rules that have been provided. These lines must be indented with tab characters; spaces will not work. Make is rather particular about syntax.
 
-Variable Substitution
-The Make utility provides convenient access to environment variables. Makefiles
-can set, combine, and retrieve environment variables as text strings and can
-include these variables in targets and rules. It is common to use the variable CC
-to represent the C compiler command (which in our case is gcc), CFLAGS to
-represent the standard set of command-line options to pass to the compiler, and
-LDFLAGS to represent the options to pass to the linker (which is normally just the
-C compiler but is sometimes explicitly invoked with the ld command). For
-example, the previous makefile can be rewritten as follows to take advantage of
-variable substitution:
+**Variable Substitution**
 
+The Make utility provides convenient access to environment variables. Makefiles can set, combine, and retrieve environment variables as text strings and can include these variables in targets and rules. It is common to use the variable CC to represent the C compiler command (which in our case is gcc), CFLAGS to represent the standard set of command-line options to pass to the compiler, and LDFLAGS to represent the options to pass to the linker (which is normally just the C compiler but is sometimes explicitly invoked with the ld command). For example, the previous makefile can be rewritten as follows to take advantage of variable substitution:
+
+```
 CC=gcc
 CFLAGS=-O2 -W -Wall -pedantic
 LIBS=-lSDL -lpthread
+
 program: file1.c file2.c graphics.a
-$(CC) $(CFLAGS) -c file1.c file2.c
-$(CC) file1.o file2.o graphics.a $(LIBS) -o program
-
-26
-
-CHAPTER 2
+	$(CC) $(CFLAGS) -c file1.c file2.c
+	$(CC) file1.o file2.o graphics.a $(LIBS) -o program
 
 graphics.a: graphics.c draw.c
-$(CC) $(CFLAGS) -c graphics.c draw.c
-ar rcs graphics.a graphics.o draw.o
-ranlib graphics.a
+	$(CC) $(CFLAGS) -c graphics.c draw.c
+	ar rcs graphics.a graphics.o draw.o
+	ranlib graphics.a
+```
 
-As you can see, variables are substituted into the makefile with the $(VARNAME)
-notation. This is a literal text substitution, and it takes place before the rule is
-otherwise processed. What if you want to add to the end of a variable without
-destroying its old contents? You might try something like this:
+As you can see, variables are substituted into the makefile with the $(VARNAME) notation. This is a literal text substitution, and it takes place before the rule is otherwise processed. What if you want to add to the end of a variable without destroying its old contents? You might try something like this:
+
+```
 FOO=bar
 FOO=$(FOO) baz
 FOO=$(FOO) qux
+```
 
-At a glance, it would appear that the FOO variable would end up with the value
-bar baz qux. However, Make does not normally evaluate variables until they
-are used (in targets), so FOO actually ends up with the string $(FOO) qux. There
-are two solutions to this problem. GNU Make (the default Make on Linux
-systems) provides a := operator for assignments, which causes its right-hand side
-to be evaluated before the variable is assigned. It also provides a += operator for
-directly appending to variables. A more portable solution would be to assign
-bar, baz, and qux to three different variables and to combine them all at once:
+At a glance, it would appear that the FOO variable would end up with the value bar baz qux. However, Make does not normally evaluate variables until they are used (in targets), so FOO actually ends up with the string $(FOO) qux. There are two solutions to this problem. GNU Make (the default Make on Linux systems) provides a := operator for assignments, which causes its right-hand side to be evaluated before the variable is assigned. It also provides a += operator for directly appending to variables. A more portable solution would be to assign bar, baz, and qux to three different variables and to combine them all at once:
+
+```
 BAR=bar
 BAZ=baz
 QUX=qux
 FOO=$(BAR) $(BAZ) $(QUX)
+```
 
-This (hacked) solution allows the variable FOO to be constructed correctly when
-it is used in a rule. It is a rather ugly way to do so, however, so we suggest using
-the GNU Make extensions.
-Although the use of variables might lengthen a makefile, they can provide a nice
-bit of abstraction. Variables make it easy to modify the options used throughout
-the build process without changing the whole makefile.
+This (hacked) solution allows the variable FOO to be constructed correctly when it is used in a rule. It is a rather ugly way to do so, however, so we suggest using the GNU Make extensions.  
 
-LINUX DEVELOPMENT TOOLS
+Although the use of variables might lengthen a makefile, they can provide a nice bit of abstraction. Variables make it easy to modify the options used throughout the build process without changing the whole makefile.  
 
-27
+**Implied Rules**
 
-Implied Rules
-Since C files are almost always compiled with the cc command (which is a
-symbolic link to the gcc command on Linux machines), there is really no need to
-specify build rules for each source file in the project. Make allows for implied
-build rules. That is, if a target is followed by no rules and does not specify any
-dependencies (or it simply does not exist), Make will attempt to use a default
-build rule based on the target’s file extension.
-For example, let’s say that foo.c is a C source file containing the function bar
-and that main.c is a C source file containing a main function that calls bar.
-The following makefile will build the program. Notice that there is no target for
-foo.o—it is referenced by the foo target, and Make assumes that it should create
-the target by compiling the file foo.c. (Actually, Make knows of several different
-source file types, C being perhaps the most common.) When Make automatically
-invokes the C compiler, it adds the CFLAGS variable to the command line.
+Since C files are almost always compiled with the cc command (which is a symbolic link to the gcc command on Linux machines), there is really no need to specify build rules for each source file in the project. Make allows for *implied* build rules. That is, if a target is followed by no rules and does not specify any dependencies (or it simply does not exist), Make will attempt to use a default build rule based on the target’s file extension.
+
+For example, let’s say that foo.c is a C source file containing the function bar and that main.c is a C source file containing a main function that calls bar.  The following makefile will build the program. Notice that there is no target for foo.o—it is referenced by the foo target, and Make assumes that it should create the target by compiling the file foo.c. (Actually, Make knows of several different source file types, C being perhaps the most common.) When Make automatically invokes the C compiler, it adds the CFLAGS variable to the command line.
+
+```
 CFLAGS=-O2 -W -Wall -pedantic
+
 foo: foo.o main.c
-gcc foo.o main.c -o foo
+	gcc foo.o main.c -o foo
+```
 
-Phony Targets
-Programmers often use Make for purposes other than building executables. It’s
-really a general-purpose project management tool. For instance, I’m currently
-using a makefile so that I don’t have to delete a bunch of files and then run
-LATEX, MakeIndex, and dvips every time I want a preview of this book. Consider
-the following makefile:
+**Phony Targets**
+
+Programmers often use Make for purposes other than building executables. It’s really a general-purpose project management tool. For instance, I’m currently using a makefile so that I don’t have to delete a bunch of files and then run LATEX, MakeIndex, and dvips every time I want a preview of this book. Consider the following makefile:
+
+```
 foo: foo.c
-gcc foo.c -o foo
+	gcc foo.c -o foo
+
 clean:
-rm *.o
-rm foo
+	rm *.o
+	rm foo
 
-The clean target has no dependencies and is therefore built only when it is
-specifically requested on the command line. The command make clean causes
+```
 
-28
+The clean target has no dependencies and is therefore built only when it is specifically requested on the command line. The command make clean causes all object files as well as the executable foo to be deleted and therefore serves to force a complete rebuild of the project. Programmers commonly include a clean target in their makefiles for convenience.
 
-CHAPTER 2
+In a more general sense, Make is often used as a simple interface to complex commands. Targets used for this purpose do not actually describe a build process but rather a set of commands to be executed when the target is requested. But what happens if such a “phony” target has the same name as a file in the current directory? For instance, what if there is a file called **clean**?  Make would detect that this file exists and would decide not to build the target.  
 
-all object files as well as the executable foo to be deleted and therefore serves to
-force a complete rebuild of the project. Programmers commonly include a clean
-target in their makefiles for convenience.
-In a more general sense, Make is often used as a simple interface to complex
-commands. Targets used for this purpose do not actually describe a build
-process but rather a set of commands to be executed when the target is
-requested. But what happens if such a “phony” target has the same name as a
-file in the current directory? For instance, what if there is a file called clean?
-Make would detect that this file exists and would decide not to build the target.
-Make provides a special pseudo-target called .PHONY for this purpose. .PHONY
-takes a dependency list, just as other targets do, but no build rules. .PHONY’s
-dependencies are marked as phony targets and will always be built when
-requested, regardless of any existing file by the same name. Here is the previous
-makefile, rewritten to use the .PHONY target.
+Make provides a special pseudo-target called .PHONY for this purpose. .PHONY takes a dependency list, just as other targets do, but no build rules. .PHONY’s dependencies are marked as phony targets and will always be built when requested, regardless of any existing file by the same name. Here is the previous makefile, rewritten to use the .PHONY target.
+
+```
 foo: foo.c
-gcc foo.c -o foo
+	gcc foo.c -o foo
+
 .PHONY: clean
+
 clean:
-rm *.o
-rm foo
+	rm *.o
+	rm foo
+```
 
-Error Handling
-In the event of an error, Make immediately stops and prints an error message (in
-addition to whatever was printed by the command that failed). Make detects
-errors by the return codes of the rules it executes: a return code of zero indicates
-success, and anything else indicates an error. Most UNIX commands follow this
-convention. If there is a syntax error in the makefile itself, Make will complain
-about it and exit.
+### Error Handling
 
-LINUX DEVELOPMENT TOOLS
+In the event of an error, Make immediately stops and prints an error message (in addition to whatever was printed by the command that failed). Make detects errors by the return codes of the rules it executes: a return code of zero indicates success, and anything else indicates an error. Most UNIX commands follow this convention. If there is a syntax error in the makefile itself, Make will complain about it and exit.
 
-29
+## Working with Libraries
 
-Working with Libraries
-Libraries provide a way to package code into reusable binary modules. Linux
-software can use two types of libraries: static and shared. A static library is
-simply a collection of object files that have been archived into one file with a
-symbol table. Static libraries have a file extension of .a, and they can be linked
-into programs as normal object files. A shared library is similar to a static
-library, except that it permanently resides in a separate file and is never directly
-linked into an application. Shared libraries are linked at runtime by the
-operating system’s dynamic linker.
+Libraries provide a way to package code into reusable binary modules. Linux software can use two types of libraries: *static* and *shared*. A static library is simply a collection of object files that have been archived into one file with a symbol table. Static libraries have a file extension of .a, and they can be linked into programs as normal object files. A shared library is similar to a static library, except that it permanently resides in a separate file and is never directly linked into an application. Shared libraries are linked at runtime by the operating system’s dynamic linker.
 
-Static Libraries
-Static libraries are extremely simple to create and use. Once you have created
-the object files you wish to package as a library, combine them with the ar utility:
+### Static Libraries
+
+Static libraries are extremely simple to create and use. Once you have created the object files you wish to package as a library, combine them with the ar utility:
+
+```
 $ ar rcs something.a file1.o file2.o file3.o
+```
 
-ar is a simple archiving utility. The r option specifies an operating mode: it tells
-ar to add the given files to the archive, replacing any existing files with the same
-names. The c option specifies that the archive should be created if it does not
-already exist. Finally, s informs ar that this is an archive of object files (that is,
-a static library) and that a symbol table should be added. Optionally, you can
-leave out the s flag and use the ranlib utility to add the symbol table; the
-resulting file will be equivalent.
-To use a static library, pass it to gcc just as you would pass a normal object file.
-gcc will recognize the .a file extension as an archive of object files.
+ar is a simple archiving utility. The r option specifies an operating mode: it tells ar to add the given files to the archive, replacing any existing files with the same names. The c option specifies that the archive should be created if it does not already exist. Finally, s informs ar that this is an archive of object files (that is, a static library) and that a symbol table should be added. Optionally, you can leave out the s flag and use the ranlib utility to add the symbol table; the resulting file will be equivalent.
 
-Shared Libraries
-Shared libraries are a bit more complex to manage than static libraries, but they
-are often worth the extra effort. Shared libraries are not stored in executables
-that use them; they are independent files that are linked into executables at
-runtime. In many cases shared libraries can be updated without recompiling the
-programs that depend on them. It is possible for the operating system to load a
-shared library into memory once, for use by multiple applications.
+To use a static library, pass it to gcc just as you would pass a normal object file. gcc will recognize the **.a** file extension as an archive of object files.
 
-30
+### Shared Libraries
 
-CHAPTER 2
+Shared libraries are a bit more complex to manage than static libraries, but they are often worth the extra effort. Shared libraries are not stored in executables that use them; they are independent files that are linked into executables at runtime. In many cases shared libraries can be updated without recompiling the programs that depend on them. It is possible for the operating system to load a shared library into memory once, for use by multiple applications.  
 
-Shared libraries follow a very specific naming scheme designed to keep
-incompatible versions separate. Each shared library should be given a unique
-base name (or soname) of the form libFooBar.so.n, where n is a major release
-number. The major release number should be incremented whenever backward
-compatibility is broken. Minor version and release numbers (indicating slight
-revisions that shouldn’t affect compatibility) are added to the end of the base
-name, so that the final name looks something like libFooBar.so.2.1.3.
-The ldconfig utility imposes sanity upon the various versions of a library that
-might exist. It searches for libraries in a certain set of directories, usually
-specified in /etc/ld.so.conf or the environment variable LD LIBRARY PATH. For
-each library it finds with a name in the form libSomething.so.m.n.r , it
-creates a symbolic link for libSomething.so.m. If two libraries have the same
-base name, ldconfig creates a symbolic link to the later version. Applications
-reference these symbolic links rather than the full names of the libraries. If a
-new release of a library is installed, ldconfig updates the symbolic link, and all
-applications that use the library will automatically reference the new version.
+Shared libraries follow a very specific naming scheme designed to keep incompatible versions separate. Each shared library should be given a unique base name (or *soname*) of the form **libFooBar.so.n**, where n is a major release number. The major release number should be incremented whenever backward compatibility is broken. Minor version and release numbers (indicating slight revisions that shouldn’t affect compatibility) are added to the end of the base name, so that the final name looks something like **libFooBar.so.2.1.3**.
 
-Creating Shared Libraries
-Shared libraries are simple to create. First, compile your sources into object files
-with the -fPIC flag. This causes gcc to output position-independent code, which
-is more palatable to the dynamic linker. Then link with gcc’s -shared flag. You
-will also need to inform the linker of the soname you wish to use. To see how
-this is done, take a look at the following example:
+The ldconfig utility imposes sanity upon the various versions of a library that might exist. It searches for libraries in a certain set of directories, usually specified in **/etc/ld.so.conf** or the environment variable LD LIBRARY PATH. For each library it finds with a name in the form **libSomething.so.*m.n.r*** , it creates a symbolic link for **libSomething.so.*m***. If two libraries have the same base name, ldconfig creates a symbolic link to the later version. Applications reference these symbolic links rather than the full names of the libraries. If a new release of a library is installed, ldconfig updates the symbolic link, and all applications that use the library will automatically reference the new version.
+
+**Creating Shared Libraries**
+
+Shared libraries are simple to create. First, compile your sources into object files with the -fPIC flag. This causes gcc to output position-independent code, which is more palatable to the dynamic linker. Then link with gcc’s -shared flag. You will also need to inform the linker of the soname you wish to use. To see how this is done, take a look at the following example:
+
+```
 $ gcc -fPIC -c foo.c bar.c
-$ gcc -shared -Wl,-soname,libFooBar.so.1 foo.o bar.o -o \
-libFooBar.so.1.1.1
+$ gcc -shared -Wl,-soname,libFooBar.so.1 foo.o bar.o -o libFooBar.so.1.1.1
+
 $ su
 Password:
 # install -m 0755 libFooBar.so.1.1.1 /usr/lib
 # ldconfig
 # ln -s /usr/lib/libFooBar.so.1 /usr/lib/libFooBar.so
 # exit
+```
 
-The first command produces the object files foo.o and bar.o, and the second
-creates the shared library. Note the use of the -Wl flag to send options directly
+The first command produces the object files foo.o and bar.o, and the second creates the shared library. Note the use of the -Wl flag to send options directly to the linker. The library is then installed to the standard location with a reasonable set of permissions (note: this step will require write permission to **/usr/lib**), and ldconfig is executed to set up the proper symbolic link. Finally, another symbolic link is created to the base name of the library. This allows the library to be linked into a program with the -lFooBar gcc option.
 
-LINUX DEVELOPMENT TOOLS
+**Using Shared Libraries**
 
-31
+Shared libraries are extremely versatile. Once they are linked into an application, they act as part of the program, except that the actual linking is done at runtime. Shared libraries can also be manually loaded and accessed via the dlopen C interface.
 
-to the linker. The library is then installed to the standard location with a
-reasonable set of permissions (note: this step will require write permission to
-/usr/lib), and ldconfig is executed to set up the proper symbolic link. Finally,
-another symbolic link is created to the base name of the library. This allows the
-library to be linked into a program with the -lFooBar gcc option.
+To link a properly installed shared library into an application, use gcc’s -l option. For instance, to link with **/usr/lib/libFooBar.so** (which is a symbolic link to **/usr/lib/libFooBar.so.1**), specify -lFooBar. If the library resides in a nonstandard directory (such as the X libraries in **/usr/X11R6/lib**), use the -L option (-L/usr/X11R6/lib). When the application is run, the runtime linker attempts to locate the library (by name) and match its symbols with the symbols the application thinks it should have. If any symbols are missing, the linker reports an error, and the application fails to load. Otherwise, the shared library becomes part of the application.
 
-Using Shared Libraries
-Shared libraries are extremely versatile. Once they are linked into an
-application, they act as part of the program, except that the actual linking is
-done at runtime. Shared libraries can also be manually loaded and accessed via
-the dlopen C interface.
-To link a properly installed shared library into an application, use gcc’s -l
-option. For instance, to link with /usr/lib/libFooBar.so (which is a symbolic
-link to /usr/lib/libFooBar.so.1), specify -lFooBar. If the library resides in a
-nonstandard directory (such as the X libraries in /usr/X11R6/lib), use the -L
-option (-L/usr/X11R6/lib). When the application is run, the runtime linker
-attempts to locate the library (by name) and match its symbols with the
-symbols the application thinks it should have. If any symbols are missing, the
-linker reports an error, and the application fails to load. Otherwise, the shared
-library becomes part of the application.
-dlopen/dlsym is another approach to using shared libraries. This interface
-allows you to manually open and access shared object files. For example,
-suppose that libfoo.so is a shared object file containing a function bar. The
-following example will open the file and call the function:
+dlopen/dlsym is another approach to using shared libraries. This interface allows you to manually open and access shared object files. For example, suppose that **libfoo.so** is a shared object file containing a function bar. The following example will open the file and call the function: 
+
+```
 #include <dlfcn.h>
+
 /* dlfcn.h provides the dlopen() interface */
+
 int main()
 {
-void *handle;
-void (*bar)(void);
-/* Open the library and save the handle */
-handle = dlopen("libfoo.so",RTLD_NOW);
-if (handle == NULL) {
+	void *handle;
+	void (*bar)(void);
 
-32
+	/* Open the library and save the handle */
+	handle = dlopen("libfoo.so",RTLD_NOW);
+	if (handle == NULL) {
+		/* dlerror() returns an error message */
+		printf("dlopen failed: %s\n",dlerror());
+		return 1;
+	}
 
-CHAPTER 2
-/* dlerror() returns an error message */
-printf("dlopen failed: %s\n",dlerror());
-return 1;
+	/* Attempt to find the address of bar() */
+	bar = dlsym(handle,"bar");
+	if (bar == NULL) {
+		printf("dlsym failed: %s\n",dlerror());
+		return 1;
+	}
+
+	/* Good, we found bar(), so call it */
+	bar();
+
+	/* Close libfoo.so */
+	dlclose(handle);
+
+	return 0;
 }
-/* Attempt to find the address of bar() */
-bar = dlsym(handle,"bar");
-if (bar == NULL) {
-printf("dlsym failed: %s\n",dlerror());
-return 1;
-}
-/* Good, we found bar(), so call it */
-bar();
-/* Close libfoo.so */
-dlclose(handle);
-return 0;
+```
 
-}
+The RTLD NOW flag in dlopen indicates that dlopen should attempt to resolve all symbols that the shared library depends on immediately. (Shared libraries can depend on other libraries, so this is a serious concern.) The other option is RTLD LAZY, which instructs the dynamic linker to resolve symbols as it encounters them.
 
-The RTLD NOW flag in dlopen indicates that dlopen should attempt to resolve all
-symbols that the shared library depends on immediately. (Shared libraries can
-depend on other libraries, so this is a serious concern.) The other option is
-RTLD LAZY, which instructs the dynamic linker to resolve symbols as it
-encounters them.
-Sometimes a dynamically loaded library needs to access symbols in the parent
-application. To allow these symbols to be resolved, compile the application with
-the -rdynamic option and the --export-dynamic linker option. (The correct
-syntax is -wl,--export-dynamic.) The -rdynamic option allows unresolved
-symbols in a shared library to be matched with symbols in the parent
-application, and the --export-dynamic option instructs the linker to generate
-extra symbol information suitable for this purpose.
+Sometimes a dynamically loaded library needs to access symbols in the parent application. To allow these symbols to be resolved, compile the application with the -rdynamic option and the --export-dynamic linker option. (The correct syntax is -wl,--export-dynamic.) The -rdynamic option allows unresolved symbols in a shared library to be matched with symbols in the parent application, and the --export-dynamic option instructs the linker to generate extra symbol information suitable for this purpose.
 
-Linux Linker Quirks
-The Linux linker, GNU ld, is a complex but quirky tool. Although a complete
-discussion of ld is far beyond the scope of this book, here are some hints that
-might make your life easier.
+## Linux Linker Quirks
 
-LINUX DEVELOPMENT TOOLS
+The Linux linker, GNU ld, is a complex but quirky tool. Although a complete discussion of ld is far beyond the scope of this book, here are some hints that might make your life easier.  
 
-33
+ld (and therefore gcc) is sensitive about the order in which libraries and object files are specified on the command line. If **libfoo.so** depends on **libbar.so**, you must specify **libfoo.so** first (as counterintuitive as this may be). The reason is that ld keeps track only of unresolved symbols as it links. If **libfoo.so** and **libbar.so** depend on each other, one of the libraries will have to be specified twice (for example, -lfoo -lbar -lfoo). This is different from the behavior of Visual C++’s linker, and it causes headaches when porting games from Windows.  If the linker can’t find a symbol but you’re sure that you’ve given it the right libraries, double-check the order in which they’re specified on the command line.  
 
-ld (and therefore gcc) is sensitive about the order in which libraries and object
-files are specified on the command line. If libfoo.so depends on libbar.so, you
-must specify libfoo.so first (as counterintuitive as this may be). The reason is
-that ld keeps track only of unresolved symbols as it links. If libfoo.so and
-libbar.so depend on each other, one of the libraries will have to be specified
-twice (for example, -lfoo -lbar -lfoo). This is different from the behavior of
-Visual C++’s linker, and it causes headaches when porting games from Windows.
-If the linker can’t find a symbol but you’re sure that you’ve given it the right
-libraries, double-check the order in which they’re specified on the command line.
-The Linux runtime linker does not respect the LD LIBRARY PATH environment
-variable with setuid root executables. This is a bit annoying, but it is important
-for security; consider the implications of allowing users to modify the library
-search path for executables that are run as the root user.
-Name collisions are annoying, especially because they can be extremely hard to
-trace. The -warn-common flag causes a warning to be printed whenever symbols
-(global variables, for instance) are combined between object files.
-Finally, keep in mind that some Linux distributions (notably Red Hat, at least
-as of the time of this writing) do not recognize /usr/local/lib as a library
-directory, and hence any libraries placed there will not be accessible. You can fix
-this by editing /etc/ld.so.conf. Remeber to run the ldconfig program after
-editing the library path list.
+The Linux runtime linker does not respect the LD LIBRARY PATH environment variable with setuid root executables. This is a bit annoying, but it is important for security; consider the implications of allowing users to modify the library search path for executables that are run as the root user.
 
-Debugging Linux Applications
-Linux’s programming environment provides support for interactive debugging.
-The gcc compiler can generate symbol information for debugging, and several
-debuggers are available. We will begin by demonstrating how to add debugging
-information to an executable and then take a brief tour of two popular
-debugging environments for Linux.
+Name collisions are annoying, especially because they can be extremely hard to trace. The -warn-common flag causes a warning to be printed whenever symbols (global variables, for instance) are combined between object files.
 
-Compiling for Debugging
-In order for a debugger to analyze an executable’s behavior in a way that is
-useful to humans, it needs to determine the exact locations of the program’s
+Finally, keep in mind that some Linux distributions (notably Red Hat, at least as of the time of this writing) do not recognize /usr/local/lib as a library directory, and hence any libraries placed there will not be accessible. You can fix this by editing /etc/ld.so.conf. Remeber to run the ldconfig program after editing the library path list.
 
-34
+## Debugging Linux Applications
 
-CHAPTER 2
+Linux’s programming environment provides support for interactive debugging.  The gcc compiler can generate symbol information for debugging, and several debuggers are available. We will begin by demonstrating how to add debugging information to an executable and then take a brief tour of two popular debugging environments for Linux.
 
-variables and function entry points. This requires a bit of help from the
-compiler; applications must be specifically compiled for debugging, or symbolic
-debuggers will be useless. To compile a program with the necessary debugging
-support (and in particular, support for the gdb debugger), use the -ggdb flag:
+### Compiling for Debugging
+
+In order for a debugger to analyze an executable’s behavior in a way that is useful to humans, it needs to determine the exact locations of the program’s variables and function entry points. This requires a bit of help from the compiler; applications must be specifically compiled for debugging, or symbolic debuggers will be useless. To compile a program with the necessary debugging support (and in particular, support for the gdb debugger), use the -ggdb flag:
+
+```
 $ gcc -ggdb foo.c -o foo
+```
 
-It is a good idea to disable optimization when debugging (that is, do not use the
--On compiler option). Although gcc and gdb allow you to debug optimized
-executables, the results might be a bit surprising (since optimization, by
-definition, changes the internals of a program).
-Although programmers sometimes use the -fomit-frame-pointer compiler
-option in the hope of improving performance, this option is incompatible with
-debugging in most cases. (It causes the compiler to omit the instructions that
-usually keep track of an important piece of position information.) Compiling an
-executable for debugging will increase its size and most likely decrease its
-performance; executables intended for public release should not be compiled for
-debugging.
+It is a good idea to disable optimization when debugging (that is, do not use the -O*n* compiler option). Although gcc and gdb allow you to debug optimized executables, the results might be a bit surprising (since optimization, by definition, changes the internals of a program).
 
-gdb
-The GNU debugger, known as gdb, is the primary debugger for Linux. It allows
-you to single-step programs, inspect variables while programs are running, and
-analyze core files (memory dump files, usually named core, generated
-automatically when applications crash, affectionately dubbed “core pies”). gdb
-is an extremely powerful tool, but its interface is likely to throw beginners for a
-loop.
-gdb is a text-based interactive debugger. Once a program is loaded into the
-debugger, gdb accepts commands to direct the program’s operation. There are
-lots of commands, but there is also a nice online help facility. Simply type help
-for an index.
+Although programmers sometimes use the **-fomit-frame-pointer** compiler option in the hope of improving performance, this option is incompatible with debugging in most cases. (It causes the compiler to omit the instructions that usually keep track of an important piece of position information.) Compiling an executable for debugging will increase its size and most likely decrease its performance; executables intended for public release should not be compiled for debugging.
 
-LINUX DEVELOPMENT TOOLS
+### gdb
 
-35
+The GNU debugger, known as gdb, is the primary debugger for Linux. It allows you to single-step programs, inspect variables while programs are running, and analyze **core** files (memory dump files, usually named **core**, generated automatically when applications crash, affectionately dubbed “core pies”). gdb is an extremely powerful tool, but its interface is likely to throw beginners for a loop.
 
-A Trivial Example
-The following program is supposed to print the numbers from 0 to 9. However, it
-has a bug. There is an extra semicolon after the for loop, which causes the
-printf statement to be separated from the loop. This is a fairly common error,
-simple to fix but often hard to locate. gdb is great for pinpointing this type of
-error, since it lets you see exactly what’s happening in the program.
+gdb is a text-based interactive debugger. Once a program is loaded into the debugger, gdb accepts commands to direct the program’s operation. There are lots of commands, but there is also a nice online help facility. Simply type help for an index.
+
+**A Trivial Example**
+
+The following program is supposed to print the numbers from 0 to 9. However, it has a bug. There is an extra semicolon after the for loop, which causes the printf statement to be separated from the loop. This is a fairly common error, simple to fix but often hard to locate. gdb is great for pinpointing this type of error, since it lets you see exactly what’s happening in the program.
+
+```
 #include <stdio.h>
 int main()
 {
-int i;
-for (i = 0; i < 10; i++);
-printf("Counter is now %i\n",i);
-return 0;
+	int i;
+	for (i = 0; i < 10; i++);
+		printf("Counter is now %i\n",i);
+	return 0;
 }
+```
 
 First, we compile the program and test it:
+
+```
 $ gcc -ggdb buggy.c -o buggy
 $ ./buggy
 Counter is now 10
+```
 
-Yikes! That shouldn’t have happened—we’ll use gdb to figure out what’s going
-on. To load a program into gdb, pass the name of the program on the command
-line:
+Yikes! That shouldn’t have happened—we’ll use gdb to figure out what’s going on. To load a program into gdb, pass the name of the program on the command line:
+
+```
 $ gdb buggy
 GNU gdb 4.18
 Copyright 1998 Free Software Foundation, Inc.
-license notice removed
+*license notice removed*
+
 This GDB was configured as "i386-redhat-linux"...}
+```
 
-gdb is now ready to accept commands. We will set a breakpoint (a position at
-which gdb suspends the process for inspection) and then start the program:
+gdb is now ready to accept commands. We will set a breakpoint (a position at which gdb suspends the process for inspection) and then start the program:
 
-36
-
-CHAPTER 2
-
+```
 (gdb) b main
 Breakpoint 1 at 0x80483d6: file buggy.c, line 6.
 (gdb) r
 Starting program: /home/overcode/book/test/buggy
+
 Breakpoint 1, main () at buggy.c:6
-6
-for (i = 0; i < 10; i++);
+6		for (i = 0; i < 10; i++);
+```
 
-The b command (short for breakpoint) sets a breakpoint at the specified function
-name. We also could have specified a line number or an actual memory address.
-In this case, gdb reports that breakpoint #1 has been successfully added for line
-6 of the source file buggy.c. The r command starts the program’s execution.
-Since we have set a breakpoint on the function main, gdb immediately suspends
-the program and prints the current line (which happens to be the for loop with
-the error). We will now use the n (next) command to single-step the program:
+The b command (short for breakpoint) sets a breakpoint at the specified function name. We also could have specified a line number or an actual memory address.  In this case, gdb reports that breakpoint #1 has been successfully added for line 6 of the source file **buggy.c**. The r command starts the program’s execution.  Since we have set a breakpoint on the function main, gdb immediately suspends the program and prints the current line (which happens to be the for loop with the error). We will now use the n (next) command to single-step the program:
+
+```
 (gdb) n
-7
+7	printf("Counter is now %i\n",i);
+```
 
-printf("Counter is now %i\n",i);
+The n command runs the program until it reaches a different line of code, so this is the expected result. After executing this line of code, the program should continue through the loop. Let’s see what happens:
 
-The n command runs the program until it reaches a different line of code, so this
-is the expected result. After executing this line of code, the program should
-continue through the loop. Let’s see what happens:
+```
 (gdb) n
 Counter is now 10
-8
-return 0;
+8	return 0;
+```
 
-That’s not good—the program moved on to line 8, meaning that the loop is no
-longer running. It is now fairly obvious that line 7 is not part of the loop. We
-can take a quick look at the source code with the l (list) command:
+That’s not good—the program moved on to line 8, meaning that the loop is no longer running. It is now fairly obvious that line 7 is not part of the loop. We can take a quick look at the source code with the l (list) command:
+
+```
 (gdb) l
-3
-int main()
-4
-{
-5
-int i;
-6
-for (i = 0; i < 10; i++);
-7
-printf("Counter is now %i\n",i);
-8
-return 0;
-9
-}
+3 int main()
+4 {
+5	int i;
+6	for (i = 0; i < 10; i++);
+7		printf("Counter is now %i\n",i);
+8	return 0;
+9 }
+```
 
-LINUX DEVELOPMENT TOOLS
+Hopefully, at this point the programmer would notice the extra semicolon and fix the problem. (One would hope that the programmer would have found it before the gdb session, but we all make dumb mistakes.) gdb doesn’t eliminate the need to study the source code for errors—it just helps you focus on the right areas.
 
-37
+**Accessing Data**
 
-Hopefully, at this point the programmer would notice the extra semicolon and fix
-the problem. (One would hope that the programmer would have found it before
-the gdb session, but we all make dumb mistakes.) gdb doesn’t eliminate the need
-to study the source code for errors—it just helps you focus on the right areas.
+gdb can report the value of any variable that is accessible from the current scope in the program. It can also modify variables while the program is running. To view a variable, use the p (codeprint) command. p foo would report the current value of foo (if foo is visible from the current location in the program). There is also a printf command, which behaves much like its C namesake. To modify a variable, use the set var varname=value command.
 
-Accessing Data
-gdb can report the value of any variable that is accessible from the current scope
-in the program. It can also modify variables while the program is running. To
-view a variable, use the p (codeprint) command. p foo would report the current
-value of foo (if foo is visible from the current location in the program). There is
-also a printf command, which behaves much like its C namesake. To modify a
-variable, use the set var varname=value command.
-Programmers frequently need to track variables as they change throughout the
-program. With gdb, you can define a list of variables to display each time the
-program is suspended. The display command adds variables to this list, and
-the undisplay command removes them.
-gdb’s watchpoints are useful for tracing variable corruption. A watchpoint is a
-hardware trap placed on a memory location. If that memory location is read
-from or written to, gdb will catch the access and pause the program for
-inspection. Since watchpoints are independent of the semantics of a particular
-programming language, they can be used to trace memory corruption from
-misplaced pointers. There are three types of watchpoints: write-only, read-only,
-and access. Write-only watchpoints detect modifications but not reads, read-only
-watchpoints detect reads but not modifications, and access watchpoints detect
-any type of access to the given memory address. The watch, rwatch, and
-awatch commands correspond to these types of watchpoints. These three
-commands take a symbol name as an argument. Use the enable and disable
-commands to toggle watchpoints. info breakpoints prints a list of all
-breakpoints and watchpoints.
+Programmers frequently need to track variables as they change throughout the program. With gdb, you can define a list of variables to display each time the program is suspended. The display command adds variables to this list, and the undisplay command removes them.
 
-Viewing the Stack
-It is often useful to examine the call stack. Programs often crash because of
-invalid data passed to the C library (notably the free function), and a normal
+gdb’s *watchpoints* are useful for tracing variable corruption. A watchpoint is a hardware trap placed on a memory location. If that memory location is read from or written to, gdb will catch the *access* and pause the program for inspection. Since watchpoints are independent of the semantics of a particular programming language, they can be used to trace memory corruption from misplaced pointers. There are three types of watchpoints: *write-only*, *read-only*, and *access*. Write-only watchpoints detect modifications but not reads, read-only watchpoints detect reads but not modifications, and access watchpoints detect any type of access to the given memory address. The watch, rwatch, and awatch commands correspond to these types of watchpoints. These three commands take a symbol name as an argument. Use the enable and disable commands to toggle watchpoints. info breakpoints prints a list of all breakpoints and watchpoints.
 
-38
+**Viewing the Stack**
 
-CHAPTER 2
+It is often useful to examine the call stack. Programs often crash because of invalid data passed to the C library (notably the free function), and a normal gdb crash report will list the name and memory address only of the function where the crash actually occurred. This is essentially useless in a typical program that makes hundreds of calls to these functions; the bewildered programmer would have no idea where the erroneous library call took place. For instance, the following is the late-night programmer’s worst nightmare (other than a copy of eggdrop found running in an unknown account):
 
-gdb crash report will list the name and memory address only of the function
-where the crash actually occurred. This is essentially useless in a typical
-program that makes hundreds of calls to these functions; the bewildered
-programmer would have no idea where the erroneous library call took place. For
-instance, the following is the late-night programmer’s worst nightmare (other
-than a copy of eggdrop found running in an unknown account):
+```
 Program received signal SIGSEGV, Segmentation fault.
 0x401371eb in free () from /lib/libc.so.6
+```
 
-This message indicates a crash in the C library itself, resulting from an invalid
-call to free. This information is almost useless to us, since most nontrivial C
-programs make hundreds of calls to free. Since the segmentation fault occurred
-in a function outside of our program (and, more importantly, in one that does
-not contain debugging information), gdb cannot simply tell us the line number of
-the crash location.
-gdb solves this problem with its backtrace command. When a program crashes
-under gdb, backtrace will display the names of all functions that are currently
-active on the stack. In this particular program, backtrace provides us with the
-following information:
+This message indicates a crash in the C library itself, resulting from an invalid call to free. This information is almost useless to us, since most nontrivial C programs make hundreds of calls to free. Since the segmentation fault occurred in a function outside of our program (and, more importantly, in one that does not contain debugging information), gdb cannot simply tell us the line number of the crash location.
+
+gdb solves this problem with its backtrace command. When a program crashes under gdb, backtrace will display the names of all functions that are currently active on the stack. In this particular program, backtrace provides us with the following information:
+
+```
 (gdb) backtrace
 #0 0x401371eb in free () from /lib/libc.so.6
-#1 0x804b85e in ParseSurf (f=0x8112568, buf=0xbfffd6f0 "SURF 0x10")
-at ac3dfile.c:252
-#2 0x804c71f in ParseObject (scene=0x8112620, f=0x8112568,
-buf=0xbfffe34c "OBJECT poly") at ac3dfile.c:545
-#3 0x804c7c3 in ParseObject (scene=0x8112620, f=0x8112568,
-buf=0xbffff380 "OBJECT world") at ac3dfile.c:559
-#4 0x804cb74 in AC3D_LoadSceneFile (filename=0xbffff957 "crash.ac")
-at ac3dfile.c:829
+#1 0x804b85e in ParseSurf (f=0x8112568, buf=0xbfffd6f0 "SURF 0x10") at ac3dfile.c:252
+#2 0x804c71f in ParseObject (scene=0x8112620, f=0x8112568, buf=0xbfffe34c "OBJECT poly") at ac3dfile.c:545
+#3 0x804c7c3 in ParseObject (scene=0x8112620, f=0x8112568, buf=0xbffff380 "OBJECT world") at ac3dfile.c:559
+#4 0x804cb74 in AC3D_LoadSceneFile (filename=0xbffff957 "crash.ac") at ac3dfile.c:829
 #5 0x804d7a2 in main (argc=3, argv=0xbffff7e4) at ac3dembed.c:15
+```
 
-Aha! The invalid free call occurred while the program was executing line 252 of
-ac3dfile.c, in the function ParseSurf. We now know exactly where the
-erroneous call to free was made, and we can use standard debugging techniques
-to figure out why this particular line caused a crash. (A hint, in case you find
+Aha! The invalid free call occurred while the program was executing line 252 of **ac3dfile.c**, in the function ParseSurf. We now know exactly where the erroneous call to free was made, and we can use standard debugging techniques to figure out why this particular line caused a crash. (A hint, in case you find yourself in this situation: crashes in free are usually due to heap corruption, which can result when a program overruns allocated memory buffers.)
 
-LINUX DEVELOPMENT TOOLS
+backtrace’s output will be useless if the program has corrupted the stack in some way. If this happens, you’re in for a challenge, but at least you’ll know to look for memory accesses that might cause stack corruption. If you’re feeling particularly adventurous, you can try setting a watchpoint on an address in the stack, but it could easily be triggered by legitimate accesses as well as bugs.
 
-39
+**Remote Debugging**
 
-yourself in this situation: crashes in free are usually due to heap corruption,
-which can result when a program overruns allocated memory buffers.)
-backtrace’s output will be useless if the program has corrupted the stack in
-some way. If this happens, you’re in for a challenge, but at least you’ll know to
-look for memory accesses that might cause stack corruption. If you’re feeling
-particularly adventurous, you can try setting a watchpoint on an address in the
-stack, but it could easily be triggered by legitimate accesses as well as bugs.
+Linux is a network-enabled multiuser operating system, and it makes remote debugging extremely easy. Remote debugging (that is, debugging from a different console than the one on which the program is running) is useful when you’re dealing with applications that take over the screen or keyboard (as is frequently the case with games). Anyone who has had to debug a full-screen OpenGL game can attest to the importance of remote debugging.
 
-Remote Debugging
-Linux is a network-enabled multiuser operating system, and it makes remote
-debugging extremely easy. Remote debugging (that is, debugging from a
-different console than the one on which the program is running) is useful when
-you’re dealing with applications that take over the screen or keyboard (as is
-frequently the case with games). Anyone who has had to debug a full-screen
-OpenGL game can attest to the importance of remote debugging.
-gdb supports two types of remote debugging. It provides support for debugging
-over a serial connection, which is useful for kernel debugging but probably
-overkill for game development. Serial debugging is important when one cannot
-count on the stability of the operating system itself (and therefore the stability
-of the debugger). gdb also has the ability to attach to programs that are already
-running. You start the buggy application (compiled for debugging) normally and
-launch gdb via a remote login from a second computer. You then attach gdb to
-the buggy application. Now you can use the debugger without fear of losing
-control of the console. Note that gdb is running on the same computer as the
-application; it is just controlled from a remote terminal.
-To attach gdb to a running program, first use the file command with the name
-of the executable you want to debug:
+gdb supports two types of remote debugging. It provides support for debugging over a serial connection, which is useful for kernel debugging but probably overkill for game development. Serial debugging is important when one cannot count on the stability of the operating system itself (and therefore the stability of the debugger). gdb also has the ability to attach to programs that are already running. You start the buggy application (compiled for debugging) normally and launch gdb via a remote login from a second computer. You then attach gdb to the buggy application. Now you can use the debugger without fear of losing control of the console. Note that gdb is running on the same computer as the application; it is just controlled from a remote terminal.
+
+To attach gdb to a running program, first use the file command with the name of the executable you want to debug:
+
+```
 (gdb) file foo
 Reading symbols from foo...done.
+```
 
-gdb is now ready to attach to a running copy of foo. Use the attach command
-with the process ID of the running application:
+gdb is now ready to attach to a running copy of foo. Use the attach command with the process ID of the running application:
 
-40
-
-CHAPTER 2
-
+```
 (gdb) attach 3691
 Attaching to program: /home/overcode/test/foo, Pid 3691
 Reading symbols from /usr/X11R6/lib/libX11.so.6...done.
 Reading symbols from /lib/libc.so.6...done.
 Reading symbols from /lib/ld-linux.so.2...done.
 0x4016754e in __select () from /lib/libc.so.6
+```
 
-The debugger has suspended foo, and you can now use the normal gdb
-debugging commands, just as if you had started foo under gdb directly.
+The debugger has suspended foo, and you can now use the normal gdb debugging commands, just as if you had started foo under gdb directly.
 
-Debugging Multithreaded Applications
-Games frequently use multiple threads of execution to smoothly coordinate the
-various parts of the game engine. Unfortunately, multithreading has always been
-a thorn in the side of source-level debuggers. gdb can debug multithreaded
-applications locally, but it cannot attach to more than one thread of an
-application that is already running. This is because threads under Linux are
-implemented as separate processes that share an address space, and each thread
-has a separate process ID. gdb needs to catch threads as they are created in
-order to debug them.
-When gdb suspends a multithreaded application, it suspends all of its threads at
-once. This allows you to switch between threads and examine the program
-without the fear that something will change in the background. Keep in mind,
-however, that single-stepping a multithreaded application may result in more
-than one line of code being executed in some threads; gdb only directly controls
-the execution of one of the threads.
-Working with threads in gdb is not particularly difficult. The info threads
-command prints a list of threads owned by the application, and the thread id
-command switches between threads. gdb assigns its own thread IDs to a
-program’s threads; these are listed in the leftmost column of the info threads
-display. To apply a gdb command to one or more threads, use thread apply
-ids, where ids is a list of thread IDs or “all.”
-Unfortunately, multithreading causes problems with watchpoints. gdb can
-reliably detect memory changes only within the current thread; it might fail to
-detect a change caused by another thread. Watchpoints can still be useful in
-multithreaded applications, but you will have to determine which thread is
-causing the change on your own.
+**Debugging Multithreaded Applications**
 
-LINUX DEVELOPMENT TOOLS
+Games frequently use multiple threads of execution to smoothly coordinate the various parts of the game engine. Unfortunately, multithreading has always been a thorn in the side of source-level debuggers. gdb can debug multithreaded applications locally, *but it cannot attach to more than one thread of an application that is already running*. This is because threads under Linux are implemented as separate processes that share an address space, and each thread has a separate process ID. gdb needs to catch threads as they are created in order to debug them.
 
-41
+When gdb suspends a multithreaded application, it suspends all of its threads at once. This allows you to switch between threads and examine the program without the fear that something will change in the background. Keep in mind, however, that single-stepping a multithreaded application may result in more than one line of code being executed in some threads; gdb only directly controls the execution of one of the threads.
 
-Screen shot of ddd
+Working with threads in gdb is not particularly difficult. The info threads command prints a list of threads owned by the application, and the thread *id* command switches between threads. gdb assigns its own thread IDs to a program’s threads; these are listed in the leftmost column of the info threads display. To apply a gdb command to one or more threads, use thread apply *ids*, where *ids* is a list of thread IDs or “all.”
 
-ddd
-Many people find the gdb interface hard to live with, and so several front ends
-have been created. Perhaps the best-known front end is the Data Display
-Debugger, or ddd. This program adds a nice interface to gdb, perhaps limiting
-its usefulness to hardcore gdb fans but certainly making life considerably easier
-for beginners.
-ddd requires only a minimal introduction, because it closely mirrors the
-functionality provided by gdb (and with good reason; it is gdb, inside a GUI
-wrapper). To begin a debugging session with ddd, choose Open Program from
-the File menu. You may then set breakpoints and control execution with ddd’s
-toolbar and menus. ddd allows you to attach to running programs after the
-corresponding executables have been opened. If you need a piece of functionality
-provided by gdb but not ddd, you can send commands directly to gdb with the
-console at the bottom of the screen.
+Unfortunately, multithreading causes problems with watchpoints. gdb can reliably detect memory changes only within the current thread; it might fail to detect a change caused by another thread. Watchpoints can still be useful in multithreaded applications, but you will have to determine which thread is causing the change on your own.
 
-42
+[Screen shot of ddd](none.jpg)
 
-CHAPTER 2
 
-Bug Tracking
-A very important but often overlooked aspect of debugging is keeping track of
-the information pertaining to identified bugs. A game development team might
-easily receive hundreds of bug reports during the course of a game’s development
-and beta test, and it is essential to organize these reports so that the developers
-can easily verify and resolve the bugs. Bug-tracking software is every bit as
-important to a serious game development operation as the debugger itself.
-The Mozilla project’s Bugzilla has emerged as one of the best and most widely
-used bug-tracking systems. Bugzilla is a Web-based system written in Perl and
-designed for use with the popular Apache Web server and MySQL database
-server. With it, users can report bugs, check to see if a reported bug has been
-resolved, and browse through other bugs that have been reported. Bugzilla is
-covered under the Mozilla Public License, and it can be freely used and modified.
-It is relatively simple to install if MySQL and Apache are already configured. To
-see Bugzilla in action, visit http://bugzilla.mozilla.org.
+### ddd
 
-Project Management with CVS
-Collaboration is the only way to accomplish a large programming task in any
-reasonable amount of time, but coordination can become difficult even with only
-two or three developers working on a project. In particular, care must be taken
-to ensure that one programmer’s work does not overwrite another’s. It is also
-important to keep development and release versions of a piece of software
-separate.
-These problems are addressed by version control software. The capabilities of
-these tools vary, but we will discuss the most popular tool, the Concurrent
-Version System (CVS). CVS is a tool for managing repositories, which are
-simply directory trees of source code with a bit of extra control information.
-Each project in a repository is called a module. Modules are initially imported
-into the repository, and additional files can subsequently be added. Individual
-developers can check out modules, make changes, and commit the updated files
-back into the master source repository when they are finished. CVS keeps a
-record of the changes made to each file and allows individual files or entire trees
-to be tagged with version designations. Developers can also create separate
+Many people find the gdb interface hard to live with, and so several front ends have been created. Perhaps the best-known front end is the Data Display Debugger, or ddd. This program adds a nice interface to gdb, perhaps limiting its usefulness to hardcore gdb fans but certainly making life considerably easier for beginners.
 
-LINUX DEVELOPMENT TOOLS
+ddd requires only a minimal introduction, because it closely mirrors the functionality provided by gdb (and with good reason; it is gdb, inside a GUI wrapper). To begin a debugging session with ddd, choose **Open Program** from the File menu. You may then set breakpoints and control execution with ddd’s toolbar and menus. ddd allows you to attach to running programs after the corresponding executables have been opened. If you need a piece of functionality provided by gdb but not ddd, you can send commands directly to gdb with the console at the bottom of the screen.
 
-43
 
-branches of a source tree if they intend to make substantial and possibly
-dangerous modifications. Successful branches can later be merged back into the
-main source tree.
-What if two developers make (conflicting) modifications to the same file? Some
-version control systems physically prevent this with “strong” file locking, but
-CVS allows it. In the case of a conflict, CVS will prevent the most recent
-modification from being committed to the repository. Instead, it will provide the
-developer with a reject file listing the source code lines in question. The
-developer must then merge the two sets of changes by hand and then recommit
-the file. This would obviously be a continuous hassle without a bit of
-coordination between developers; CVS does not replace communication and
-management. It is best to avoid conflicts in the first place, but they are
-sometimes inevitable.
-CVS is a free tool, a fact that has played a role in its almost universal
-acceptance in the Linux development community. Free software would not be
-where it is today without CVS.
+### Bug Tracking
 
-A Brief Tutorial on CVS
-We will now work through a complete example of using CVS to manage a small
-project. Suppose that we have four files: Makefile, foo.c, foo.h, and main.c.
-These constitute a small programming project, but their contents are not
-relevant for our purposes. We would like to create a CVS module out of these
-files so that other developers can join in. For now we’ll assume that all
-developers have local access to the machine hosting the repository, though it is
-possible to use CVS remotely.
+A very important but often overlooked aspect of debugging is keeping track of the information pertaining to identified bugs. A game development team might easily receive hundreds of bug reports during the course of a game’s development and beta test, and it is essential to organize these reports so that the developers can easily verify and resolve the bugs. Bug-tracking software is every bit as important to a serious game development operation as the debugger itself.
 
-Creating a CVS Module
-The first step is to create a repository, if one does not already exist. A repository
-can host any number of modules, and it is common for software teams to use one
-central repository for all of their projects (this facilitates routine backups, among
-other things). To create a repository, set the CVSROOT environment variable to a
-suitable location and issue the command cvs init. This will create the CVS
-repository directory and initialize several important control files. The location of
+The Mozilla project’s Bugzilla has emerged as one of the best and most widely used bug-tracking systems. Bugzilla is a Web-based system written in Perl and designed for use with the popular Apache Web server and MySQL database server. With it, users can report bugs, check to see if a reported bug has been resolved, and browse through other bugs that have been reported. Bugzilla is covered under the Mozilla Public License, and it can be freely used and modified.  It is relatively simple to install if MySQL and Apache are already configured. To see Bugzilla in action, visit http://bugzilla.mozilla.org.
 
-44
+## Project Management with CVS
 
-CHAPTER 2
+Collaboration is the only way to accomplish a large programming task in any reasonable amount of time, but coordination can become difficult even with only two or three developers working on a project. In particular, care must be taken to ensure that one programmer’s work does not overwrite another’s. It is also important to keep development and release versions of a piece of software separate.
 
-CVSROOT is not especially important, but make sure that your account has write
-access to it. If a repository already exists, make sure the CVSROOT environment
-variable is set to the repository’s location.
+These problems are addressed by *version control software*. The capabilities of these tools vary, but we will discuss the most popular tool, the Concurrent Version System (CVS). CVS is a tool for managing *repositories*, which are simply directory trees of source code with a bit of extra control information.  Each project in a repository is called a *module*. Modules are initially *imported* into the repository, and additional files can subsequently be added. Individual developers can *check out* modules, make changes, and *commit* the updated files back into the master source repository when they are finished. CVS keeps a record of the changes made to each file and allows individual files or entire trees to be tagged with version designations. Developers can also create separate *branches* of a source tree if they intend to make substantial and possibly dangerous modifications. Successful branches can later be *merged* back into the main source tree.
+
+What if two developers make (conflicting) modifications to the same file? Some version control systems physically prevent this with “strong” file locking, but CVS allows it. In the case of a conflict, CVS will prevent the most recent modification from being committed to the repository. Instead, it will provide the developer with a *reject file* listing the source code lines in question. The developer must then merge the two sets of changes by hand and then recommit the file. This would obviously be a continuous hassle without a bit of coordination between developers; CVS does not replace communication and management. It is best to avoid conflicts in the first place, but they are sometimes inevitable.
+
+CVS is a free tool, a fact that has played a role in its almost universal acceptance in the Linux development community. Free software would not be where it is today without CVS.
+
+### A Brief Tutorial on CVS
+
+We will now work through a complete example of using CVS to manage a small project. Suppose that we have four files: **Makefile**, **foo.c**, **foo.h**, and **main.c**.  These constitute a small programming project, but their contents are not relevant for our purposes. We would like to create a CVS module out of these files so that other developers can join in. For now we’ll assume that all developers have local access to the machine hosting the repository, though it is possible to use CVS remotely.
+
+**Creating a CVS Module**
+
+The first step is to create a repository, if one does not already exist. A repository can host any number of modules, and it is common for software teams to use one central repository for all of their projects (this facilitates routine backups, among other things). To create a repository, set the CVSROOT environment variable to a suitable location and issue the command cvs init. This will create the CVS repository directory and initialize several important control files. The location of CVSROOT is not especially important, but make sure that your account has write access to it. If a repository already exists, make sure the CVSROOT environment variable is set to the repository’s location.
+
+```
 $ export CVSROOT=/home/overcode/cvs
 $ cvs init
+```
 
+```
 Warning
-Do not create a CVS repository in the same directory as a project you
-wish to add to the repository. This would result in an infinite loop.
-CVS is remarkably brain-dead about some things, but it’s a useful tool
-nonetheless.
 
-Now we need to import the initial set of source files to the repository. Assuming
-that we are in the project’s directory and that CVSROOT is set correctly, we use
-the command cvs import -m "Some descriptive comment" projname
-vendor label, where projname is the name of the project (“foobar” for now),
-vendor is the name of the organization responsible for the project (which doesn’t
-matter too much to us), and label is an indication of the software’s progress,
-such as initial or start. This command will copy the project’s files into the
-CVS repository under the given project name. The project is now controlled by
-CVS, and the original files can safely be deleted.
-For the purposes of our tutorial, the correct import command is cvs import -m
-"CVS Example" example xyz start. This command must be executed from the
-directory containing the four source files, and CVSROOT must point to the
-initialized repository.
+Do not create a CVS repository in the same directory as a project you wish to add to the repository. This would result in an infinite loop.  CVS is remarkably brain-dead about some things, but it’s a useful tool nonetheless.
+```
 
-$
-N
-N
-N
-N
+Now we need to import the initial set of source files to the repository. Assuming that we are in the project’s directory and that CVSROOT is set correctly, we use the command **cvs import -m "Some descriptive comment" projname vendor label**, where *projname* is the name of the project (“foobar” for now), *vendor* is the name of the organization responsible for the project (which doesn’t matter too much to us), and *label* is an indication of the software’s progress, such as initial or start. This command will copy the project’s files into the CVS repository under the given project name. The project is now controlled by CVS, and the original files can safely be deleted.
 
-cvs import -m "CVS Example" example xyz start
-example/foo.h
-example/foo.c
-example/main.c
-example/Makefile
+For the purposes of our tutorial, the correct import command is cvs import -m "CVS Example" example xyz start. This command must be executed from the directory containing the four source files, and CVSROOT must point to the initialized repository.
+
+```
+$ cvs import -m "CVS Example" example xyz start
+N example/foo.h
+N example/foo.c
+N example/main.c
+N example/Makefile
+```
 
 No conflicts created by this import
 
-LINUX DEVELOPMENT TOOLS
+**Working with a CVS Project**
 
-45
+Once a project is in CVS, multiple developers can safely access the project’s files without too much fear of colliding with one another. Each developer should make his or her own working copy of the project (with the cvs checkout *projname* command). For our tutorial, switch to a new directory and type cvs checkout example. CVS will copy the four example files to a new directory called **example**. You can now make any modifications you like to the files, and other developers can join in by checking out their own copies of the project.
 
-Working with a CVS Project
-Once a project is in CVS, multiple developers can safely access the project’s files
-without too much fear of colliding with one another. Each developer should
-make his or her own working copy of the project (with the cvs checkout
-projname command). For our tutorial, switch to a new directory and type cvs
-checkout example. CVS will copy the four example files to a new directory
-called example. You can now make any modifications you like to the files, and
-other developers can join in by checking out their own copies of the project.
-
+```
 Warning
-Try to avoid editing files in a CVS repository directly. Doing so defeats
-the whole purpose of CVS, and it is sure to cause massive headaches for
-the next person to commit a working copy to the repository.
-CVS-controlled files are marked read-only to help prevent this from
-happening. CVS is not designed to be a nuisance (quite the opposite,
-actually), but it requires a bit of cooperation from its users.
 
-When you have finished making modifications to a project’s files, you should
-commit them back into the repository for everyone else to use. For example,
-suppose that we have corrected an error in foo.c, and we want to integrate this
-modification back into the master source tree. From the directory containing our
-working copy, we would type cvs commit -m "Description of changes".
+Try to avoid editing files in a CVS repository directly. Doing so defeats the whole purpose of CVS, and it is sure to cause massive headaches for the next person to commit a working copy to the repository.  CVS-controlled files are marked read-only to help prevent this from happening. CVS is not designed to be a nuisance (quite the opposite, actually), but it requires a bit of cooperation from its users. 
+```
+
+When you have finished making modifications to a project’s files, you should commit them back into the repository for everyone else to use. For example, suppose that we have corrected an error in **foo.c**, and we want to integrate this modification back into the master source tree. From the directory containing our working copy, we would type **cvs commit -m "Description of changes"**.
+
+```
 $ cvs commit -m "Fixed a typo."
 cvs commit: Examining .
 Checking in foo.c;
-/home/overcode/testcvs/example/foo.c,v <-new revision: 1.1; previous revision: 1.0
+/home/overcode/testcvs/example/foo.c,v <-- foo.c
+new revision: 1.1; previous revision: 1.0
 done
+```
 
-foo.c
+What if someone has made conflicting modifications to the master copy of **foo.c**? It would be bad to simply overwrite those changes; that person may have spent a lot of time on them. CVS obviously doesn’t know how to rewrite source code to integrate changes (beyond a certain, very limited capability), so we must intervene and merge the changes ourselves. The transaction might look something like this:
 
-What if someone has made conflicting modifications to the master copy of
-foo.c? It would be bad to simply overwrite those changes; that person may have
-spent a lot of time on them. CVS obviously doesn’t know how to rewrite source
-code to integrate changes (beyond a certain, very limited capability), so we must
-intervene and merge the changes ourselves. The transaction might look
-something like this:
-
-46
-
-CHAPTER 2
-
+```
 $ cvs commit
 cvs commit: Examining .
 cvs commit: Up-to-date check failed for ‘foo.c’
 cvs [commit aborted]: correct above errors first!
+```
 
-This response indicates that somebody else has modified foo.c, and so this file
-requires special attention. To correct the problem we need to perform a CVS
-update, which will compare our modified version with the one on the server and
-produce a list of conflicts.
+This response indicates that somebody else has modified **foo.c**, and so this file requires special attention. To correct the problem we need to perform a CVS update, which will compare our modified version with the one on the server and produce a list of conflicts.
+
+```
 $ cvs update
 cvs update: Updating .
 RCS file: /home/overcode/testcvs/example/foo.c,v
@@ -1422,108 +834,57 @@ Merging differences between 1.4 and 1.5 into foo.c
 rcsmerge: warning: conflicts during merge
 cvs update: conflicts found in foo.c
 C foo.c
+```
 
-The file foo.c now contains diff-like information showing which lines need to be
-merged. We should edit the file, decide how to resolve the conflicting lines of
-code, remove CVS’s information, and perform another cvs commit. Unless more
-modifications have been made to the master file, CVS will accept the second
-commit.
+The file **foo.c** now contains diff-like information showing which lines need to be merged. We should edit the file, decide how to resolve the conflicting lines of code, remove CVS’s information, and perform another cvs commit. Unless more modifications have been made to the master file, CVS will accept the second commit.
 
+```
 CVS Revision Numbers
-CVS automatically assigns revision numbers to the files in a source
-repository. These numbers are incremented after each successful
-commit. They are intended for reference within the CVS system, and
-they generally do not correspond to a product’s actual version numbers.
 
-Adding and Removing Files
-To add a file to a CVS module (that is, to ask CVS to start controlling a newly
-added file from your working directory), use the cvs add command. For
+CVS automatically assigns revision numbers to the files in a source repository. These numbers are incremented after each successful commit. They are intended for reference within the CVS system, and they generally do not correspond to a product’s actual version numbers.
+```
 
-LINUX DEVELOPMENT TOOLS
+**Adding and Removing Files**
 
-47
+To add a file to a CVS module (that is, to ask CVS to start controlling a newly added file from your working directory), use the cvs add command. For instance, to add a file named **qux.c** to the foo module, you would use the command **cvs add qux.c**. You can specify wildcards, but be careful when doing so. To add a directory to a CVS module, simply add one or more files within that directory.
 
-instance, to add a file named qux.c to the foo module, you would use the
-command cvs add qux.c. You can specify wildcards, but be careful when doing
-so. To add a directory to a CVS module, simply add one or more files within
-that directory.
-Removing files from CVS is a bit trickier. There is a cvs remove command, but
-it can be used only if the file in question no longer exists. For example, suppose
-that you erroneously added qux.c to CVS. To remove it, you would first have to
-delete or rename your working copy of qux.c and then run the cvs remove
-command. This is truly annoying, but it does at least make you think twice
-before ripping a file out of the source tree. CVS never actually deletes these files;
-instead, it stores them in a special directory called Attic, from which they can
-usually be recovered.
+Removing files from CVS is a bit trickier. There is a cvs remove command, but it can be used only if the file in question no longer exists. For example, suppose that you erroneously added **qux.c** to CVS. To remove it, you would first have to delete or rename your working copy of **qux.c** and then run the cvs remove command. This is truly annoying, but it does at least make you think twice before ripping a file out of the source tree. CVS never actually deletes these files; instead, it stores them in a special directory called **Attic**, from which they can usually be recovered.
 
-Branching Source Trees
-Developers often have great ideas, but they’re sometimes risky or difficult to
-implement. CVS allows developers to create branches of source trees so that
-they can test these ideas without jeopardizing everyone else’s work. If these
-experimental branches work out, CVS can merge them back into the main source
-tree. Branches are also good for creating release snapshots of a source tree so
-that individual releases can be maintained while the main development process
-continues. For instance, if the Linux kernel team were to use CVS (which it does
-not), the “cutting edge” kernel would probably be in the main tree, while each
-major release (2.2, 2.4, and so on) would have its own branch for continued
-maintenance (such as security patches and driver backports).
-To branch a source repository, use the cvs rtag (remote tag) command with the
--b (branch) option. This will create a new branch of the current source tree and
-tag it with a name. For example, suppose we want to add a gltweak branch
-(presumably for OpenGL tweaking) to the example tree:
+***Branching Source Trees***
+
+Developers often have great ideas, but they’re sometimes risky or difficult to implement. CVS allows developers to create branches of source trees so that they can test these ideas without jeopardizing everyone else’s work. If these experimental branches work out, CVS can merge them back into the main source tree. Branches are also good for creating release snapshots of a source tree so that individual releases can be maintained while the main development process continues. For instance, if the Linux kernel team were to use CVS (which it does not), the “cutting edge” kernel would probably be in the main tree, while each major release (2.2, 2.4, and so on) would have its own branch for continued maintenance (such as security patches and driver backports).  
+
+To branch a source repository, use the `cvs rtag` (remote tag) command with the -b (branch) option. This will create a new branch of the current source tree and tag it with a name. For example, suppose we want to add a gltweak branch (presumably for OpenGL tweaking) to the example tree:
+
+```
 $ cvs rtag -b gltweak example
 cvs rtag: Tagging example/foo.h
 cvs rtag: Tagging example/foo.c
 cvs rtag: Tagging example/main.c
 cvs rtag: Tagging example/Makefile
+```
 
-48
+Most CVS commands allow you to select a branch with the -r option. To check out the new **gltweak** branch, use `cvs co -r gltweak example`. (Likewise, you would use `cvs update -r gltweak example` to update an already checked-out source tree to a new copy of the branch.) Once you’ve checked out a tagged branch, all further updates and commits from that directory will automatically refer to the branch rather than to the master source tree. It is possible to merge a branch back into the main tree with the `cvs update -j branchname` command (of course, this is likely to produce conflicts, just as any other merge might).
 
-CHAPTER 2
+You may have noticed that the `cvs rtag` command operates on the CVS repository rather than on a checked-out copy of the code. You can tag an existing directory just as easily (in which case the branch will actually be created whenever it is committed). This might be useful if you decide that things are getting out of hand halfway into a major hacking session. The command for this is simply cvs tag.
 
-Most CVS commands allow you to select a branch with the -r option. To check
-out the new gltweak branch, use cvs co -r gltweak example. (Likewise, you
-would use cvs update -r gltweak example to update an already checked-out
-source tree to a new copy of the branch.) Once you’ve checked out a tagged
-branch, all further updates and commits from that directory will automatically
-refer to the branch rather than to the master source tree. It is possible to merge
-a branch back into the main tree with the cvs update -j branchname
-command (of course, this is likely to produce conflicts, just as any other merge
-might).
-You may have noticed that the cvs rtag command operates on the CVS
-repository rather than on a checked-out copy of the code. You can tag an
-existing directory just as easily (in which case the branch will actually be created
-whenever it is committed). This might be useful if you decide that things are
-getting out of hand halfway into a major hacking session. The command for this
-is simply cvs tag.
-Branching is certainly useful, but use it with care. It’s easy to make a mess of a
-source repository unless you manage this sort of thing carefully.
+Branching is certainly useful, but use it with care. It’s easy to make a mess of a source repository unless you manage this sort of thing carefully.
 
-Accessing CVS Remotely
-CVS is well suited to the Internet’s massively distributed environment. It
-supports remote access with its client/server mode. Setting up a CVS server is
-not too difficult, but it is beyond the scope of this section.6 However, it is
-important to know how to access remote CVS servers, since they are frequently
-used for Linux-related projects on the Internet.
-CVSROOT normally points to a directory on the local machine, but it may also
-specify a remote CVS site. The general syntax of a remote CVSROOT is
+***Accessing CVS Remotely***
+
+CVS is well suited to the Internet’s massively distributed environment. It supports remote access with its client/server mode. Setting up a CVS server is not too difficult, but it is beyond the scope of this section. However, it is important to know how to access remote CVS servers, since they are frequently used for Linux-related projects on the Internet.
+
+CVSROOT normally points to a directory on the local machine, but it may also specify a remote CVS site. The general syntax of a remote CVSROOT is
+
+```
 :pserver:username@hostname:path
+```
 
-6
+The *username* must exist on the remote CVS site, though many projects provide a username for the general public to use. The *path* specifies the directory location of the CVS repository on the remote machine.  
 
-SourceForge (http://www.sourceforge.net) offers free remote CVS repositories to open
-source developers.
+Remote CVS access is similar to local access, but you must first log in to the remote site with the `cvs login` command. For example, suppose you want to obtain the latest version of SDL from Loki Software’s public CVS server:
 
-LINUX DEVELOPMENT TOOLS
-
-49
-
-The username must exist on the remote CVS site, though many projects provide
-a username for the general public to use. The path specifies the directory
-location of the CVS repository on the remote machine.
-Remote CVS access is similar to local access, but you must first log in to the
-remote site with the cvs login command. For example, suppose you want to
-obtain the latest version of SDL from Loki Software’s public CVS server:
+```
 $ export CVSROOT=:pserver:guest@cvs.lokigames.com:/cvs
 $ cvs login
 (Logging in to guest@cvs.lokigames.com)
@@ -1531,497 +892,216 @@ CVS password: guest
 $ cvs checkout SDL
 cvs server: Updating SDL
 ...
+```
 
-Since source modules can grow quite large, CVS provides a compression option
-for bandwidth-deprived users. The -zn option asks CVS to use compression for
-its downloads, where n is a number from 0 to 9. CVS actually uses GNU’s gzip
-program for its compression, and n specifies the gzip compression level to use.
-Compression is a very good idea for performing CVS updates over slow
-connections.
+Since source modules can grow quite large, CVS provides a compression option for bandwidth-deprived users. The **-z*n*** option asks CVS to use compression for its downloads, where *n* is a number from 0 to 9. CVS actually uses GNU’s gzip program for its compression, and *n* specifies the gzip compression level to use.  Compression is a very good idea for performing CVS updates over slow connections.
 
-Other Useful Tools
-UNIX is full of useful programming tools; unfortunately we can’t cover them all
-here. This section points out several standard shell utilities that often come in
-handy for programming projects. A full explanation of these utilities is left to
-the appropriate online manual pages.
+## Other Useful Tools
 
-Rapid Text Searching with grep
-Programmers often need to search source code for specific strings. For instance,
-a programmer might need to check the way that a certain OpenGL function is
-implemented but might not know which source file contains the function’s code.
-The grep utility can quickly search any number of files for a given piece of text.
+UNIX is full of useful programming tools; unfortunately we can’t cover them all here. This section points out several standard shell utilities that often come in handy for programming projects. A full explanation of these utilities is left to the appropriate online manual pages.
 
-50
+### Rapid Text Searching with grep
 
-CHAPTER 2
+Programmers often need to search source code for specific strings. For instance, a programmer might need to check the way that a certain OpenGL function is implemented but might not know which source file contains the function’s code.  The grep utility can quickly search any number of files for a given piece of text.  grep is based on *regular expressions*. A regular expression (*regex*) is a pattern for matching text.7 A regex *matches* a string of text if all of the string’s characters are described by the regular expression in some way. grep’s basic job is to search text files and print out all lines that match a given regex. For an explanation of regular expressions, see the grep(1) manpage (type man grep at a shell prompt).
 
-grep is based on regular expressions. A regular expression (regex ) is a pattern for
-matching text.7 A regex matches a string of text if all of the string’s characters
-are described by the regular expression in some way. grep’s basic job is to search
-text files and print out all lines that match a given regex. For an explanation of
-regular expressions, see the grep(1) manpage (type man grep at a shell prompt).
+### Updating Source with diff and patch
 
-Updating Source with diff and patch
-If you’ve worked with CVS, you’ve probably seen diff and patch (or a close
-equivalent) in action. Source code tends to change quickly, though specific
-changes are often small and isolated. If another developer is collaborating on a
-project, it doesn’t make sense to trade entire source trees; it would be better to
-send just the parts of a source tree that have changed since the last update. diff
-is a utility for comparing two files or directories and generating a delta (or patch)
-that can be used to change one into the other. Deltas can be applied with the
-patch utility. CVS uses this patching technique internally to keep track of
-project revisions without maintaining multiple copies of the entire project. The
-Linux kernel development team uses patches to exchange code improvements.
-The basic usage of diff is very simple. To create a delta file that describes how to
-convert the file foo into the file bar, simply feed the two files to diff and catch
-diff’s output with redirection:
+If you’ve worked with CVS, you’ve probably seen diff and patch (or a close equivalent) in action. Source code tends to change quickly, though specific changes are often small and isolated. If another developer is collaborating on a project, it doesn’t make sense to trade entire source trees; it would be better to send just the parts of a source tree that have changed since the last update. diff is a utility for comparing two files or directories and generating a *delta* (or *patch*) that can be used to change one into the other. Deltas can be applied with the patch utility. CVS uses this patching technique internally to keep track of project revisions without maintaining multiple copies of the entire project. The Linux kernel development team uses patches to exchange code improvements.  
+
+The basic usage of diff is very simple. To create a delta file that describes how to convert the file **foo** into the file **bar**, simply feed the two files to diff and catch diff’s output with redirection:
+
+```
 $ diff foo bar > foo.patch
+```
 
-foo.patch now contains a description of the differences between the files foo
-and bar, and this file is sufficient for the patch utility to convert foo into bar.
+**foo.patch** now contains a description of the differences between the files **foo** and **bar**, and this file is sufficient for the patch utility to convert **foo** into **bar**.
 
-7
-
-Do not confuse regular expressions with globs, which provide a much simpler (and less
-powerful) way to match strings. Most UNIX shells (such as bash) use globs for matching
-filenames, and this throws many UNIX users for a loop.
-
-LINUX DEVELOPMENT TOOLS
-
-51
-
+```
 Warning
-When you specify files to diff on the command line, be sure to put the
-original file first and the new file second. Programmers often generate
-deltas in the wrong order. This is a bad thing!
 
-To patch a file with a delta, supply the patch utility with the name of the file on
-the command line and the delta information on standard input. The following
-example uses the delta we just generated to patch foo into bar:
+When you specify files to diff on the command line, be sure to put the original file *first* and the new file *second*. Programmers often generate deltas in the wrong order. This is a bad thing!
+```
+
+To patch a file with a delta, supply the patch utility with the name of the file on the command line and the delta information on standard input. The following example uses the delta we just generated to patch **foo** into **bar**:
+
+```
 $ cat foo.patch | patch foo
+```
 
 Or, equivalently,
+
+```
 $ patch foo < foo.patch
+```
 
-The patch utility generally prints status information to indicate its success or
-failure. Patching usually succeeds, but it can fail if the file to be patched has
-been otherwise modified since the delta was generated. The patch utility tries to
-recover from this situation, but sometimes it is necessary to perform the patch
-yourself. It’s not too hard, but it’s a situation you’ll want to avoid if possible.
-patch can also handle entire directories. Suppose you’ve made modifications to a
-source tree in the new/ directory, and there is a copy of the original source tree
-in the old/ directory. You can generate a complete diff of the two directories
-with the following command:
+The patch utility generally prints status information to indicate its success or failure. Patching usually succeeds, but it can fail if the file to be patched has been otherwise modified since the delta was generated. The patch utility tries to recover from this situation, but sometimes it is necessary to perform the patch yourself. It’s not too hard, but it’s a situation you’ll want to avoid if possible.
+
+patch can also handle entire directories. Suppose you’ve made modifications to a source tree in the **new/** directory, and there is a copy of the original source tree in the **old/** directory. You can generate a complete diff of the two directories with the following command: 
+
+```
 $ diff -ubr old/ new/ > foo.patch
+```
 
-This command causes diff to recursively scan through each directory, comparing
-files with the same name and outputting a complete chunk of patch data for the
-entire set. The -b option instructs diff to ignore changes in whitespace (such as
-indentation). You would obviously leave this option out if your code involves a
-language in which indentation is significant (such as Python). To apply the
-patch generated with this command, change to the directory containing the
-source tree you want to patch, and feed the file to the patch utility:
+This command causes diff to recursively scan through each directory, comparing files with the same name and outputting a complete chunk of patch data for the entire set. The -b option instructs diff to ignore changes in whitespace (such as indentation). You would obviously leave this option out if your code involves a language in which indentation is significant (such as Python). To apply the patch generated with this command, change to the directory containing the source tree you want to patch, and feed the file to the patch utility:
 
-52
-
-CHAPTER 2
-
+```
 $ patch -p1 < foo.patch
+```
 
-The -p1 option tells patch that it is already in the directory to be patched
-(which, in all likelihood, has a different name than the directory from which the
-patch file was generated) and that it should ignore the first part of each filename
-it encounters.
+The -p1 option tells patch that it is already in the directory to be patched (which, in all likelihood, has a different name than the directory from which the patch file was generated) and that it should ignore the first part of each filename it encounters.
 
-Time to Move On
-There are a lot of useful utilities that we haven’t mentioned (or just haven’t done
-justice to) here, but we have covered the most valuable tools for game
-programming. gcc and gdb are the most important by far (after a
-programmer-friendly text editor, of course), and you would do yourself a favor to
-become proficient with them.
-It’s time to move on. The next chapter concerns the programming toolkits
-you’re likely to use for programming Linux games, and after that we’ll get into
-programming with the SDL library.
+**Time to Move On**
 
-Chapter 3
+There are a lot of useful utilities that we haven’t mentioned (or just haven’t done justice to) here, but we have covered the most valuable tools for game programming. gcc and gdb are the most important by far (after a programmer-friendly text editor, of course), and you would do yourself a favor to become proficient with them.
 
-Linux Gaming APIs
-I still remember the first game programming book I ever read. By Dave Roberts,
-it was entitled PC Game Programming Explorer, and it demonstrated game
-programming with a game called Alien Alley. This was actually a neat game,
-especially for one intended as a book example: its graphics were smooth, the
-artwork was top-notch, and it ran well on my rather underpowered system. It
-would be easy for me to write such a game today, even in a matter of a few
-hours. But to a neophyte game programmer, it seemed a towering monolith.
-Back in the days of DOS-based gaming, programmers generally wrote games by
-issuing commands directly to the computer’s hardware. There were only a few
-popular types of sound cards on the market, and many were at least partially
-compatible with Creative Labs’ Sound Blaster. Input devices were trivial to
-program: accessing the mouse required only a few assembly language
-instructions (interrupt 33h, for those who remember), reading the joystick’s
-position was a matter of a dozen lines of code, and there were several easy ways
-to collect keyboard input. Video programming was the hardest part of game
-development at the time: Although nearly every computer had a
-VGA-compatible display chip, coaxing fast and smooth graphics out of it took a
-significant amount of skill (due to some of the brain-dead limitations of the PC
-architecture). In fact, Alien Alley was mostly video code.
-Times have changed, arguably for the better. Very few game programmers
-actually write register-level video code these days; instead, they rely on
+It’s time to move on. The next chapter concerns the programming toolkits you’re likely to use for programming Linux games, and after that we’ll get into programming with the SDL library.
 
-54
+# Chapter 3
 
-CHAPTER 3
+# Linux Gaming APIs
 
-prewritten interfaces (such as OpenGL, SDL, and DirectDraw). Direct hardware
-hacking is fun, but it slows down game development and usually produces
-unportable code (with the unfortunate effect that many “old school” games are
-extremely difficult to port to modern environments). Even if I could find the
-floppy disk that came with my copy of PC Game Programming Explorer, I
-doubt that I could port Alien Alley to Linux in any reasonable amount of time,
-simply because it depends on certain hardware-level features of the original VGA
-graphics adapter.
-DOS programs are given free reign of the entire system; they can freely access
-memory or hardware ports, and they are effectively allowed to shove the
-operating system out of the way. Linux programs, on the other hand, are not
-generally allowed direct access to the system’s hardware; they must either use
-interfaces provided by the Linux kernel or obtain special permissions, requiring
-the program to be executed under the godlike root account (a potential security
-risk). The Linux kernel also prevents programs from directly accessing certain
-areas of the system’s memory. In return for these restrictions, Linux is able to
-prevent applications from interfering with one another, thereby ensuring the
-system’s stability and security.
-The bottom line is that we’ll probably want to avoid talking directly to the
-system’s multimedia hardware, but instead use one of many existing libraries for
-the purpose. It saves time and effort, and libraries are usually more fully
-developed and stable than code written for a particular game.
-This chapter tours the variety of game-programming toolkits available under
-Linux. Most are free and open (indeed, I am wary of any Linux toolkit that isn’t
-these days). If you intend to use these toolkits, familiarize yourself with the
-terms of the GNU Library General Public License (LGPL): It is possible to
-legally develop closed source, commercial software using LGPL libraries under
-certain conditions; something that has been a frequent source of confusion
-among developers.
-Multimedia programming is a broad field, and so we have divided our tour into
-several categories. Some packages provide several types of functionality, and they
-will be mentioned more than once. Finally, some capabilities are provided by the
-Linux kernel itself, in which case we will simply refer to “the kernel” or “Linux.”
+I still remember the first game programming book I ever read. By Dave Roberts, it was entitled *PC Game Programming Explorer*, and it demonstrated game programming with a game called Alien Alley. This was actually a neat game, especially for one intended as a book example: its graphics were smooth, the artwork was top-notch, and it ran well on my rather underpowered system. It would be easy for me to write such a game today, even in a matter of a few hours. But to a neophyte game programmer, it seemed a towering monolith.
 
-LINUX GAMING APIS
+Back in the days of DOS-based gaming, programmers generally wrote games by issuing commands directly to the computer’s hardware. There were only a few popular types of sound cards on the market, and many were at least partially compatible with Creative Labs’ Sound Blaster. Input devices were trivial to program: accessing the mouse required only a few assembly language instructions (interrupt 33h, for those who remember), reading the joystick’s position was a matter of a dozen lines of code, and there were several easy ways to collect keyboard input. Video programming was the hardest part of game development at the time: Although nearly every computer had a VGA-compatible display chip, coaxing fast and smooth graphics out of it took a significant amount of skill (due to some of the brain-dead limitations of the PC architecture). In fact, Alien Alley was mostly video code.
 
-55
+Times have changed, arguably for the better. Very few game programmers actually write register-level video code these days; instead, they rely on prewritten interfaces (such as OpenGL, SDL, and DirectDraw). Direct hardware hacking is fun, but it slows down game development and usually produces unportable code (with the unfortunate effect that many “old school” games are extremely difficult to port to modern environments). Even if I could find the floppy disk that came with my copy of *PC Game Programming Explorer*, I doubt that I could port Alien Alley to Linux in any reasonable amount of time, simply because it depends on certain hardware-level features of the original VGA graphics adapter.
 
-Graphics APIs
-Linux offers several options for graphics programming. Most of today’s Linux
-games use the X Window System in some way, as it is almost universally
-available, well supported, and at least tolerably fast.1 Recently the Linux
-framebuffer device interface has been making inroads into gaming, and this
-interface has a lot of potential. Finally, SVGALib provides a way to get
-extremely fast access to SVGA-compatible video devices.
+DOS programs are given free reign of the entire system; they can freely access memory or hardware ports, and they are effectively allowed to shove the operating system out of the way. Linux programs, on the other hand, are not generally allowed direct access to the system’s hardware; they must either use interfaces provided by the Linux kernel or obtain special permissions, requiring the program to be executed under the godlike root account (a potential security risk). The Linux kernel also prevents programs from directly accessing certain areas of the system’s memory. In return for these restrictions, Linux is able to prevent applications from interfering with one another, thereby ensuring the system’s stability and security.
 
-SVGALib
-As its name implies, SVGALib is a library for programming Super
-VGA-compatible video hardware, which is extremely fast because it directly
-accesses the system’s video hardware. SVGALib has fallen out of favor recently,
-due to its inconvenient interface, its failure to fully support many of today’s
-video chipsets, and its demand for root privileges. Furthermore, it is known to
-conflict with the X Window System, and in some cases it is incompatible with
-Linux’s new framebuffer device system. While SVGALib is still under
-development, it is reasonable to predict that its use will continue to decline.
-SVGALib is distributed with a sister library called vgagl (not to be confused
-with the OpenGL library). The vgagl library provides higher-level drawing and
-blitting functions that make an SVGALib programmer’s life a bit easier.
-SVGALib also includes sublibraries for keyboard and mouse access.
-If you really want to mess with SuperVGA video cards, don’t mind locking up
-your console occasionally, and don’t care too much about wide compatibility,
-SVGALib may be worth looking into. Otherwise, your hacking effort is probably
-better spent elsewhere.
+The bottom line is that we’ll probably want to avoid talking directly to the system’s multimedia hardware, but instead use one of many existing libraries for the purpose. It saves time and effort, and libraries are usually more fully developed and stable than code written for a particular game.  
 
-1
+This chapter tours the variety of game-programming toolkits available under Linux. Most are free and open (indeed, I am wary of any Linux toolkit that isn’t these days). If you intend to use these toolkits, familiarize yourself with the terms of the GNU Library General Public License (LGPL): It *is* possible to legally develop closed source, commercial software using LGPL libraries under certain conditions; something that has been a frequent source of confusion among developers.
 
-The X Window System is incredibly flexible, and it’s really not a bad platform for gaming.
-However, its design requires all graphics data to pass through certain predefined channels,
-and the use of extensions is required to achieve acceptable game performance in most cases
-(among these extensions are shared memory access and the XVideo extension). X was never
-really intended for today’s level of high-speed graphics processing. Some people think X
-should be replaced with a new system, but I believe that it just needs a bit of reworking in
-some areas. X has a lot going for it.
+Multimedia programming is a broad field, and so we have divided our tour into several categories. Some packages provide several types of functionality, and they will be mentioned more than once. Finally, some capabilities are provided by the Linux kernel itself, in which case we will simply refer to “the kernel” or “Linux.”
 
-56
+## Graphics APIs
 
-CHAPTER 3
+Linux offers several options for graphics programming. Most of today’s Linux games use the X Window System in some way, as it is almost universally available, well supported, and at least tolerably fast. Recently the Linux framebuffer device interface has been making inroads into gaming, and this interface has a lot of potential. Finally, SVGALib provides a way to get extremely fast access to SVGA-compatible video devices.
 
-GGI
-General Graphics Interface (GGI) is a massive, general-purpose, multitargeted
-graphics library that provides a complete graphics system for games and other
-applications. Its companion library, GII, provides portable input device support,
-and games that use it are meant to be easily portable to any platform. GGI does
-not depend on any one method of accessing graphics devices; instead, it provides
-a system of “back ends” that can support just about anything remotely
-resembling a graphics device. The GGI Project is also working on a kernel-based
-graphics infrastructure, KGI. GGI is free software, distributed under the GNU
-LGPL. The GGI Project’s Web site is http://www.ggi-project.org.
+### SVGALib
 
-SDL
-Simple DirectMedia Layer (SDL) is a cross-platform multimedia library
-developed with commercial game porting in mind. (In fact, it has already been
-used to port a number of games from Windows to Linux, including most of
-Loki’s titles.) SDL supports almost all of the major operating systems, including
-Linux, Windows, BeOS, and MacOS. In addition to fast graphics support, SDL
-provides interfaces for playing sound, accessing CD-ROM drives, and achieving
-portable multithreading.
-SDL is also an excellent library for free software projects: Released under the
-GNU LGPL, it has everything a programmer needs to write fast, portable
-games. SDL has accumulated a collection of user-contributed libraries that
-provide additional functionality for game developers.
-We will discuss the SDL library in detail later. SDL’s Web site is
-http://www.libsdl.org, and a helpful group of SDL enthusiasts (including
-myself)2 gathers on IRC at irc.openprojects.net, #sdl.
+As its name implies, SVGALib is a library for programming Super VGA-compatible video hardware, which is extremely fast because it directly accesses the system’s video hardware. SVGALib has fallen out of favor recently, due to its inconvenient interface, its failure to fully support many of today’s video chipsets, and its demand for root privileges. Furthermore, it is known to conflict with the X Window System, and in some cases it is incompatible with Linux’s new framebuffer device system. While SVGALib is still under development, it is reasonable to predict that its use will continue to decline.
 
-2
+SVGALib is distributed with a sister library called vgagl (not to be confused with the OpenGL library). The vgagl library provides higher-level drawing and blitting functions that make an SVGALib programmer’s life a bit easier.  SVGALib also includes sublibraries for keyboard and mouse access.  
 
-My name on IRC is “overcode.” I’m not difficult to find.
+If you really want to mess with SuperVGA video cards, don’t mind locking up your console occasionally, and don’t care too much about wide compatibility, SVGALib may be worth looking into. Otherwise, your hacking effort is probably better spent elsewhere.
 
-LINUX GAMING APIS
+### GGI
 
-57
+General Graphics Interface (GGI) is a massive, general-purpose, multitargeted graphics library that provides a complete graphics system for games and other applications. Its companion library, GII, provides portable input device support, and games that use it are meant to be easily portable to any platform. GGI does not depend on any one method of accessing graphics devices; instead, it provides a system of “back ends” that can support just about anything remotely resembling a graphics device. The GGI Project is also working on a kernel-based graphics infrastructure, KGI. GGI is free software, distributed under the GNU LGPL. The GGI Project’s Web site is http://www.ggi-project.org.
 
-ClanLib
-ClanLib is a C++ game-programming library that, like SDL, stresses platform
-independence and optimal use of the system’s underlying multimedia resources.
-Released under the GNU LGPL, ClanLib’s design is very clean and extensible.
-ClanLib is a higher-level library than SDL: Whereas SDL provides a relatively
-small set of C functions for accessing the computer’s hardware in a portable way,
-ClanLib provides a complete C++ infrastructure for game development. We will
-cover SDL rather than ClanLib in this book, but ClanLib is certainly a worthy
-contender. You can find more information about ClanLib at
-http://www.clanlib.org.
+### SDL
 
-OpenGL
-OpenGL is a 3D graphics API designed by Silicon Graphics and developed by an
-Architecture Review Board (ARB) of graphics industry leaders. Although it was
-not originally intended as a game-programming library, OpenGL has found a
-place as a convenient interface standard for hardware-accelerated 3D graphics,
-and therefore lends itself well to gaming. The Mesa 3D Graphics Library is a
-free implementation of the OpenGL specification, and there are Mesa-based
-Linux drivers for several popular 3D accelerator cards.
-Unfortunately, we can’t cover OpenGL here in the detail it deserves (3D graphics
-is a subject of its own), but we’ll at least demonstrate how to gain access to
-OpenGL from within SDL programs. This particular combination allows us to
-use the rendering power of hardware-accelerated OpenGL with the various
-amenities provided by SDL, and it is an excellent platform for developing games.
-Loki Software has successfully used SDL and OpenGL to port several
-commercial games to Linux, including Heavy Gear II and Soldier of Fortune.
-For more information on OpenGL, see the most recent version of the OpenGL
-ARB’s OpenGL Programming Guide, or visit http://www.opengl.org.
+Simple DirectMedia Layer (SDL) is a cross-platform multimedia library developed with commercial game porting in mind. (In fact, it has already been used to port a number of games from Windows to Linux, including most of Loki’s titles.) SDL supports almost all of the major operating systems, including Linux, Windows, BeOS, and MacOS. In addition to fast graphics support, SDL provides interfaces for playing sound, accessing CD-ROM drives, and achieving portable multithreading.
 
-Plib
-Plib is the collective name for several individual game-programming libraries
-written by Steve Baker. The purpose of this library is to build a usable game
+SDL is also an excellent library for free software projects: Released under the GNU LGPL, it has everything a programmer needs to write fast, portable games. SDL has accumulated a collection of user-contributed libraries that provide additional functionality for game developers.
 
-58
+We will discuss the SDL library in detail later. SDL’s Web site is http://www.libsdl.org, and a helpful group of SDL enthusiasts (including myself) gathers on IRC at irc.openprojects.net, #sdl.
 
-CHAPTER 3
+### ClanLib
 
-programming environment out of the OpenGL GLUT toolkit (more on GLUT in
-the next chapter). This collection includes sg (“Simple Geometry,” routines for
-fast 3D math), ssg (“Simple Scene Graph,” for manipulating 3D scene data), pui
-(“Picoscopic User Interface,” a simple menu and dialog box system), sl (“Sound
-Library”, a portable sound interface), and several other useful components. Plib
-is available at http://plib.sourceforge.net. These libraries are free software,
-available under the GNU LGPL.
+ClanLib is a C++ game-programming library that, like SDL, stresses platform independence and optimal use of the system’s underlying multimedia resources.  Released under the GNU LGPL, ClanLib’s design is very clean and extensible.
 
-Glide
-Glide is 3Dfx’s native 3D programing library, designed specifically for 3Dfx
-graphics chips. It is a much lower-level library than OpenGL, serving mainly as
-a consistent interface for all video cards based on 3Dfx chipsets. Since 3Dfx no
-longer has a virtual monopoly in the 3D accelerator business, Glide has lost a
-certain amount of popularity recently. With the advent of accelerated OpenGL
-under Linux, there are very few good reasons to use Glide for new game projects,
-and now that 3Dfx is out of business it’s even less of an issue. It is mentioned
-here only because it has been an influential API during the past few years.
+ClanLib is a higher-level library than SDL: Whereas SDL provides a relatively small set of C functions for accessing the computer’s hardware in a portable way, ClanLib provides a complete C++ infrastructure for game development. We will cover SDL rather than ClanLib in this book, but ClanLib is certainly a worthy contender. You can find more information about ClanLib at http://www.clanlib.org.
 
-Xlib
-Some game programmers eschew all of these “programmer-friendly” libraries in
-favor of using the X Window System directly (via the native Xlib API). While
-experienced programmers may achieve small performance gains this way, they do
-so at the expense of portability and simplicity.
-Xlib is not particularly difficult to use, but it is meant to be used as a base for
-constructing other toolkits, rather than as a library for writing actual
-applications. Xlib is a bit too verbose for my taste, but you might find it
-enjoyable. If you’ve ever written an application with the Win32 API, you have a
-good idea of what Xlib programming is like, except that in most cases Xlib
-requires even more library calls to get anything done. Remember that toolkits
-such as SDL and ClanLib already use a number of Xlib’s tricks to achieve their
-level of performance, and if you code for Xlib directly, you’ll be duplicating this
-work.
+### OpenGL
 
-LINUX GAMING APIS
+OpenGL is a 3D graphics API designed by Silicon Graphics and developed by an Architecture Review Board (ARB) of graphics industry leaders. Although it was not originally intended as a game-programming library, OpenGL has found a place as a convenient interface standard for hardware-accelerated 3D graphics, and therefore lends itself well to gaming. The Mesa 3D Graphics Library is a free implementation of the OpenGL specification, and there are Mesa-based Linux drivers for several popular 3D accelerator cards.
 
-59
+Unfortunately, we can’t cover OpenGL here in the detail it deserves (3D graphics is a subject of its own), but we’ll at least demonstrate how to gain access to OpenGL from within SDL programs. This particular combination allows us to use the rendering power of hardware-accelerated OpenGL with the various amenities provided by SDL, and it is an excellent platform for developing games.  Loki Software has successfully used SDL and OpenGL to port several commercial games to Linux, including Heavy Gear II and Soldier of Fortune.
 
-If you’re interested in learning Xlib (perhaps not a bad exercise, whether or not
-you actually intend to use it), you’ll want to get one or two of the books from
-the official X Window System documentation series. See the Bibliography for
-more info.
+For more information on OpenGL, see the most recent version of the OpenGL ARB’s OpenGL Programming Guide, or visit http://www.opengl.org.
 
-Graphical User Interface Toolkits
-Many games use menus and dialogs to let the user make configuration changes
-and select the type of game to play. In many cases it’s practical to build an ad
-hoc interface for a particular project, but games with complex settings might
-benefit from a more substantial user interface toolkit. There are plenty of good
-GUI packages to choose from.
+### Plib
 
-GTK+
-Originally developed to serve as the GNU Image Manipulation Program’s user
-interface, GTK+ (formerly just GTK) is an enormous GUI library that
-somewhat resembles the time-tested Motif toolkit. GTK+ is implemented on top
-of an abstraction layer called GDK, freeing GTK+ from low-level concerns like
-input gathering and pixel format conversion.
-GTK+ is implemented in pure C, but C++ wrapper libraries are available. Its
-programming model takes a bit of getting used to, but it is powerful enough for
-building interfaces for large applications. It would be a major hassle to port
-GDK/GTK+ to work with anything but the X Window System or Microsoft
-Windows, so you can pretty much forget about using it to develop games for the
-framebuffer console.
+Plib is the collective name for several individual game-programming libraries written by Steve Baker. The purpose of this library is to build a usable game programming environment out of the OpenGL GLUT toolkit (more on GLUT in the next chapter). This collection includes sg (“Simple Geometry,” routines for fast 3D math), ssg (“Simple Scene Graph,” for manipulating 3D scene data), pui (“Picoscopic User Interface,” a simple menu and dialog box system), sl (“Sound Library”, a portable sound interface), and several other useful components. Plib is available at http://plib.sourceforge.net. These libraries are free software, available under the GNU LGPL.
+
+### Glide
+
+Glide is 3Dfx’s native 3D programing library, designed specifically for 3Dfx graphics chips. It is a much lower-level library than OpenGL, serving mainly as a consistent interface for all video cards based on 3Dfx chipsets. Since 3Dfx no longer has a virtual monopoly in the 3D accelerator business, Glide has lost a certain amount of popularity recently. With the advent of accelerated OpenGL under Linux, there are very few good reasons to use Glide for new game projects, and now that 3Dfx is out of business it’s even less of an issue. It is mentioned here only because it has been an influential API during the past few years.
+
+### Xlib
+
+Some game programmers eschew all of these “programmer-friendly” libraries in favor of using the X Window System directly (via the native Xlib API). While experienced programmers may achieve small performance gains this way, they do so at the expense of portability and simplicity.
+
+Xlib is not particularly difficult to use, but it is meant to be used as a base for constructing other toolkits, rather than as a library for writing actual applications. Xlib is a bit too verbose for my taste, but you might find it enjoyable. If you’ve ever written an application with the Win32 API, you have a good idea of what Xlib programming is like, except that in most cases Xlib requires even more library calls to get anything done. Remember that toolkits such as SDL and ClanLib already use a number of Xlib’s tricks to achieve their level of performance, and if you code for Xlib directly, you’ll be duplicating this work.
+
+If you’re interested in learning Xlib (perhaps not a bad exercise, whether or not you actually intend to use it), you’ll want to get one or two of the books from the official X Window System documentation series. See the Bibliography for more info.
+
+##Graphical User Interface Toolkits
+
+Many games use menus and dialogs to let the user make configuration changes and select the type of game to play. In many cases it’s practical to build an ad hoc interface for a particular project, but games with complex settings might benefit from a more substantial user interface toolkit. There are plenty of good GUI packages to choose from.
+
+### GTK+
+
+Originally developed to serve as the GNU Image Manipulation Program’s user interface, GTK+ (formerly just GTK) is an enormous GUI library that somewhat resembles the time-tested Motif toolkit. GTK+ is implemented on top of an abstraction layer called GDK, freeing GTK+ from low-level concerns like input gathering and pixel format conversion.
+
+GTK+ is implemented in pure C, but C++ wrapper libraries are available. Its programming model takes a bit of getting used to, but it is powerful enough for building interfaces for large applications. It would be a major hassle to port GDK/GTK+ to work with anything but the X Window System or Microsoft Windows, so you can pretty much forget about using it to develop games for the framebuffer console.
+
 The GTK+ project is online at http://www.gtk.org.
 
-Tk
-The Tk toolkit was originally created as a windowing interface for the Tcl
-scripting language, but it’s since found its way into a number of other
-environments. It is an extensible and flexible GUI toolkit for X11, Windows, and
-MacOS. Tk is tied to Tcl, but you can still develop your application in C and
-only use Tcl to build the interface. (If you don’t mind a bit of extra effort, you
-can bypass Tcl entirely, but Tk wasn’t really designed for this.)
+### Tk
 
-60
+The Tk toolkit was originally created as a windowing interface for the Tcl scripting language, but it’s since found its way into a number of other environments. It is an extensible and flexible GUI toolkit for X11, Windows, and MacOS. Tk is tied to Tcl, but you can still develop your application in C and only use Tcl to build the interface. (If you don’t mind a bit of extra effort, you can bypass Tcl entirely, but Tk wasn’t really designed for this.) 
 
-CHAPTER 3
+Tk is available under the same (extremely liberal) license as Tcl, and it can be modified and used in any type of application with very few restrictions. More information is available on http://www.tcltk.org.
 
-Tk is available under the same (extremely liberal) license as Tcl, and it can be
-modified and used in any type of application with very few restrictions. More
-information is available on http://www.tcltk.org.
+### Fltk
 
-Fltk
-Fltk stands for “fast, light toolkit.” It is a very small C++ GUI toolkit that
-works on several different platforms (and is easily portable to others). Fltk
-requires very little of the underlying platform, and this makes it a good
-candidate for integrating into existing graphics systems (games, for instance).
-This toolkit is released under the GNU LGPL, and more information is available
-from http://www.fltk.org.
+Fltk stands for “fast, light toolkit.” It is a very small C++ GUI toolkit that works on several different platforms (and is easily portable to others). Fltk requires very little of the underlying platform, and this makes it a good candidate for integrating into existing graphics systems (games, for instance).  This toolkit is released under the GNU LGPL, and more information is available from http://www.fltk.org.
 
-Qt
-Qt is a comprehensive, portable application development system for C++. It
-shares some similarities with Microsoft’s MFC toolkit, but it’s refreshingly
-different in implementation. Qt is portable between UNIX and Windows, and
-there is even an embeddable version of Qt for handheld devices. It’s really not
-fair to call Qt a GUI toolkit; it does serve that purpose, but it also provides
-basic data structures, file I/O, networking, and image loading and saving.
-TrollTech (a free software–friendly Norwegian company) created and maintains
-Qt as a commercial product, and you need to buy a license if you intend to use
-Qt in proprietary software. The Linux version is available under both the GNU
-General Public License and the custom Q Public License, but these require all
-unlicensed Qt applications to be free. Qt is great for creating free software and
-for serious commercial development, but it’s probably not what you want if
-you’re interested in small-scale, nonfree development.
+### Qt
+
+Qt is a comprehensive, portable application development system for C++. It shares some similarities with Microsoft’s MFC toolkit, but it’s refreshingly different in implementation. Qt is portable between UNIX and Windows, and there is even an embeddable version of Qt for handheld devices. It’s really not fair to call Qt a GUI toolkit; it does serve that purpose, but it also provides basic data structures, file I/O, networking, and image loading and saving.  
+
+TrollTech (a free software–friendly Norwegian company) created and maintains Qt as a commercial product, and you need to buy a license if you intend to use Qt in proprietary software. The Linux version is available under both the GNU General Public License and the custom Q Public License, but these require all unlicensed Qt applications to be free. Qt is great for creating free software and for serious commercial development, but it’s probably not what you want if you’re interested in small-scale, nonfree development.
+
 More information on Qt is available at http://www.trolltech.com.
 
-SDL GUI Support
-There’s no “official” SDL GUI toolkit, but there are a few user-contributed
-libraries that fill this niche. The SDL gui library provides basic things like
-frames, menus, and widgets, while the SDL console library implements a
+### SDL GUI Support
 
-LINUX GAMING APIS
+There’s no “official” SDL GUI toolkit, but there are a few user-contributed libraries that fill this niche. The SDL gui library provides basic things like frames, menus, and widgets, while the SDL console library implements a Quake-like popup console system. Both of these libraries are free software, and you can hack them to your liking (provided, of course, that you contribute your modifications back to the community at large).
 
-61
+These and other user-contributed SDL addons are available on http://www.libsdl.org.
 
-Quake-like popup console system. Both of these libraries are free software, and
-you can hack them to your liking (provided, of course, that you contribute your
-modifications back to the community at large).
-These and other user-contributed SDL addons are available on
-http://www.libsdl.org.
 
-Audio APIs
-Linux supports most of today’s sound cards. There are two competing standards
-for kernel-level sound support—OSS and ALSA—but fortunately neither is
-difficult to work with, and games commonly support both.
+## Audio APIs
 
-OSS
-The Open Sound System (OSS) is the original sound-programming interface for
-Linux. Maintained by 4Front Technologies, OSS provides a consistent
-kernel-based interface to sound hardware. Its API is not especially pretty, but if
-you close your eyes and pretend you’re doing something fun you can almost
-forget about it.
-OSS supports most of today’s sound cards, but some of the newer drivers are not
-free and require a commercial OSS license. The free portions of OSS (OSS/Free)
-are included in the Linux kernel (and are no longer directly maintained by
-4Front).
-There are two types of OSS programs: “nice” and “rude.” Nice OSS programs
-are likely to work on just about anything that remotely claims to be OSS
-compatible, including vendor-supplied drivers, FreeBSD’s sound system, and
-ALSA’s OSS emulation module. In fact, most OSS programs are basically nice.
-Rude OSS programs do unusual things with the driver, such as memory-mapping
-the driver’s DMA buffer. While the maintainers of OSS discourage this, some
-people do it anyway (Quake 3 is a notable example). We’ll discuss a variety of
-OSS programming techniques in Chapter 5.
-More information on OSS is available from 4Front Technologies at
-http://www.4front.com.
+Linux supports most of today’s sound cards. There are two competing standards for kernel-level sound support—OSS and ALSA—but fortunately neither is difficult to work with, and games commonly support both.  
 
-62
+### OSS
 
-CHAPTER 3
+The Open Sound System (OSS) is the original sound-programming interface for Linux. Maintained by 4Front Technologies, OSS provides a consistent kernel-based interface to sound hardware. Its API is not especially pretty, but if you close your eyes and pretend you’re doing something fun you can almost forget about it.
 
-ALSA
-Advanced Linux Sound Architecture (ALSA) is a community project that seeks
-to surpass OSS in all areas. The ALSA team has created a complete set of
-kernel-level sound card drivers, an easy-to-use programming interface, and a
-facility for emulating OSS. ALSA is not without its fair share of quirks, but it is
-a viable alternative to OSS for sound support and, with few exceptions, games
-that support OSS are also compatible with ALSA. It would be good to see
-ALSA grow in popularity since it has a lot of functionality and a lot of promise.
-The only serious problem with ALSA is that it is somewhat of a moving target;
-its API changes frequently. For more information on ALSA, visit
-http://www.alsa-project.org. We’ll address ALSA programming in Chapter
-5.
+OSS supports most of today’s sound cards, but some of the newer drivers are not free and require a commercial OSS license. The free portions of OSS (OSS/Free) are included in the Linux kernel (and are no longer directly maintained by 4Front).
 
-ESD
-The Enlightened Sound Daemon (ESD, also called EsounD) is a sound server
-that allows multiple applications to share a single sound card. ESD-aware
-applications send their sound streams to ESD, and ESD mixes them internally
-into a single output stream. Some people love ESD, and some hate it; it has its
-fair share of technical problems, but results are acceptable in most cases. The
-main problem with ESD (other than its bugginess and lack of documentation) is
-the basic fact that it takes time for audio data to travel over a network, and this
-results in a significant delay before sound actually gets to the soundcard. ESD
-currently uses a fixed-sized buffer, regardless of the type of network or sound
-card. This latency can be rather disruptive for gameplay, but it’s usually not a
-problem for music playback and other things that don’t need to be precisely
-timed.
-Recently some sound card drivers have started to support multiple device opens;
-that is, the driver allows multiple programs to use the sound card at once. This
-renders ESD more or less obsolete, but these drivers are in the minority right
-now.
-ESD is an excellent software package, but programming information is very
-sparse, other than a few spare comments in the header file and various
-ESD-enabled projects that users have written. We will cover the basics of ESD
-programming in Chapter 5.
+There are two types of OSS programs: “nice” and “rude.” Nice OSS programs are likely to work on just about anything that remotely claims to be OSS compatible, including vendor-supplied drivers, FreeBSD’s sound system, and ALSA’s OSS emulation module. In fact, most OSS programs are basically nice.  Rude OSS programs do unusual things with the driver, such as memory-mapping the driver’s DMA buffer. While the maintainers of OSS discourage this, some people do it anyway (Quake 3 is a notable example). We’ll discuss a variety of OSS programming techniques in Chapter 5.
 
-LINUX GAMING APIS
+More information on OSS is available from 4Front Technologies at http://www.4front.com.
 
-63
 
-OpenAL
-The Open Audio Library (OpenAL) is an environmental 3D audio library that
-supports just about every major platform. It aims to provide an open
-replacement for proprietary (and generally incompatible) 3D audio systems such
-as EAX and A3D. OpenAL can add realism to a game by simulating attenuation
-(degradation of sound over distance), the Doppler effect (change in frequency as
-a result of motion), and material densities. OpenAL has been used in several
-Linux game ports, including Heavy Gear II and Sid Meier’s Alpha Centauri.
-The OpenAL Web site is http://www.openal.org, and we will cover its API in
-Chapter 5.
+### ALSA
 
-Scripting Libraries
-Tcl
+Advanced Linux Sound Architecture (ALSA) is a community project that seeks to surpass OSS in all areas. The ALSA team has created a complete set of kernel-level sound card drivers, an easy-to-use programming interface, and a facility for emulating OSS. ALSA is not without its fair share of quirks, but it is a viable alternative to OSS for sound support and, with few exceptions, games that support OSS are also compatible with ALSA. It would be good to see ALSA grow in popularity since it has a lot of functionality and a lot of promise.  The only serious problem with ALSA is that it is somewhat of a moving target; its API changes frequently. For more information on ALSA, visit http://www.alsa-project.org. We’ll address ALSA programming in Chapter 5.
+
+### ESD
+
+The Enlightened Sound Daemon (ESD, also called EsounD) is a sound server that allows multiple applications to share a single sound card. ESD-aware applications send their sound streams to ESD, and ESD mixes them internally into a single output stream. Some people love ESD, and some hate it; it has its fair share of technical problems, but results are acceptable in most cases. The main problem with ESD (other than its bugginess and lack of documentation) is the basic fact that it takes time for audio data to travel over a network, and this results in a significant delay before sound actually gets to the soundcard. ESD currently uses a fixed-sized buffer, regardless of the type of network or sound card. This latency can be rather disruptive for gameplay, but it’s usually not a problem for music playback and other things that don’t need to be precisely timed.
+
+Recently some sound card drivers have started to support multiple device opens; that is, the driver allows multiple programs to use the sound card at once. This renders ESD more or less obsolete, but these drivers are in the minority right now.
+
+ESD is an excellent software package, but programming information is very sparse, other than a few spare comments in the header file and various ESD-enabled projects that users have written. We will cover the basics of ESD programming in Chapter 5.
+
+### OpenAL
+
+The Open Audio Library (OpenAL) is an environmental 3D audio library that supports just about every major platform. It aims to provide an open replacement for proprietary (and generally incompatible) 3D audio systems such as EAX and A3D. OpenAL can add realism to a game by simulating attenuation (degradation of sound over distance), the Doppler effect (change in frequency as a result of motion), and material densities. OpenAL has been used in several Linux game ports, including Heavy Gear II and Sid Meier’s Alpha Centauri.
+
+The OpenAL Web site is http://www.openal.org, and we will cover its API in Chapter 5.
+
+## Scripting Libraries
+
+### Tcl
+
 Tool Command Language (Tcl) is a very simple extension language designed to
 automate a variety of tools. It often loses out because some people try to use it
 as a replacement for Perl (which it is not), but its simple syntax and convenient
@@ -2033,1240 +1113,735 @@ The command-line Tcl interpreter and extension libraries are available as source
 and binaries from http://www.scriptics.com. Although Tcl is commercially
 maintained, it is free software.
 
-Guile and MzScheme
-Scheme is a modern programming language that draws heavily from Lisp. It was
-designed primarily by Guy Steele in 1979, and it has evolved quite a bit since
-then. Scheme tends to scare away novices due to its prefix notation, its heavy use
-of recursion, and the simple fact that it is a Lisp derivative, but advanced users
-generally find it an amazingly expressive language. Scheme can be parsed and
-executed very quickly, and it is sufficiently powerful to serve as an excellent game
+### Guile and MzScheme
 
-64
+Scheme is a modern programming language that draws heavily from Lisp. It was designed primarily by Guy Steele in 1979, and it has evolved quite a bit since then. Scheme tends to scare away novices due to its prefix notation, its heavy use of recursion, and the simple fact that it is a Lisp derivative, but advanced users generally find it an amazingly expressive language. Scheme can be parsed and executed very quickly, and it is sufficiently powerful to serve as an excellent game scripting language. The decision to use Tcl instead of Scheme for our scripting examples was difficult, but I felt that Tcl would make for more straightforward examples. However, Scheme would probably provide better performance.
 
-CHAPTER 3
+Guile is the official GNU extension language. It is a reasonably complete Scheme implementation, but its documentation is extremely sparse. You can find it at http://www.gnu.org/guile.
 
-scripting language. The decision to use Tcl instead of Scheme for our scripting
-examples was difficult, but I felt that Tcl would make for more straightforward
-examples. However, Scheme would probably provide better performance.
-Guile is the official GNU extension language. It is a reasonably complete Scheme
-implementation, but its documentation is extremely sparse. You can find it at
-http://www.gnu.org/guile.
-MzScheme is a complete and actively maintained Scheme system from Rice
-University (and others). It implements the latest official Scheme standard
-(R5RS) almost completely, and it extends the language in various ways to make
-it more practical as a general-purpose programming language. MzScheme
-functions both as a standalone Scheme interpreter and an embeddable scripting
-library. If you’re interested in using Scheme as an extension language, MzScheme
-would be an excellent choice. It is available at http://www.cs.rice.edu/PLT.
+MzScheme is a complete and actively maintained Scheme system from Rice University (and others). It implements the latest official Scheme standard (R5RS) almost completely, and it extends the language in various ways to make it more practical as a general-purpose programming language. MzScheme functions both as a standalone Scheme interpreter and an embeddable scripting library. If you’re interested in using Scheme as an extension language, MzScheme would be an excellent choice. It is available at http://www.cs.rice.edu/PLT.  
 
-Python and Perl
-You’re probably familiar with Python and Perl, and you may already be
-proficient in one of these languages. While most commonly used as standalone
-scripting languages, Python and Perl can also be embedded in applications to
-provide modular scripting support. We won’t be using these languages in this
-book (we’ll use Tcl instead), but their scripting interfaces are not terribly
-difficult (very similar to Tcl, which we’ll discuss in Chapter 6). Perl is superb at
-string processing, and Python has a bit of an object-oriented slant. Which
-language is better suited to game development is anybody’s guess.
-Perl and Python are available from http://www.perl.org and
-http://www.python.org, respectively, and each language comes with plenty of
-online documentation.
+### Python and Perl
 
-Networking APIs
-Networked gaming is big, and it is here to stay. There are several networking
-interfaces for Linux, but almost all of them revolve around the BSD sockets API
-that became a standard part of UNIX years ago.
+You’re probably familiar with Python and Perl, and you may already be proficient in one of these languages. While most commonly used as standalone scripting languages, Python and Perl can also be embedded in applications to provide modular scripting support. We won’t be using these languages in this book (we’ll use Tcl instead), but their scripting interfaces are not terribly difficult (very similar to Tcl, which we’ll discuss in Chapter 6). Perl is superb at string processing, and Python has a bit of an object-oriented slant. Which language is better suited to game development is anybody’s guess.
 
-LINUX GAMING APIS
+Perl and Python are available from http://www.perl.org and http://www.python.org, respectively, and each language comes with plenty of online documentation.
 
-65
+## Networking APIs
 
-BSD Sockets
-A socket is a UNIX file descriptor that designates a network connection rather
-than a file on disk. Sockets can be thought of as telephone handsets; they are
-communication endpoints through which data can be transferred in either
-direction. Sockets are most commonly used with TCP/IP, the stack of protocols
-behind the Internet.
-The advantage of programming with TCP/IP sockets is that TCP/IP is an
-incredibly versatile protocol. Some version of the BSD sockets API can be found
-in nearly every operating system, including Linux, Windows, BeOS, and Mac
-OS. TCP/IP can be used for both local (LAN) and wide-area (WAN)
-networking, and the protocol can be adapted to the nature of a particular game.
-Chapter 7 focuses on socket programming. Even if you decide to use an
-additional toolkit for convenience, it is important to understand how sockets and
-the underlying network protocols operate.
+Networked gaming is big, and it is here to stay. There are several networking interfaces for Linux, but almost all of them revolve around the BSD sockets API that became a standard part of UNIX years ago.
 
-OpenPlay
-OpenPlay is the successor to NetSprocket, Apple’s network gaming support
-library. It is a cross-platform library (implemented in C), and it compiles on
-Linux as well as Windows and MacOS. OpenPlay is released under the terms of
-the Apple Public Source License, which is a corporate-friendly license that seems
-to be remotely inspired by the GNU GPL. OpenPlay is a substantial API
-designed to compete with Microsoft’s closed and proprietary DirectPlay.
-OpenPlay shows promise, but its Linux port is still under development.
-It remains to be seen whether OpenPlay for Linux will catch on. Some Linux
-developers seem to distrust Apple (not always for rational reasons), but the
-finished port of OpenPlay will have a lot to offer. OpenPlay is available on
-Apple’s public source site, http://publicsource.apple.com.
+### BSD Sockets
 
-IPX and SPX
-Internetwork Packet Exchange (IPX) is a simple networking protocol similar to
-the Internet’s underlying IP protocol, and Sequenced Packet Exchange (SPX) is
-a higher-level protocol similar to the Internet’s TCP protocol. These protocols
+A socket is a UNIX file descriptor that designates a network connection rather than a file on disk. Sockets can be thought of as telephone handsets; they are communication endpoints through which data can be transferred in either direction. Sockets are most commonly used with TCP/IP, the stack of protocols behind the Internet.
 
-66
+The advantage of programming with TCP/IP sockets is that TCP/IP is an incredibly versatile protocol. Some version of the BSD sockets API can be found in nearly every operating system, including Linux, Windows, BeOS, and Mac OS. TCP/IP can be used for both local (LAN) and wide-area (WAN) networking, and the protocol can be adapted to the nature of a particular game.  
 
-CHAPTER 3
+Chapter 7 focuses on socket programming. Even if you decide to use an additional toolkit for convenience, it is important to understand how sockets and the underlying network protocols operate.  
 
-(often collectively referred to as IPX) were designed by Novell for its NetWare
-line of products. IPX has fallen out of favor, but it is still used in a number of
-games. IPX is fine for small private LANs, but it is not ideal for large networks.
-Should you choose to support IPX in your games, the Linux kernel provides the
-necessary networking code (via the normal BSD sockets interface). It is not
-terribly difficult to support both TCP/IP and IPX with the same networking
-code.
+### OpenPlay
 
-File Handling
-Games often need to load images and audio samples from files. This can be a bit
-of a trick with today’s complex file formats and compression techniques.
-Fortunately, you can usually avoid doing this decoding yourself—there are
-Linux-compatible libraries for just about every type of image or sound file you
-could possibly want to load. Many of these libraries are free software.
+OpenPlay is the successor to NetSprocket, Apple’s network gaming support library. It is a cross-platform library (implemented in C), and it compiles on Linux as well as Windows and MacOS. OpenPlay is released under the terms of the Apple Public Source License, which is a corporate-friendly license that seems to be remotely inspired by the GNU GPL. OpenPlay is a substantial API designed to compete with Microsoft’s closed and proprietary DirectPlay.  OpenPlay shows promise, but its Linux port is still under development.
 
-libpng and libjpeg
-These two libraries allow you to load Portable Network Graphic (.png) and
-JPEG (.jpg) images, respectively. PNG is an excellent general-purpose image
-format that compresses images without loss in detail. It is based on a completely
-open specification, and it is widely supported by image manipulation programs.
-JPEG is an older, “lossy” image format that does a good job with landscapes
-and other natural scenes but produces noticeably lousy results with precise
-images such as line art. JPEG is also an open standard.
-If you need to add support for PNG or JPEG images to a game, these libraries
-are the way to go. It would not be a good idea to try to implement either format
-yourself unless you have a lot of time on your hands. We’ll use these libraries in
-this book, albeit indirectly: the SDL image library (Chapter 4) links against
-them to provide seamless PNG and JPEG loading support.
-libpng is the offical PNG reference library, and it is available at
-http://www.libpng.org. libjpeg is maintained by the Independent JPEG
-Group at http://www.ijg.org. These libraries are included in most Linux
-distributions.
+It remains to be seen whether OpenPlay for Linux will catch on. Some Linux developers seem to distrust Apple (not always for rational reasons), but the finished port of OpenPlay will have a lot to offer. OpenPlay is available on Apple’s public source site, http://publicsource.apple.com.  
 
-LINUX GAMING APIS
+### IPX and SPX
 
-67
+Internetwork Packet Exchange (IPX) is a simple networking protocol similar to the Internet’s underlying IP protocol, and Sequenced Packet Exchange (SPX) is a higher-level protocol similar to the Internet’s TCP protocol. These protocols (often collectively referred to as IPX) were designed by Novell for its NetWare line of products. IPX has fallen out of favor, but it is still used in a number of games. IPX is fine for small private LANs, but it is not ideal for large networks.  Should you choose to support IPX in your games, the Linux kernel provides the necessary networking code (via the normal BSD sockets interface). It is not terribly difficult to support both TCP/IP and IPX with the same networking code.
 
-libaudiofile and libsndfile
-libaudiofile and libsndfile are libraries for loading audio data from files. Each can
-read and write a wide assortment of file formats. There is a lot of functional
-overlap between these two libraries, but they have different interfaces. libsndfile
-is probably the more convenient of the two, and we will use it for loading wave
-files in Chapter 5. libaudiofile has a slightly more arcane (but perhaps more
-powerful) interface, but it can be a bit annoying to use.
-libsndfile was designed and written by Erik de Castro Lopo, and it is available
-under the GNU LGPL license. libaudiofile was originally implemented by Silicon
-Graphics for its multimedia workstations, but it has since been largely
-reimplemented as free software, and it has been officially adopted by the
-GNOME project.
-You can find more information about libsndfile in Chapter 5 or at the library’s
-home page, http://www.zip.com.au/%7Eerikd/libsndfile/.
-libaudiofile is available at http://www.68k.org/%7Emichael/audiofile/, but it
-is included in most Linux distributions. You’ll probably have to download
-libsndfile yourself. It’s worth the trouble.
 
-Ogg Vorbis
-Ogg Vorbis is a new audio compression scheme designed to compete with MP3
-and the upcoming (stymied) SDMI format. Vorbis is patent-free, and support for
-it can easily be dropped into an application with the libvorbis library. Although
-Ogg Vorbis is still under development, the bitstream format is finalized (meaning
-that future versions of Vorbis will not break compatibility), and, at this writing,
-it already compresses audio data slighly better than MP3 (with further
-improvements expected soon). Let’s hear a round of applause for the people
-behind the Ogg project!
-We will use Ogg Vorbis to implement game music in Chapter 5. The Vorbis
-library is available for free download online at http://www.vorbis.com.
+## File Handling
 
-68
+Games often need to load images and audio samples from files. This can be a bit of a trick with today’s complex file formats and compression techniques.  Fortunately, you can usually avoid doing this decoding yourself—there are Linux-compatible libraries for just about every type of image or sound file you could possibly want to load. Many of these libraries are free software.  
 
-CHAPTER 3
+### libpng and libjpeg
 
-The SDL MPEG Library, SMPEG
-The SDL MPEG library is a free MPEG-1 video and audio library with a heavy
-SDL slant. If you want to add MPEG-1 video or MP3 audio playback to your
-SDL-based game or application, SMPEG is an excellent choice. It may or may
-not be a viable solution for non-SDL programs, though (since SMPEG outputs
-directly to SDL surfaces).
-MPEG-1 is popular compressed video format based on the discrete cosine
-transform and motion prediction. It is lossy (that is, it discards video data that
-it judges to be of less importance), but it generally produces good results, and it
-is commonly used for game cinematics. MPEG-2 is a newer video codec that
-produces higher-quality results at the expense of a lower compression ratio, but
-it is encumbered by patents and is therefore not supported by SMPEG.
-The SMPEG library is available in the Development section of
-http://www.lokigames.com. Loki Software commercially maintains it for use in
-its games, but SMPEG is free software.
+These two libraries allow you to load Portable Network Graphic (*.png*) and JPEG (*.jpg*) images, respectively. PNG is an excellent general-purpose image format that compresses images without loss in detail. It is based on a completely open specification, and it is widely supported by image manipulation programs.  JPEG is an older, “lossy” image format that does a good job with landscapes and other natural scenes but produces noticeably lousy results with precise images such as line art. JPEG is also an open standard.
 
-zlib
-zlib (pronounced zee-lib or zeta-lib) is a general-purpose data compression
-library that implements the gzip format. It features an interface very similar to
-the stdio codefopen and codefwrite functions, and it is often used as a drop-in
-replacement for such. zlib is a good option when you need decent compression
-and don’t want to code it yourself.
-This library is very widely used, and there’s a very good chance that it’s already
-present on your Linux installation. You can download zlib’s source code from
-http://www.gzip.org.
+If you need to add support for PNG or JPEG images to a game, these libraries are the way to go. It would not be a good idea to try to implement either format yourself unless you have a lot of time on your hands. We’ll use these libraries in this book, albeit indirectly: the SDL image library (Chapter 4) links against them to provide seamless PNG and JPEG loading support.
 
-On to the Code!
-Enough groundwork. It’s time to throw around some code. In the next chapter
-we’ll talk about the SDL library, a one-stop shop for portable graphics and
-audio. We’ll also get started on Penguin Warrior, a complete Linux game that
-we’ll develop over several chapters.
+libpng is the offical PNG reference library, and it is available at http://www.libpng.org. libjpeg is maintained by the Independent JPEG Group at http://www.ijg.org. These libraries are included in most Linux distributions.
 
-Chapter 4
+### libaudiofile and libsndfile
 
-Mastering SDL
-Simple DirectMedia Layer (SDL) is a cross-platform multimedia library that has
-been used in countless free games and several commercial projects. SDL works
-with a platform’s underlying multimedia capabilities to provide a consistent and
-open API across multiple operating systems. In this chapter we will tour the
-various facets of SDL with respect to Linux game programming.
-SDL’s full name, Simple DirectMedia Layer, summarizes the design of the
-library. SDL is simple to learn and use: its API is well defined (if a bit sparsely
-documented in the recently added areas), uncluttered, and to the point. It
-provides direct access to the computer’s multimedia capabilities where possible
-and does its best to compensate if the computer’s underlying support is missing
-in some area. Finally, SDL is a thin and well-behaved layer of code rather than a
-subsuming beast. It is possible and often desirable to use individual components
-of SDL separately, and it is possible to integrate SDL into applications other
-than games to provide special multimedia capabilities. For instance, a game
-might use SDL for audio and some other toolkit for graphics, or an office suite
-might use SDL to display video clips. The most important use of SDL, though,
-is game programming.
-The SDL library consists of several sub-APIs, providing cross-platform support
-for video, audio, input handling, multithreading, OpenGL rendering contexts,
-and various other amenities. We’ll begin our tour with graphics programming.
-Before we jump into the world of surfaces and pixels, however, let’s take a look
-at the hardware that makes it all possible.
+libaudiofile and libsndfile are libraries for loading audio data from files. Each can read and write a wide assortment of file formats. There is a lot of functional overlap between these two libraries, but they have different interfaces. libsndfile is probably the more convenient of the two, and we will use it for loading wave files in Chapter 5. libaudiofile has a slightly more arcane (but perhaps more powerful) interface, but it can be a bit annoying to use.
 
-70
+libsndfile was designed and written by Erik de Castro Lopo, and it is available under the GNU LGPL license. libaudiofile was originally implemented by Silicon Graphics for its multimedia workstations, but it has since been largely reimplemented as free software, and it has been officially adopted by the GNOME project.
 
-CHAPTER 4
+You can find more information about libsndfile in Chapter 5 or at the library’s home page, http://www.zip.com.au/%7Eerikd/libsndfile/.
 
-Computer Graphics Hardware
-Every personal computer is equipped with a video controller of some sort. This
-set of chips is responsible for producing images on the screen, based on the data
-contained in a certain area of memory (the framebuffer ). In addition to this
-basic drudgery, the video controller often assists software by providing
-hardware-accelerated drawing functions. Video controllers usually reside on
-replaceable video cards that can be easily upgraded as video technology
-progresses.
-Video cards contain a unit called a CRTC, an acronym for cathode ray tube
-controller. This device (either a separate chip or part of another chip) instructs
-the monitor to redraw its picture at regular intervals. The image on a computer
-screen is composed of horizontal lines on a fluorescent surface, and the monitor’s
-hardware updates these from top to bottom. Each completed image is called a
-refresh. The CRTC instructs the monitor to perform a new refresh at least 60
-times each second. The brief pause between refreshes is known as the vertical
-retrace, because this is when the monitor’s electron beam returns to the top of
-the screen. No matter how quickly the data in the framebuffer changes, the
-monitor is not updated until the next refresh. The video hardware’s refresh rate
-is therefore of great interest to a game developer.
-The image on a computer screen is divided into discrete colored areas called
-pixels (short for pictorial elements). Each pixel can be individually controlled by
-the video card. The resolution of a display specifies the number of pixels across
-and down; for instance, a screen with a resolution of 640 by 480 is a matrix of
-640 columns and 480 rows. The video card uses a device called a RAMDAC
-(random access memory digital-analog converter ) to pump these individual
-pixels from the framebuffer memory to the monitor. Video card manufacturers
-like to brag about the speed of their RAMDAC components.
-Since there are a lot of pixels on the screen (anywhere from 64,000 to more than
-a million), producing complete images can be an intensive process, especially if a
-program needs to change the entire contents of the screen several times every
-second. Video chip manufacturers have invested a large amount of research in
-this problem and have created video accelerator chips to help with this work.
-Video accelerators can speed up graphical applications (such as games) by
-performing time-consuming updates with dedicated hardware. For instance,
-video accelerators can often help out by performing high-speed copying between
+libaudiofile is available at http://www.68k.org/%7Emichael/audiofile/, but it is included in most Linux distributions. You’ll probably have to download libsndfile yourself. It’s worth the trouble.
 
-MASTERING SDL
+### Ogg Vorbis
 
-71
+Ogg Vorbis is a new audio compression scheme designed to compete with MP3 and the upcoming (stymied) SDMI format. Vorbis is patent-free, and support for it can easily be dropped into an application with the libvorbis library. Although Ogg Vorbis is still under development, the bitstream format is finalized (meaning that future versions of Vorbis will not break compatibility), and, at this writing, it already compresses audio data slighly better than MP3 (with further improvements expected soon). Let’s hear a round of applause for the people behind the Ogg project!
 
-the framebuffer and other areas of memory. Computer memory is fast, but
-today’s video games need every bit of performance they can get.
+We will use Ogg Vorbis to implement game music in Chapter 5. The Vorbis library is available for free download online at http://www.vorbis.com.
 
-The Framebuffer
-The framebuffer is an area of memory that describes the image on the screen,
-with each on-screen pixel corresponding to one memory location. The exact
-format of the framebuffer is determined by the video chipset, but it is most
-commonly a simple array (this is known as a linear framebuffer ). To change the
-color of a pixel on the screen, a program must calculate the location of the pixel
-in the array (with the formula width × y + x), determine the correct
-representation of the desired color, and store the color representation in the
-framebuffer. The video card then sends the new pixel color to the monitor
-during its next screen refresh.
-Pixels are almost always represented by one- to four-byte values, but the exact
-format of these values depends on the current video mode. The following
-schemes are used to specify pixel colors in the framebuffer:
-Indexing
+### The SDL MPEG Library, SMPEG
 
-Pixel values are indices into a preset table of color values, which is
-called the colormap or palette. Each entry in this table consists of
-a red, green, and blue intensity level. The video card converts the
-indices into actual color intensities (signals for the monitor’s
-electron guns) as it goes. These video modes generally use one
-byte per pixel, allowing for a meager 256 colors on the screen at
-once. The palette can usually be changed at will (but updates to
-the palette will not show up until the next refresh). Clever
-programmers occasionally use the palette to implement animation
-tricks and special effects. Indexed modes offer extremely fast
-performance but relatively few simultaneous colors.
+The SDL MPEG library is a free MPEG-1 video and audio library with a heavy SDL slant. If you want to add MPEG-1 video or MP3 audio playback to your SDL-based game or application, SMPEG is an excellent choice. It may or may not be a viable solution for non-SDL programs, though (since SMPEG outputs directly to SDL surfaces).
 
-Hicolor
+MPEG-1 is popular compressed video format based on the discrete cosine transform and motion prediction. It is lossy (that is, it discards video data that it judges to be of less importance), but it generally produces good results, and it is commonly used for game cinematics. MPEG-2 is a newer video codec that produces higher-quality results at the expense of a lower compression ratio, but it is encumbered by patents and is therefore not supported by SMPEG.
 
-Pixel values are 16 bits (2 bytes) each. These bits are divided into
-red, green, and blue fields. It is common for hicolor modes to
-allocate 5 bits to red, 6 bits to green, and 5 bits to blue, but you
-cannot assume that this will be the case. Hicolor offers excellent
-performance potential and a decent representation of the color
-spectrum, and it is frequently used for game programming.
+The SMPEG library is available in the Development section of http://www.lokigames.com. Loki Software commercially maintains it for use in its games, but SMPEG is free software.
 
-72
+### zlib
 
-CHAPTER 4
-However, it lacks the color depth necessary for professional
-graphics. This is currently the most important pixel format for
-game programming. Hicolor is also known as High Color, but
-most people use the shorter term.
+zlib (pronounced zee-lib or zeta-lib) is a general-purpose data compression library that implements the gzip format. It features an interface very similar to the stdio codefopen and codefwrite functions, and it is often used as a drop-in replacement for such. zlib is a good option when you need decent compression and don’t want to code it yourself.
 
-True Color Pixel values are 24 bits each, allotting 1 byte to each color
-channel. True Color modes are extremely easy to program (since
-they do not require bit shifting or masking), but they tend to be
-rather slow due to the increased amount of video data. Some True
-Color modes use 32 bits for each pixel, simply wasting the 4th
-byte. This improves performance in many cases, because 32-bit
-processors are usually more efficient at accessing data aligned on
-4-byte boundaries.
-Direct Color
-Pixel values are divided into three bit fields, each of which is an
-index into a palette for a particular color channel. That is, Direct
-Color provides a separate palette for red, green, and blue. This
-scheme combines the advantages of indexing with the excellent
-color depth of True Color. Direct Color is rarely used for game
-programming (it is mainly a feature of high-end graphics
-workstations) and is mentioned here only for the sake of
-completeness.
-Although the variety of video modes may appear to be a serious programming
-nightmare, many games simply pick one mode to support (such as hicolor), and
-inform the video card of that mode when they start. If a video card does not
-allow a certain mode, it is often possible to perform on-the-fly conversion
-between pixel formats with only a minor performance loss. It is sometimes
-possible to write programs in a depth-independent manner.
+This library is very widely used, and there’s a very good chance that it’s already present on your Linux installation. You can download zlib’s source code from http://www.gzip.org.
 
-The SDL Video API
-SDL uses structures called surfaces for manipulating graphical data. A surface is
-simply a block of memory for storing a rectangular region of pixels. You can
-think of a surface as a generic chunk of video data. Surfaces have widths,
-heights, and specific pixel formats, just as framebuffers do. In fact, SDL
+**On to the Code!**
 
-MASTERING SDL
+Enough groundwork. It’s time to throw around some code. In the next chapter we’ll talk about the SDL library, a one-stop shop for portable graphics and audio. We’ll also get started on Penguin Warrior, a complete Linux game that we’ll develop over several chapters.
 
-73
+# Chapter 4
 
-represents the video card’s framebuffer as a special surface. The rectangular
-regions of data stored in surfaces are often called bitmaps or pixmaps.
-The most important property of surfaces is that they can be copied onto each
-other very quickly. That is, one surface’s pixels can be transferred to an
-identically sized rectangular area of another surface. This operation is called a
-blit, or block image transfer. Blits are a fundamental part of game programming
-because they allow complete images to be composed out of predrawn graphics
-(generally created by artists with image-processing software). Since the
-framebuffer is a surface, entire images can be sent to the screen with a single
-blitting operation. SDL provides a function for performing fast blits between
-surfaces, and it can even convert between surfaces of different pixel formats on
-the fly.
-Most games rely almost exclusively on surface blits for their drawing (as opposed
-to drawing with individual pixels). For example, consider the game Civilization:
-Call To Power (which was ported to Linux using SDL). Other than the lines
-used to indicate paths and gridpoints, every character and building that you can
-see is stored in memory with surfaces, and they are drawn on the screen with
-blits. All of the game’s artwork was created by artists and stored in files. The
-game assembles its screen images almost entirely out of these predrawn graphics.
-We will now examine a series of SDL video-programming examples. It would be
-a good idea to compile and run each of these examples and to tweak them until
-you understand how they work. Don’t worry about typing in all of the examples;
-they are available on the book’s Web page. Throughout the rest of the chapter
-(and throughout chapters to come) we’ll make note of important structures and
-functions with references like this:
-Function
+# Mastering SDL
 
+Simple DirectMedia Layer (SDL) is a cross-platform multimedia library that has been used in countless free games and several commercial projects. SDL works with a platform’s underlying multimedia capabilities to provide a consistent and open API across multiple operating systems. In this chapter we will tour the various facets of SDL with respect to Linux game programming.
+
+SDL’s full name, *Simple DirectMedia Layer*, summarizes the design of the library. SDL is simple to learn and use: its API is well defined (if a bit sparsely documented in the recently added areas), uncluttered, and to the point. It provides direct access to the computer’s multimedia capabilities where possible and does its best to compensate if the computer’s underlying support is missing in some area. Finally, SDL is a thin and well-behaved layer of code rather than a subsuming beast. It is possible and often desirable to use individual components of SDL separately, and it is possible to integrate SDL into applications other than games to provide special multimedia capabilities. For instance, a game might use SDL for audio and some other toolkit for graphics, or an office suite might use SDL to display video clips. The most important use of SDL, though, is game programming.
+
+The SDL library consists of several sub-APIs, providing cross-platform support for video, audio, input handling, multithreading, OpenGL rendering contexts, and various other amenities. We’ll begin our tour with graphics programming.  Before we jump into the world of surfaces and pixels, however, let’s take a look at the hardware that makes it all possible.  
+
+
+## Computer Graphics Hardware
+
+Every personal computer is equipped with a video controller of some sort. This set of chips is responsible for producing images on the screen, based on the data contained in a certain area of memory (the *framebuffer*). In addition to this basic drudgery, the video controller often assists software by providing hardware-accelerated drawing functions. Video controllers usually reside on replaceable *video cards* that can be easily upgraded as video technology progresses.
+
+Video cards contain a unit called a CRTC, an acronym for *cathode ray tube controller*. This device (either a separate chip or part of another chip) instructs the monitor to redraw its picture at regular intervals. The image on a computer screen is composed of horizontal lines on a fluorescent surface, and the monitor’s hardware updates these from top to bottom. Each completed image is called a *refresh*. The CRTC instructs the monitor to perform a new refresh at least 60 times each second. The brief pause between refreshes is known as the *vertical retrace*, because this is when the monitor’s electron beam returns to the top of the screen. No matter how quickly the data in the framebuffer changes, the monitor is not updated until the next refresh. The video hardware’s refresh rate is therefore of great interest to a game developer.
+
+The image on a computer screen is divided into discrete colored areas called *pixels* (short for *pictorial elements*). Each pixel can be individually controlled by the video card. The *resolution* of a display specifies the number of pixels across and down; for instance, a screen with a resolution of 640 by 480 is a matrix of 640 columns and 480 rows. The video card uses a device called a RAMDAC (*random access memory digital-analog converter*) to pump these individual pixels from the framebuffer memory to the monitor. Video card manufacturers like to brag about the speed of their RAMDAC components.
+
+Since there are a lot of pixels on the screen (anywhere from 64,000 to more than a million), producing complete images can be an intensive process, especially if a program needs to change the entire contents of the screen several times every second. Video chip manufacturers have invested a large amount of research in this problem and have created video accelerator chips to help with this work.  Video accelerators can speed up graphical applications (such as games) by performing time-consuming updates with dedicated hardware. For instance, video accelerators can often help out by performing high-speed copying between the framebuffer and other areas of memory. Computer memory is fast, but today’s video games need every bit of performance they can get.  
+
+
+## The Framebuffer
+
+The framebuffer is an area of memory that describes the image on the screen, with each on-screen pixel corresponding to one memory location. The exact format of the framebuffer is determined by the video chipset, but it is most commonly a simple array (this is known as a *linear framebuffer*). To change the color of a pixel on the screen, a program must calculate the location of the pixel in the array (with the formula *width × y + x*), determine the correct representation of the desired color, and store the color representation in the framebuffer. The video card then sends the new pixel color to the monitor during its next screen refresh.
+
+Pixels are almost always represented by one- to four-byte values, but the exact format of these values depends on the current video mode. The following schemes are used to specify pixel colors in the framebuffer:
+
+* **Indexing**
+Pixel values are indices into a preset table of color values, which is called the *colormap* or *palette*. Each entry in this table consists of a red, green, and blue intensity level. The video card converts the indices into actual color intensities (signals for the monitor’s electron guns) as it goes. These video modes generally use one byte per pixel, allowing for a meager 256 colors on the screen at once. The palette can usually be changed at will (but updates to the palette will not show up until the next refresh). Clever programmers occasionally use the palette to implement animation tricks and special effects. Indexed modes offer extremely fast performance but relatively few simultaneous colors.
+
+* **Hicolor**
+Pixel values are 16 bits (2 bytes) each. These bits are divided into red, green, and blue fields. It is common for hicolor modes to allocate 5 bits to red, 6 bits to green, and 5 bits to blue, but you cannot assume that this will be the case. Hicolor offers excellent performance potential and a decent representation of the color spectrum, and it is frequently used for game programming.
+However, it lacks the color depth necessary for professional graphics. This is currently the most important pixel format for game programming. Hicolor is also known as *High Color*, but most people use the shorter term.
+
+* **True Color**
+Pixel values are 24 bits each, allotting 1 byte to each color channel. True Color modes are extremely easy to program (since they do not require bit shifting or masking), but they tend to be rather slow due to the increased amount of video data. Some True Color modes use 32 bits for each pixel, simply wasting the 4th byte. This improves performance in many cases, because 32-bit processors are usually more efficient at accessing data aligned on 4-byte boundaries.
+
+* **Direct Color**
+Pixel values are divided into three bit fields, each of which is an index into a palette for a particular color channel. That is, Direct Color provides a separate palette for red, green, and blue. This scheme combines the advantages of indexing with the excellent color depth of True Color. Direct Color is rarely used for game programming (it is mainly a feature of high-end graphics workstations) and is mentioned here only for the sake of completeness.
+
+Although the variety of video modes may appear to be a serious programming nightmare, many games simply pick one mode to support (such as hicolor), and inform the video card of that mode when they start. If a video card does not allow a certain mode, it is often possible to perform on-the-fly conversion between pixel formats with only a minor performance loss. It is sometimes possible to write programs in a depth-independent manner.
+
+## The SDL Video API
+
+SDL uses structures called *surfaces* for manipulating graphical data. A surface is simply a block of memory for storing a rectangular region of pixels. You can think of a surface as a generic chunk of video data. Surfaces have widths, heights, and specific pixel formats, just as framebuffers do. In fact, SDL represents the video card’s framebuffer as a special surface. The rectangular regions of data stored in surfaces are often called *bitmaps* or *pixmaps*.  
+
+The most important property of surfaces is that they can be copied onto each other very quickly. That is, one surface’s pixels can be transferred to an identically sized rectangular area of another surface. This operation is called a *blit*, or *block image transfer*. Blits are a fundamental part of game programming because they allow complete images to be composed out of predrawn graphics (generally created by artists with image-processing software). Since the framebuffer is a surface, entire images can be sent to the screen with a single blitting operation. SDL provides a function for performing fast blits between surfaces, and it can even convert between surfaces of different pixel formats on the fly.
+
+Most games rely almost exclusively on surface blits for their drawing (as opposed to drawing with individual pixels). For example, consider the game Civilization: Call To Power (which was ported to Linux using SDL). Other than the lines used to indicate paths and gridpoints, every character and building that you can see is stored in memory with surfaces, and they are drawn on the screen with blits. All of the game’s artwork was created by artists and stored in files. The game assembles its screen images almost entirely out of these predrawn graphics.
+
+We will now examine a series of SDL video-programming examples. It would be a good idea to compile and run each of these examples and to tweak them until you understand how they work. Don’t worry about typing in all of the examples; they are available on the book’s Web page. Throughout the rest of the chapter (and throughout chapters to come) we’ll make note of important structures and functions with references like this:
+
+* **Function**
 PrepNuke(kilotons, target)
 
-Synopsis
-
+* **Synopsis**
 Sets up a tactical nuke and aims it at target.
 
-Parameters
+* **Parameters**
+kilotons—Power rating of the desired nuke.  target—Target of the nuke. 0 picks a random destination. *Be careful*.
 
-kilotons—Power rating of the desired nuke.
-target—Target of the nuke. 0 picks a random
-destination. Be careful.
+Don’t worry if you don’t understand the relevance of a particular function or member of a structure at first; some are presented as a reference for advanced SDL users. Most of them should make sense by the end of the chapter.
 
-Don’t worry if you don’t understand the relevance of a particular function or
-member of a structure at first; some are presented as a reference for advanced
-SDL users. Most of them should make sense by the end of the chapter.
+### Setting Up the Display
 
-74
+Before we can begin writing to the framebuffer, we need to tell the video card what we expect of it. It needs to know the screen resolution we want, as well as the pixel format to expect in the framebuffer. SDL can handle this for us with the SDL SetVideoMode function. The following example demonstrates how to set the display to a particular video mode and prepare the framebuffer for drawing:
 
-CHAPTER 4
+**Code Listing 4–1 (initializing-sdl.c)**
 
-Setting Up the Display
-Before we can begin writing to the framebuffer, we need to tell the video card
-what we expect of it. It needs to know the screen resolution we want, as well as
-the pixel format to expect in the framebuffer. SDL can handle this for us with
-the SDL SetVideoMode function. The following example demonstrates how to set
-the display to a particular video mode and prepare the framebuffer for drawing:
-Code Listing 4–1 (initializing-sdl.c)
+```
 /* Example of initializing SDL. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int main()
 {
-SDL_Surface *screen;
-/* Initialize SDL’s video system and check for errors */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
+	SDL_Surface *screen;
+
+	/* Initialize SDL’s video system and check for errors */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
+
+	/* Attempt to set a 640x480 hicolor video mode */
+	screen = SDL_SetVideoMode(640, 480, 16, SDL_FULLSCREEN);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* If we got this far, everything worked */
+	printf("Success!\n");
+	return 0;
 }
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 640x480 hicolor video mode */
-screen = SDL_SetVideoMode(640, 480, 16, SDL_FULLSCREEN);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* If we got this far, everything worked */
-printf("Success!\n");
-return 0;
-}
+```
 
-MASTERING SDL
+This program includes the **SDL.h** header file, in the **SDL** subdirectory. This is the master header file for SDL; it should be included in all SDL applications. It also includes two standard headers, for the printf and atexit functions.
 
-75
+We begin by calling **SDL_Init** to initialize SDL. This function takes an ORed list of arguments to indicate which subsystems should be initialized; we are interested only in the video subsystem, so we pass SDL_INIT_VIDEO. Unless an error occurs, this function should return zero to indicate success. We also use C’s atexit facility to request that SDL Quit be called before the program exits. This function makes sure that SDL shuts down properly.
 
-This program includes the SDL.h header file, in the SDL subdirectory. This is
-the master header file for SDL; it should be included in all SDL applications. It
-also includes two standard headers, for the printf and atexit functions.
-We begin by calling SDL Init to initialize SDL. This function takes an ORed list
-of arguments to indicate which subsystems should be initialized; we are
-interested only in the video subsystem, so we pass SDL INIT VIDEO. Unless an
-error occurs, this function should return zero to indicate success. We also use C’s
-atexit facility to request that SDL Quit be called before the program exits. This
-function makes sure that SDL shuts down properly.
-Function
-
+* **Function** 
 SDL Init(flags)
 
-Synopsis
-
+* **Synopsis**
 Initializes one or more subsystems of SDL.
 
-Returns
-
+* **Returns**
 Zero on success, a negative number on failure.
 
-Parameters
+* **Parameters**
+flags—Subsystems to initialize. This is an ORed list of flags. Possible flags are SDL INIT VIDEO and SDL INIT AUDIO, among others.
 
-flags—Subsystems to initialize. This is an ORed list
-of flags. Possible flags are SDL INIT VIDEO and
-SDL INIT AUDIO, among others.
+Next, we use the **SDL_SetVideoMode** function to inform the display of our desired resolution and color depth. There is a catch here: SDL will try to set up the display as requested, but it might fail. If this happens, SDL won’t tell us; instead it will emulate the requested mode internally. This is usually acceptable, since the emulation code is relatively fast and we would usually rather not deal with multiple modes ourselves. **SDL_SetVideoMode** returns a pointer to the surface that represents the framebuffer. If something goes wrong, this function returns NULL.
 
-Next, we use the SDL SetVideoMode function to inform the display of our desired
-resolution and color depth. There is a catch here: SDL will try to set up the
-display as requested, but it might fail. If this happens, SDL won’t tell us;
-instead it will emulate the requested mode internally. This is usually acceptable,
-since the emulation code is relatively fast and we would usually rather not deal
-with multiple modes ourselves. SDL SetVideoMode returns a pointer to the
-surface that represents the framebuffer. If something goes wrong, this function
-returns NULL.
-Function
+* **Function**
+	* SDL_SetVideoMode(width, height, bpp, flags)
 
-SDL SetVideoMode(width, height, bpp, flags)
+* **Synopsis**
+	* Creates a window or initializes the video adapter to prepare for SDL video output.
 
-Synopsis
+* **Returns**
+	* Pointer to a valid SDL Surface structure on success, NULL on failure.
 
-Creates a window or initializes the video adapter to
-prepare for SDL video output.
+* **Parameters**
+	* width—Width (x-resolution) of the desired video
+	* height—Height (y-resolution) of the desired video mode.
+	* bpp—Desired color depth. Likely values are 8, 15, 16,
+	* 24, or 32. 0 lets SDL pick any supported mode.
+	* flags—Mode flags. Possible values are SDL FULLSCREEN (requests a fullscreen video mode), SDL DOUBLEBUF (requests a double buffered video setup), SDL HWSURFACE (requests a hardware framebuffer for fast updates), SDL OPENGL (requests an OpenGL context), and others. We’ll discuss most of these later.
 
-Returns
+Finally, we report success and exit. The C library calls SDL_Quit automatically (since we registered it with atexit), and SDL returns the video display to its original mode.
 
-Pointer to a valid SDL Surface structure on success,
-NULL on failure.
+* **Function**
+	* SDL_Quit()
 
-Parameters
+* **Synopsis**
+	* Shuts down SDL cleanly, regardless of its present state.
 
-width—Width (x-resolution) of the desired video
-mode.
 
-76
+* **Function**
+	* SDL_QuitSubSystem()
 
-CHAPTER 4
-height—Height (y-resolution) of the desired video
-mode.
-bpp—Desired color depth. Likely values are 8, 15, 16,
-24, or 32. 0 lets SDL pick any supported mode.
-flags—Mode flags. Possible values are
-SDL FULLSCREEN (requests a fullscreen video mode),
-SDL DOUBLEBUF (requests a double buffered video
-setup), SDL HWSURFACE (requests a hardware
-framebuffer for fast updates), SDL OPENGL (requests an
-OpenGL context), and others. We’ll discuss most of
-these later.
+* **Synopsis**
+	* Shuts down a particular component of SDL, leaving the others untouched. It is safe to shut a subsystem down twice; SDL keeps track of its state internally.  
 
-Finally, we report success and exit. The C library calls SDL Quit automatically
-(since we registered it with atexit), and SDL returns the video display to its
-original mode.
-Function
+* **Parameters**
+	* flags—ORed bitmask of subsystems to shut down.  These are the same flags you would pass to SDL Init.  To shut down the audio subsystem without touching the video subsystem, you would use SDL_QuitSubSystem(SDL_INIT_AUDIO).
 
-SDL Quit()
+Now that we’ve created an SDL application, we need to compile it. SDL applications are easy to compile; assuming a proper installation of SDL, they require just a few flags and libraries. The standard SDL distribution includes a program called sdl-config (similar to the gtk-config and glib-config scripts that ship with the GTK+ toolkit) for supplying the appropriate command-line arguments to gcc. The command **sdl-config --cflags** produces a list of the options that should be passed to the compiler, and **sdl-config --libs** produces a list of libraries that should be linked in. These options allow SDL applications to compile correctly regardless of the location or version of the library. The following command will correctly build an SDL application:
 
-Synopsis
-
-Shuts down SDL cleanly, regardless of its present
-state.
-
-Function
-
-SDL QuitSubSystem()
-
-Synopsis
-
-Shuts down a particular component of SDL, leaving
-the others untouched. It is safe to shut a subsystem
-down twice; SDL keeps track of its state internally.
-
-Parameters
-
-flags—ORed bitmask of subsystems to shut down.
-These are the same flags you would pass to SDL Init.
-To shut down the audio subsystem without touching
-the video subsystem, you would use
-SDL QuitSubSystem(SDL INIT AUDIO).
-
-Now that we’ve created an SDL application, we need to compile it. SDL
-applications are easy to compile; assuming a proper installation of SDL, they
-require just a few flags and libraries. The standard SDL distribution includes a
-
-MASTERING SDL
-
-77
-
-program called sdl-config (similar to the gtk-config and glib-config scripts
-that ship with the GTK+ toolkit) for supplying the appropriate command-line
-arguments to gcc. The command sdl-config --cflags produces a list of the
-options that should be passed to the compiler, and sdl-config --libs
-produces a list of libraries that should be linked in. These options allow SDL
-applications to compile correctly regardless of the location or version of the
-library. The following command will correctly build an SDL application:
+```
 $ gcc sdltest.c -o sdltest `sdl-config --cflags --libs`
+```
 
 Or, to separately compile and link multiple source files that use the SDL library,
+
+```
 $ gcc -c file1.c `sdl-config --cflags`
 $ gcc -c file2.c `sdl-config --cflags`
 $ gcc file1.o file2.o -o mygame `sdl-config --libs`
+```
 
-Note the use of backtick substitution (a standard shell feature) to insert the
-output of sdl-config into the command line. Of course, it is also possible to run
-sdl-config yourself and insert its output into the command line by hand, but
-this would reduce the portability of your makefile. sdl-config produces the
-following output on one particular Linux installation:
+Note the use of backtick substitution (a standard shell feature) to insert the output of sdl-config into the command line. Of course, it is also possible to run **sdl-config** yourself and insert its output into the command line by hand, but this would reduce the portability of your makefile. sdl-config produces the following output on one particular Linux installation:
+
+```
 $ sdl-config --cflags
 -I/usr/include/SDL -D_REENTRANT
 $ sdl-config --libs
 -L/usr/lib -lSDL -lpthread
+```
 
-Direct Surface Drawing
-Putting data into an SDL surface is simple. Each SDL Surface structure
-contains a pixels member. This is a void * to the raw image, and we can write
-to it directly if we know the type of pixel that the surface is set up for. We must
-call the SDL LockSurface function before accessing this data (because some
-surfaces reside in special memory areas and require special handling). When we
-are finished with the surface, we must call SDL UnlockSurface to release it. The
+### Direct Surface Drawing
 
-78
+Putting data into an SDL surface is simple. Each **SDL_Surface** structure contains a pixels member. This is a void * to the raw image, and we can write to it directly if we know the type of pixel that the surface is set up for. We must call the **SDL_LockSurface** function before accessing this data (because some surfaces reside in special memory areas and require special handling). When we are finished with the surface, we must call **SDL_UnlockSurface** to release it. The width and the height of the image are given by the w and h members of the structure, and the pixel format is specified by the format member (which is of type **SDL_PixelFormat**). SDL often emulates nonstandard screen resolutions with higher resolutions, and the pitch member of the pixel format structure indicates the actual width of the framebuffer. You should always use pitch instead of w for calculating offsets into the pixels buffer, or else your application might not work on some configurations.
 
-CHAPTER 4
+* **Structure**
+	* SDL_Surface
 
-width and the height of the image are given by the w and h members of the
-structure, and the pixel format is specified by the format member (which is of
-type SDL PixelFormat). SDL often emulates nonstandard screen resolutions
-with higher resolutions, and the pitch member of the pixel format structure
-indicates the actual width of the framebuffer. You should always use pitch
-instead of w for calculating offsets into the pixels buffer, or else your
-application might not work on some configurations.
-Structure
-Synopsis
+* **Synopsis**
+	* Represents a video surface.
 
-SDL Surface
-Represents a video surface.
+* **Members**
+	* flags—ORed bitmask of surface flags. For instance, the SDL HWSURFACE bit of flags will be set if this is a hardware (video memory) surface. *Read-only*.
+	* format—Pointer to this surface’s pixel format information (a **SDL_PixelFormat** structure).  *Read-only*.
+	* w—Width of this surface (in pixels). *Read-only*.
+	* h—Height of this surface (in pixels). *Read-only*.
+	* pitch—Number of pixels per scanline in memory. This is often different from the surface’s width – beware!  Always use pitch for pixel offset calculations.  *Read-only*.
+	* pixels—void pointer to the actual data that makes up this image. *Read-write only after you call **SDL_LockSurface***.
 
-Members
 
-flags—ORed bitmask of surface flags. For instance,
-the SDL HWSURFACE bit of flags will be set if this is a
-hardware (video memory) surface. Read-only.
-format—Pointer to this surface’s pixel format
-information (a SDL PixelFormat structure).
-Read-only.
-w—Width of this surface (in pixels). Read-only.
-h—Height of this surface (in pixels). Read-only.
-pitch—Number of pixels per scanline in memory. This
-is often different from the surface’s width – beware!
-Always use pitch for pixel offset calculations.
-Read-only.
-pixels—void pointer to the actual data that makes up
-this image. Read-write only after you call
-SDL LockSurface.
+* **Function**
+	* SDL_LockSurface(surf)
 
-Function
+* **Synopsis** 
+	* “Locks” a surface, making its pixels available for direct access. You can use **SDL_MUSTLOCK(surf)** to determine whether a particular surface requires locking; some surfaces don’t. Do not call **SDL_BlitSurface** on a locked surface.
 
-SDL LockSurface(surf)
+* **Returns**
+	* Non-NULL on success, NULL on failure.
 
-Synopsis
+* **Parameters**
+	* surf—Surface to lock.
 
-“Locks” a surface, making its pixels available for
-direct access. You can use SDL MUSTLOCK(surf) to
-determine whether a particular surface requires
-locking; some surfaces don’t. Do not call
-SDL BlitSurface on a locked surface.
 
-Returns
+* **Function**
+	* SDL_UnlockSurface(surf)
 
-Non-NULL on success, NULL on failure.
+* **Synopsis**
+	* “Unlocks” a surface. Use this as soon as you have finished drawing on a locked surface.
 
-Parameters
+* **Parameters**
+	* surf—Surface to unlock.
 
-surf—Surface to lock.
+Our next example uses the SDL pixel format information to draw individual pixels on the screen. We have chosen to use a 16-bit (hicolor) mode for demonstration purposes, but other modes are equally simple to program. Bear in mind that plotting pixels in this way is invariably slow—don’t even think of using this code for any substantial amount of drawing in a real program!
 
-MASTERING SDL
-Function
+**Code Listing 4–2 (direct-pixel-drawing-sdl.c)**
 
-SDL UnlockSurface(surf)
-
-Synopsis
-
-“Unlocks” a surface. Use this as soon as you have
-finished drawing on a locked surface.
-
-Parameters
-
-79
-
-surf—Surface to unlock.
-
-Our next example uses the SDL pixel format information to draw individual
-pixels on the screen. We have chosen to use a 16-bit (hicolor) mode for
-demonstration purposes, but other modes are equally simple to program. Bear in
-mind that plotting pixels in this way is invariably slow—don’t even think of
-using this code for any substantial amount of drawing in a real program!
-Code Listing 4–2 (direct-pixel-drawing-sdl.c)
+```
 /* Example of direct pixel access with SDL. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-Uint16 CreateHicolorPixel(SDL_PixelFormat * fmt, Uint8 red,
-Uint8 green, Uint8 blue)
+
+Uint16 CreateHicolorPixel(SDL_PixelFormat * fmt, Uint8 red, Uint8 green, Uint8 blue)
 {
-Uint16 value;
-/* This series of bit shifts uses the information from the
-SDL_Format structure to correctly compose a 16-bit pixel
-value from 8-bit red, green, and blue data. */
-value = ((red >> fmt->Rloss) << fmt->Rshift) +
-((green >> fmt->Gloss) << fmt->Gshift) +
-((blue >> fmt->Bloss) << fmt->Bshift);
-return value;
+	Uint16 value;
+
+	/* This series of bit shifts uses the information from the SDL_Format structure to correctly compose a 16-bit pixel value from 8-bit red, green, and blue data. */
+	value = ((red >> fmt->Rloss) << fmt->Rshift) +
+			((green >> fmt->Gloss) << fmt->Gshift) +
+			((blue >> fmt->Bloss) << fmt->Bshift);
+
+	return value;
 }
+
 int main()
 {
-SDL_Surface *screen;
-Uint16 *raw_pixels;
-int x, y;
+	SDL_Surface *screen;
+	Uint16 *raw_pixels;
+	int x, y;
 
-80
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
 
-CHAPTER 4
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
 
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
+	/* Attempt to set a 256x256 hicolor (16-bit) video mode.  This will set some type of 16-bit mode, but we won’t know which particular pixel format ahead of time. If the video card can’t handle hicolor modes, SDL will emulate it. */
+	screen = SDL_SetVideoMode(256, 256, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Video memory can be strange, and it’s sometimes necessary to
+		"lock" it before it can be modified. SDL abstracts this with
+		the SDL_LockSurface function. */
+
+	SDL_LockSurface(screen);
+
+	/* Get a pointer to the video surface’s memory. */
+	raw_pixels = (Uint16 *) screen->pixels;
+
+	/* We can now safely write to the video surface. We’ll draw a
+		nice gradient pattern by varying our red and blue components
+		along the X and Y axes. Notice the formula used to calculate
+		the offset into the framebuffer for each pixel.
+		(The pitch is the number of bytes per scanline in memory.) */
+
+	for (x = 0; x < 256; x++) {
+		for (y = 0; y < 256; y++) {
+			Uint16 pixel_color;
+			int offset;
+			pixel_color = CreateHicolorPixel(screen->format, x, 0, y);
+			offset = (screen->pitch / 2 * y + x);
+			raw_pixels[offset] = pixel_color;
+		}
+	}
+
+	/* We’re finished drawing, so unlock the surface. */
+	SDL_UnlockSurface(screen);
+
+	/* Inform SDL that the screen has been changed. This is
+		necessary because SDL’s screen surface is not always the real
+		framebuffer; it is sometimes emulated behind the scenes. */
+
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+	/* Pause for a few seconds as the viewer gasps in awe. */
+	SDL_Delay(3000);
+	return 0;
 }
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 256x256 hicolor (16-bit) video mode.
-This will set some type of 16-bit mode, but we won’t
-know which particular pixel format ahead of time. If
-the video card can’t handle hicolor modes, SDL will
-emulate it. */
-screen = SDL_SetVideoMode(256, 256, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Video memory can be strange, and it’s sometimes necessary to
-"lock" it before it can be modified. SDL abstracts this with
-the SDL_LockSurface function. */
-SDL_LockSurface(screen);
-/* Get a pointer to the video surface’s memory. */
-raw_pixels = (Uint16 *) screen->pixels;
-/* We can now safely write to the video surface. We’ll draw a
-nice gradient pattern by varying our red and blue components
-along the X and Y axes. Notice the formula used to calculate
-the offset into the framebuffer for each pixel.
-(The pitch is the number of bytes per scanline in memory.) */
-for (x = 0; x < 256; x++) {
-for (y = 0; y < 256; y++) {
-Uint16 pixel_color;
-int offset;
-pixel_color = CreateHicolorPixel(screen->format,
-x, 0, y);
-offset = (screen->pitch / 2 * y + x);
-raw_pixels[offset] = pixel_color;
+```
 
-MASTERING SDL
+The code’s comments give the play-by-play, but a few points should be clarified.  This program employs a very general routine for constructing hicolor pixel values; this routine will work with any hicolor format that SDL recognizes.  Although we could write a separate (faster) routine for each possible hicolor data layout, doing so would require a lot of work and would only marginally improve performance. The 565 (5 red bits, 6 green bits, and 5 blue bits) pixel format is perhaps the most widely used format and could be reasonably optimized, but 556 and 555 are not uncommon. In addition, there is no guarantee that the bit fields will be in the red-green-blue order. Our **CreateHicolorPixel** routine solves this problem by referring to the data in the **SDL_PixelFormat** structure. For instance, the routine uses the **Rloss** member of the structure to determine how many bits to drop from the 8-bit red component, and it then uses the **Rshift** member to determine where the red bits should be located within the 16-bit pixel value. For an interesting experiment, have the program print out these fields, and determine which particular hicolor layout your video card has given to SDL. My video card (a Matrox G400 under XFree86 3.3.6) happens to use the 565 format.
 
-81
+* **Structure**
+	* SDL_PixelFormat
 
-}
-}
-/* We’re finished drawing, so unlock the surface. */
-SDL_UnlockSurface(screen);
-/* Inform SDL that the screen has been changed. This is
-necessary because SDL’s screen surface is not always the real
-framebuffer; it is sometimes emulated behind the scenes. */
-SDL_UpdateRect(screen, 0, 0, 0, 0);
-/* Pause for a few seconds as the viewer gasps in awe. */
-SDL_Delay(3000);
-return 0;
-}
+* **Synopsis**
+	* Contains information about a surface’s pixel composition.
 
-The code’s comments give the play-by-play, but a few points should be clarified.
-This program employs a very general routine for constructing hicolor pixel
-values; this routine will work with any hicolor format that SDL recognizes.
-Although we could write a separate (faster) routine for each possible hicolor data
-layout, doing so would require a lot of work and would only marginally improve
-performance. The 565 (5 red bits, 6 green bits, and 5 blue bits) pixel format is
-perhaps the most widely used format and could be reasonably optimized, but 556
-and 555 are not uncommon. In addition, there is no guarantee that the bit fields
-will be in the red-green-blue order. Our CreateHicolorPixel routine solves this
-problem by referring to the data in the SDL PixelFormat structure. For instance,
-the routine uses the Rloss member of the structure to determine how many bits
-to drop from the 8-bit red component, and it then uses the Rshift member to
-determine where the red bits should be located within the 16-bit pixel value. For
-an interesting experiment, have the program print out these fields, and
-determine which particular hicolor layout your video card has given to SDL. My
-video card (a Matrox G400 under XFree86 3.3.6) happens to use the 565 format.
+* **Members**
+	* palette—Pointer to this surface’s palette (of type SDL_Palette, if this is a paletted image.  
+	* BitsPerPixel—Color depth of this surface. Possible values are 8, 15, 16, 24, or 32.  
+	* BytesPerPixel—Number of bytes needed for each pixel. This is usually BitsPerPixel / 8, rounded up to the nearest integer.
+	* Rloss—Number of bits to remove from an 8-bit red color value in order for it to fit in the allotted space.  For instance, a 565 video mode allows for 5 bits of red color data, so the Rloss would be 3. SDL_PixelFormat also contains Gloss, Bloss, and Aloss members for the green, blue, and alpha channels.
+	* Rshift—Number of bits to shift the red value in order to position it in the correct bit field. There are similar Gshift, Bshift, and Ashift members.
+	* Rmask—Bitmask for extracting the red component from a pixel value. There are similar Gmask, Bmask, and Amask members.
+	* colorkey—Color value for colorkey blitting. Set this with SDL_SetColorKey. More on colorkey blitting later.
+	* alpha—Transparency value for the surface associated with this **SDL_PixelFormat** structure. Set this with **SDL_SetAlpha**. More on alpha blitting later.
 
-82
+Another important issue involves the **SDL_UpdateRect** function. As we mentioned earlier, SDL sometimes emulates video modes if the video card is unable to provide a certain mode itself. If the video card does not support a requested 24-bit mode, for instance, SDL might select a 16-bit mode instead and return a fake framebuffer set up for 24-bit pixels. This would allow your program to continue normally, and SDL would handle the conversion from 24 bits to 16 bits on the fly (with a slight performance loss). The **SDL_UpdateRect** function informs SDL that a portion of the screen has been updated and that it should perform the appropriate conversions to display that area. If a program does not use this function, it may still work. It is better to be on the safe side, however, and call this function whenever the framebuffer surface has been changed.
 
-CHAPTER 4
-Structure
-Synopsis
-Members
+* **Function**
+	* SDL_UpdateRect(surface, left, top, right, bottom)
 
-SDL PixelFormat
-Contains information about a surface’s pixel
-composition.
-palette—Pointer to this surface’s palette (of type
-SDL Palette, if this is a paletted image.
-BitsPerPixel—Color depth of this surface. Possible
-values are 8, 15, 16, 24, or 32.
-BytesPerPixel—Number of bytes needed for each
-pixel. This is usually BitsPerPixel / 8, rounded up
-to the nearest integer.
-Rloss—Number of bits to remove from an 8-bit red
-color value in order for it to fit in the allotted space.
-For instance, a 565 video mode allows for 5 bits of red
-color data, so the Rloss would be 3. SDL PixelFormat
-also contains Gloss, Bloss, and Aloss members for
-the green, blue, and alpha channels.
-Rshift—Number of bits to shift the red value in order
-to position it in the correct bit field. There are similar
-Gshift, Bshift, and Ashift members.
-Rmask—Bitmask for extracting the red component
-from a pixel value. There are similar Gmask, Bmask,
-and Amask members.
-colorkey—Color value for colorkey blitting. Set this
-with SDL SetColorKey. More on colorkey blitting
-later.
-alpha—Transparency value for the surface associated
-with this SDL PixelFormat structure. Set this with
-SDL SetAlpha. More on alpha blitting later.
+* **Synopsis**
+	* Updates a specific region of a surface. Normally used to make changes appear on the screen (see text above).
 
-Another important issue involves the SDL UpdateRect function. As we
-mentioned earlier, SDL sometimes emulates video modes if the video card is
-unable to provide a certain mode itself. If the video card does not support a
-requested 24-bit mode, for instance, SDL might select a 16-bit mode instead and
-return a fake framebuffer set up for 24-bit pixels. This would allow your program
+* **Parameters**
+	* surface—Surface to update. Usually the screen.
+	* left—Starting x coordinate of the region to update.  If all coordinates are zero, **SDL_UpdateRect** will update the entire surface.
+	* top—Starting y coordinate of the region to update.
+	* right—Ending x coordinate of the region to update.
+	* bottom—Ending y coordinate of the region to update.
 
-MASTERING SDL
+Finally, if you run the program, you might notice that it runs in a window instead of taking over the entire screen. To change this, replace the zero in the **SDL_SetVideoMode** call with the constant `SDL_FULLSCREEN`. Be careful, though; full-screen applications are harder to debug, and they tend to mess things up badly when they crash. It’s a good idea to use normal windowed mode until you’re pretty sure your app isn’t going to crash.
 
-83
+### Drawing with Blits
 
-to continue normally, and SDL would handle the conversion from 24 bits to 16
-bits on the fly (with a slight performance loss). The SDL UpdateRect function
-informs SDL that a portion of the screen has been updated and that it should
-perform the appropriate conversions to display that area. If a program does not
-use this function, it may still work. It is better to be on the safe side, however,
-and call this function whenever the framebuffer surface has been changed.
-Function
+You’ve seen how to draw pixels directly to a surface, and there’s no reason you couldn’t create an entire game with this technique alone. However, there is a much better way to draw large amounts of data to the screen. Our next example will load an entire surface from a file and draw it with a single SDL surface-copying function. Without further ado, here is the code.
 
-SDL UpdateRect(surface, left, top, right,
-bottom)
+**Code Listing 4–3 (blitting-surfaces-sdl.c)**
 
-Synopsis
-
-Updates a specific region of a surface. Normally used
-to make changes appear on the screen (see text above).
-
-Parameters
-
-surface—Surface to update. Usually the screen.
-left—Starting x coordinate of the region to update.
-If all coordinates are zero, SDL UpdateRect will
-update the entire surface.
-top—Starting y coordinate of the region to update.
-right—Ending x coordinate of the region to update.
-bottom—Ending y coordinate of the region to update.
-
-Finally, if you run the program, you might notice that it runs in a window
-instead of taking over the entire screen. To change this, replace the zero in the
-SDL SetVideoMode call with the constant SDL FULLSCREEN. Be careful, though;
-full-screen applications are harder to debug, and they tend to mess things up
-badly when they crash. It’s a good idea to use normal windowed mode until
-you’re pretty sure your app isn’t going to crash.
-
-Drawing with Blits
-You’ve seen how to draw pixels directly to a surface, and there’s no reason you
-couldn’t create an entire game with this technique alone. However, there is a
-much better way to draw large amounts of data to the screen. Our next example
-will load an entire surface from a file and draw it with a single SDL
-surface-copying function. Without further ado, here is the code.
-
-84
-
-CHAPTER 4
-
-Code Listing 4–3 (blitting-surfaces-sdl.c)
+```
 /* Example of simple blitting with SDL. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 int main()
 {
-SDL_Surface *screen;
-SDL_Surface *image;
-SDL_Rect src, dest;
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
-}
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 256x256 hicolor (16-bit) video mode.
-Since 256x256 is rarely a valid video mode, SDL will
-most likely emulate this resolution with a different
-video mode. */
-screen = SDL_SetVideoMode(256, 256, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Load the bitmap file. SDL_LoadBMP returns a pointer to a
-new surface containing the loaded image. */
-image = SDL_LoadBMP("test-image.bmp");
-if (image == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
+	SDL_Surface *screen;
+	SDL_Surface *image;
+	SDL_Rect src, dest;
 
-MASTERING SDL
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
 
-85
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
 
-/* The SDL blitting function needs to know how much data
-to copy. We provide this with SDL_Rect structures, which
-define the source and destination rectangles. The areas
-should be the same; SDL does not currently handle image
-stretching. */
-src.x = 0;
-src.y = 0;
-src.w = image->w; /* copy the entire image */
-src.h = image->h;
-dest.x
-dest.y
-dest.w
-dest.h
+	/* Attempt to set a 256x256 hicolor (16-bit) video mode.
+		Since 256x256 is rarely a valid video mode, SDL will
+		most likely emulate this resolution with a different
+		video mode. */
 
-=
-=
-=
-=
+	screen = SDL_SetVideoMode(256, 256, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
 
-0;
-0;
-image->w;
-image->h;
+	/* Load the bitmap file. SDL_LoadBMP returns a pointer to a
+		new surface containing the loaded image. */
+	image = SDL_LoadBMP("test-image.bmp");
+	if (image == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
 
-/* Draw the bitmap to the screen. We are using a hicolor video
-mode, so we don’t have to worry about colormap silliness.
-It is not necessary to lock surfaces before blitting; SDL
-will handle that. */
-SDL_BlitSurface(image, &src, screen, &dest);
-/* Ask SDL to update the entire screen. */
-SDL_UpdateRect(screen, 0, 0, 0, 0);
-/* Pause for a few seconds as the viewer gasps in awe. */
-SDL_Delay(3000);
-/* Free the memory that was allocated to the bitmap. */
-SDL_FreeSurface(image);
-return 0;
+	/* The SDL blitting function needs to know how much data
+		to copy. We provide this with SDL_Rect structures, which
+		define the source and destination rectangles. The areas
+		should be the same; SDL does not currently handle image
+		stretching. */
+	src.x = 0;
+	src.y = 0;
+	src.w = image->w; /* copy the entire image */
+	src.h = image->h;
+
+	dest.x = 0;
+	dest.y = 0;
+	dest.w = image->w;
+	dest.h = image->h;
+
+	/* Draw the bitmap to the screen. We are using a hicolor video
+		mode, so we don’t have to worry about colormap silliness.
+		It is not necessary to lock surfaces before blitting; SDL
+		will handle that. */
+
+	SDL_BlitSurface(image, &src, screen, &dest);
+
+	/* Ask SDL to update the entire screen. */
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+	/* Pause for a few seconds as the viewer gasps in awe. */
+	SDL_Delay(3000);
+
+	/* Free the memory that was allocated to the bitmap. */
+	SDL_FreeSurface(image);
+
+	return 0;
 }
 
-As you can see, the bitmap file is loaded into memory with the SDL LoadBMP
-function. This function returns a pointer to an SDL Surface structure containing
-the image, or a NULL pointer if the image cannot be loaded. Once this file has
-been successfully loaded, the bitmap is represented as an ordinary SDL surface,
-and a program can draw it onto the screen or any other surface. Bitmaps use
-dynamically allocated memory, and they should be freed when they are no longer
-needed. The SDL FreeSurface function frees the memory allocated to a bitmap.
+```
 
-86
+As you can see, the bitmap file is loaded into memory with the **SDL_LoadBMP** function. This function returns a pointer to an **SDL_Surface** structure containing the image, or a NULL pointer if the image cannot be loaded. Once this file has been successfully loaded, the bitmap is represented as an ordinary SDL surface, and a program can draw it onto the screen or any other surface. Bitmaps use dynamically allocated memory, and they should be freed when they are no longer needed. The **SDL_FreeSurface** function frees the memory allocated to a bitmap.
 
-CHAPTER 4
-Function
 
-SDL LoadBMP(filename)
+* **Function**
+	* SDL LoadBMP(filename)
 
-Synopsis
+* **Synopsis**
+	* Loads a .bmp image file from disk into an SDL surface.
 
-Loads a .bmp image file from disk into an SDL
-surface.
+* **Returns**
+	* Pointer to a newly allocated SDL Surface containing the loaded image.
 
-Returns
+* **Parameters**
+	* filename—Name of the bitmap file to load.
 
-Pointer to a newly allocated SDL Surface containing
-the loaded image.
+The **SDL_BlitSurface** function performs a blit of one surface onto another, converting between pixel formats as necessary. This function takes four arguments: a source surface (the image to copy from), an **SDL_Rect** structure defining the rectangular region of the source surface to copy, a destination surface (the image to copy to), and another **SDL_Rect** structure indicating the coordinates on the destination to which the image should be drawn. These two rectangles must be of the same width and height (SDL does not currently perform stretching), but the *x* and *y* starting coordinates of the regions can be different.
 
-Parameters
+* **Function**
+	* SDL_BlitSurface(src, srcrect, dest, destrect)
 
-filename—Name of the bitmap file to load.
+* **Synopsis**
+	* Blits all or part of one surface (the source) onto another (the destination).
 
-The SDL BlitSurface function performs a blit of one surface onto another,
-converting between pixel formats as necessary. This function takes four
-arguments: a source surface (the image to copy from), an SDL Rect structure
-defining the rectangular region of the source surface to copy, a destination
-surface (the image to copy to), and another SDL Rect structure indicating the
-coordinates on the destination to which the image should be drawn. These two
-rectangles must be of the same width and height (SDL does not currently
-perform stretching), but the x and y starting coordinates of the regions can be
-different.
-Function
+* **Parameters**
+	* src—Source surface. Pointer to a valid SDL Surface structure.
+	* srcrect—Region of the source surface to copy. This is a pointer to an **SDL_Rect** structure. If this is NULL, SDL will try to copy the entire surface.
+	* dest—Destination surface.
+	* destrect—Region of the destination surface to replace with the source surface. The width and height of the destination surface don’t matter; SDL only cares about the x and y coordinates.
 
-SDL BlitSurface(src, srcrect, dest, destrect)
 
-Synopsis
+* **Structure**
+	* SDL_Rect
 
-Blits all or part of one surface (the source) onto
-another (the destination).
+* **Synopsis**
+	* Specifies regions of pixels. Used for clipping and blitting.
 
-Parameters
+* **Members**
+	* x—Starting *x* coordinate.
+	* y—Starting *y* coordinate.
+	* w—Width of the region, in pixels.
+	* h—Height of the region, in pixels.
 
-src—Source surface. Pointer to a valid SDL Surface
-structure.
-srcrect—Region of the source surface to copy. This
-is a pointer to an SDL Rect structure. If this is NULL,
-SDL will try to copy the entire surface.
-dest—Destination surface.
-destrect—Region of the destination surface to
-replace with the source surface. The width and height
-of the destination surface don’t matter; SDL only
-cares about the x and y coordinates.
+There is really nothing complicated about producing graphics with SDL, once you understand the basics of working with surfaces. If you don’t feel comfortable with the **SDL_BlitSurface** function yet, you might want to work with the previous example a bit before moving on. For instance, load several bitmaps and draw them onto each other before blitting them to the screen.
 
-MASTERING SDL
-Structure
-Synopsis
-Members
+### Colorkeys and Transparency
 
-87
+Games often need to simulate transparency. For instance, suppose that you have a bitmap of a game character against a solid background, and you want to draw the character in a game level. The character would look silly drawn as is; the background would be drawn too, and the character would be surrounded by a block of solid color. It would be much better to draw only the pixels that are actually part of the character, and not its solid background. You can do this with a *colorkey blit*. SDL provides support for this technique, and it even provides support for run-length colorkey acceleration (a nice trick for speeding up drawing). RLE (run-length encoding) provides an enormous performance boost for blitting colorkeyed images, but it is practical only for bitmaps that will not be modified during the course of the program (since modifying an RLE image necessitates unpacking and repacking the image).
 
-SDL Rect
-Specifies regions of pixels. Used for clipping and
-blitting.
-x—Starting x coordinate.
-y—Starting y coordinate.
-w—Width of the region, in pixels.
-h—Height of the region, in pixels.
+A colorkey is a particular pixel value that a program declares to be transparent.  (In SDL, this is done with the **SDL_SetColorKey** function.) Pixels that match an image’s colorkey are not copied when the image is blitted. In our example of a game character, you could set the colorkey to the color of the solid background, and it would not be drawn. Colorkeys therefore make it simple to combine rectangular images of nonrectangular objects.
 
-There is really nothing complicated about producing graphics with SDL, once
-you understand the basics of working with surfaces. If you don’t feel comfortable
-with the SDL BlitSurface function yet, you might want to work with the
-previous example a bit before moving on. For instance, load several bitmaps and
-draw them onto each other before blitting them to the screen.
+[Tuxedo T. Penguin, hero of the Linux world](none.jpg)
 
-Colorkeys and Transparency
-Games often need to simulate transparency. For instance, suppose that you have
-a bitmap of a game character against a solid background, and you want to draw
-the character in a game level. The character would look silly drawn as is; the
-background would be drawn too, and the character would be surrounded by a
-block of solid color. It would be much better to draw only the pixels that are
-actually part of the character, and not its solid background. You can do this
-with a colorkey blit. SDL provides support for this technique, and it even
-provides support for run-length colorkey acceleration (a nice trick for speeding
-up drawing). RLE (run-length encoding) provides an enormous performance
-boost for blitting colorkeyed images, but it is practical only for bitmaps that will
-not be modified during the course of the program (since modifying an RLE
-image necessitates unpacking and repacking the image).
-A colorkey is a particular pixel value that a program declares to be transparent.
-(In SDL, this is done with the SDL SetColorKey function.) Pixels that match an
-image’s colorkey are not copied when the image is blitted. In our example of a
-game character, you could set the colorkey to the color of the solid background,
-and it would not be drawn. Colorkeys therefore make it simple to combine
-rectangular images of nonrectangular objects.
 
-88
+* **Function**
+	* SDL_SetColorKey(surface, flags, colorkey)
 
-CHAPTER 4
+* **Synopsis**
+	* Adjusts the colorkey information for an SDL Surface.
 
-Tuxedo T. Penguin, hero of the Linux world
+* **Parameters**
+	* surface—Surface to modify.
+	* flags—ORed bitmask of colorkey flags. SDL\_SRCCOLORKEY enables colorkey blitting for this surface. SDL\_RLEACCEL enables run-length acceleration, which can speed up colorkey operations (but can also slow down SDL LockSurface significantly).
+	* colorkey—If SDL SRCCOLORKEY is set, this specifies the pixel value to use as a colorkey.
 
-Function
+The following example uses a colorkey blit to draw an image of Tux, the Linux penguin, against another image. Tux is stored against a solid blue background, and so we will use blue (RGB 0, 0, 255) as our colorkey. For comparison, we will also draw the same penguin image without a colorkey.
 
-SDL SetColorKey(surface, flags, colorkey)
+**Code Listing 4–4 (colorkeys-sdl.c)**
 
-Synopsis
-
-Adjusts the colorkey information for an SDL Surface.
-
-Parameters
-
-surface—Surface to modify.
-flags—ORed bitmask of colorkey flags.
-SDL SRCCOLORKEY enables colorkey blitting for this
-surface. SDL RLEACCEL enables run-length
-acceleration, which can speed up colorkey operations
-(but can also slow down SDL LockSurface
-significantly).
-colorkey—If SDL SRCCOLORKEY is set, this specifies
-the pixel value to use as a colorkey.
-
-The following example uses a colorkey blit to draw an image of Tux, the Linux
-penguin, against another image. Tux is stored against a solid blue background,
-and so we will use blue (RGB 0, 0, 255) as our colorkey. For comparison, we will
-also draw the same penguin image without a colorkey.
-
-MASTERING SDL
-Code Listing 4–4 (colorkeys-sdl.c)
+```
 /* Example of blitting with colorkeys in SDL. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int main()
 {
-SDL_Surface *screen;
-SDL_Surface *background;
-SDL_Surface *image;
-SDL_Rect src, dest;
-Uint32 colorkey;
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
+	SDL_Surface *screen;
+	SDL_Surface *background;
+	SDL_Surface *image;
+	SDL_Rect src, dest;
+	Uint32 colorkey;
+
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
+
+	/* Attempt to set a 640x480 hicolor (16-bit) video mode. */
+	screen = SDL_SetVideoMode(640, 480, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Load the bitmap files. */
+	background = SDL_LoadBMP("background.bmp");
+	if (background == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
+
+	image = SDL_LoadBMP("penguin.bmp");
+	if (image == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
+
+	/* Draw the background. */
+	src.x = 0;
+	src.y = 0;
+	src.w = background->w;
+	src.h = background->h;
+
+	dest.x = 0;
+	dest.y = 0;
+	dest.w = background->w;
+	dest.h = background->h;
+	SDL_BlitSurface(background, &src, screen, &dest);
+
+	/* Draw the penguin without a colorkey. */
+	src.x = 0;
+	src.y = 0;
+	src.w = image->w;
+	src.h = image->h;
+
+	dest.x = 30;
+	dest.y = 90;
+	dest.w = image->w;
+	dest.h = image->h;
+
+	SDL_BlitSurface(image, &src, screen, &dest);
+
+	/* The penguin is stored on a blue background. We
+		can use the SDL_MapRGB function to obtain the
+		correct pixel value for pure blue. */
+
+	colorkey = SDL_MapRGB(image->format, 0, 0, 255);
+	/* We’ll now enable this surface’s colorkey and draw
+		it again. To turn off the colorkey again, we would
+		replace the SDL_SRCCOLORKEY flag with zero. */
+
+	SDL_SetColorKey(image, SDL_SRCCOLORKEY, colorkey);
+
+	src.x = 0;
+	src.y = 0;
+	src.w = image->w;
+	src.h = image->h;
+
+	dest.x = screen->w - image->w - 30;
+	dest.y = 90;
+	dest.w = image->w;
+	dest.h = image->h;
+	
+	SDL_BlitSurface(image, &src, screen, &dest);
+
+	/* Ask SDL to update the entire screen. */
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+	/* Pause for a few seconds as the viewer gasps in awe. */
+	SDL_Delay(10000);
+	
+	/* Free the memory that was allocated to the bitmaps. */
+	SDL_FreeSurface(background);
+	SDL_FreeSurface(image);
+	return 0;
 }
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 640x480 hicolor (16-bit) video mode. */
-screen = SDL_SetVideoMode(640, 480, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Load the bitmap files. */
-background = SDL_LoadBMP("background.bmp");
-if (background == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-image = SDL_LoadBMP("penguin.bmp");
-if (image == NULL) {
-printf("Unable to load bitmap.\n");
+```
 
-89
 
-90
+### Loading Other Image Formats
 
-CHAPTER 4
-return 1;
-}
-/* Draw the background. */
-src.x = 0;
-src.y = 0;
-src.w = background->w;
-src.h = background->h;
-dest.x = 0;
-dest.y = 0;
-dest.w = background->w;
-dest.h = background->h;
-SDL_BlitSurface(background, &src, screen, &dest);
-/* Draw the penguin without a colorkey. */
-src.x = 0;
-src.y = 0;
-src.w = image->w;
-src.h = image->h;
-dest.x = 30;
-dest.y = 90;
-dest.w = image->w;
-dest.h = image->h;
-SDL_BlitSurface(image, &src, screen, &dest);
-/* The penguin is stored on a blue background. We
-can use the SDL_MapRGB function to obtain the
-correct pixel value for pure blue. */
-colorkey = SDL_MapRGB(image->format, 0, 0, 255);
-/* We’ll now enable this surface’s colorkey and draw
-it again. To turn off the colorkey again, we would
-replace the SDL_SRCCOLORKEY flag with zero. */
-SDL_SetColorKey(image, SDL_SRCCOLORKEY, colorkey);
-src.x = 0;
-src.y = 0;
-src.w = image->w;
-src.h = image->h;
-dest.x = screen->w - image->w - 30;
-dest.y = 90;
-dest.w = image->w;
-dest.h = image->h;
+SDL provides built-in support for loading **.bmp** files, but this is a fairly limited file format. In particular, it supports only minimal compression and does not provide an alpha channel. (See the next section.) The SDL_image add-on library adds to SDL support for several different formats, including the popular **.png**, **.jpg**, and **.gif** formats.
 
-MASTERING SDL
+SDL image is extremely simple to use. Once you have installed the library on your system, your program should include **SDL/SDL_image.h** and link with **-lSDL_image**. Assuming this is successful, your programs can use the **IMG_Load** function to load any supported image file format. The next section demonstrates this function.
 
-91
-
-Tux, with and without a colorkey
-
-SDL_BlitSurface(image, &src, screen, &dest);
-/* Ask SDL to update the entire screen. */
-SDL_UpdateRect(screen, 0, 0, 0, 0);
-/* Pause for a few seconds as the viewer gasps in awe. */
-SDL_Delay(10000);
-
-/* Free the memory that was allocated to the bitmaps. */
-SDL_FreeSurface(background);
-SDL_FreeSurface(image);
-return 0;
-}
-
-92
-
-CHAPTER 4
-
-Loading Other Image Formats
-SDL provides built-in support for loading .bmp files, but this is a fairly limited
-file format. In particular, it supports only minimal compression and does not
-provide an alpha channel. (See the next section.) The SDL image add-on library
-adds to SDL support for several different formats, including the popular .png,
-.jpg, and .gif formats.
-SDL image is extremely simple to use. Once you have installed the library on
-your system, your program should include SDL/SDL image.h and link with
--lSDL image. Assuming this is successful, your programs can use the IMG Load
-function to load any supported image file format. The next section demonstrates
-this function.
+```
 $ gcc program.c -o program `sdl-config --libs --cflags` -lSDL image
+```
 
-Several other SDL add-on libraries are available, and it is worthwhile to become
-familiar with them. They can save you a lot of coding footwork in many cases.
-There are currently libraries for processing TrueType fonts, accessing the
-network, mixing sound effects, playing music (including MIDI), and managing
-graphical user interfaces. Most of these libraries are portable, but a few are
-OS-specific. More information on these libraries is available at
-http://www.libsdl.org.
+Several other SDL add-on libraries are available, and it is worthwhile to become familiar with them. They can save you a lot of coding footwork in many cases.  There are currently libraries for processing TrueType fonts, accessing the network, mixing sound effects, playing music (including MIDI), and managing graphical user interfaces. Most of these libraries are portable, but a few are OS-specific. More information on these libraries is available at http://www.libsdl.org.
 
-Alpha Blending
-Although graphics and sound are only part of what goes into a successful game,
-visually impressive games do tend to be more fun than games with lackluster
-graphics. Game programmers often add special effects to make their graphics
-stand out. Alpha blending is a special effect that adds varying degrees of
-translucency to surfaces.
-Most images use three color channels (red, green, and blue) to describe each
-pixel. Alpha blending adds a fourth, the alpha channel. For this reason,
-alpha-enabled images are often called RGBA images. The alpha value of each
-pixel is an indication of that pixel’s opacity. An alpha value of zero indicates
-that a pixel is completely transparent, and higher alpha values indicate
+### Alpha Blending
 
-MASTERING SDL
+Although graphics and sound are only part of what goes into a successful game, visually impressive games do tend to be more fun than games with lackluster graphics. Game programmers often add special effects to make their graphics stand out. Alpha blending is a special effect that adds varying degrees of translucency to surfaces.
 
-93
+Most images use three color channels (red, green, and blue) to describe each pixel. Alpha blending adds a fourth, the alpha channel. For this reason, alpha-enabled images are often called *RGBA* images. The alpha value of each pixel is an indication of that pixel’s opacity. An *alpha* value of zero indicates that a pixel is completely transparent, and higher alpha values indicate increasing opacity. The alpha channel can be created on the fly according to a program’s needs, or it can be stored with an image created in a graphics package.
 
-increasing opacity. The alpha channel can be created on the fly according to a
-program’s needs, or it can be stored with an image created in a graphics package.
-To draw an RGBA pixel onto another, the alpha function simply performs a
-weighted average of the two pixels, processing each color channel separately.
-Suppose that a pixel has RGB values (50,20,30) with an alpha value of 50. This
-alpha value corresponds to approximately 20 percent opacity (80 percent
-transparency), since the scale is 0 to 255. If this pixel is drawn on top of a pixel
-with RGB values (60,80,100), the resulting pixel will take 20 percent of its color
-from the first pixel and 80 percent of its color from the second, and so its final
-RGB values will be (58,68,86). This weighted average can be computed with
-simple arithmetic. Unfortunately, multiplication and division are comparatively
-slow operations for most processors, so alpha blending generally involves a
-significant performance hit unless it is supported by a video accelerator.
-SDL provides full support for alpha blending. If an image already contains alpha
-data (from an image-processing program), the SDL SetAlpha function can be
-used to enable alpha blending (as you will see in the next example). If the image
-does not contain an alpha channel, it can still be blended, but the entire surface
-will have the same opacity value. This is called per-surface alpha blending.
-Per-surface alpha blending is also set with SDL SetAlpha.
-Function
+To draw an RGBA pixel onto another, the alpha function simply performs a weighted average of the two pixels, processing each color channel separately.  Suppose that a pixel has RGB values (50,20,30) with an alpha value of 50. This alpha value corresponds to approximately 20 percent opacity (80 percent transparency), since the scale is 0 to 255. If this pixel is drawn on top of a pixel with RGB values (60,80,100), the resulting pixel will take 20 percent of its color from the first pixel and 80 percent of its color from the second, and so its final RGB values will be (58,68,86). This weighted average can be computed with simple arithmetic. Unfortunately, multiplication and division are comparatively slow operations for most processors, so alpha blending generally involves a significant performance hit unless it is supported by a video accelerator.
 
-SDL SetAlpha(surface, flags, alpha)
+SDL provides full support for alpha blending. If an image already contains alpha data (from an image-processing program), the **SDL_SetAlpha** function can be used to enable alpha blending (as you will see in the next example). If the image does not contain an alpha channel, it can still be blended, but the entire surface will have the same opacity value. This is called per-surface alpha blending.  Per-surface alpha blending is also set with **SDL_SetAlpha**.
 
-Synopsis
 
-Enables alpha blending on a particular surface.
+* **Function**
+	* SDL_SetAlpha(surface, flags, alpha)
 
-Parameters
+* **Synopsis**
+	* Enables alpha blending on a particular surface.
 
-surface—The surface to modify.
-flags—ORed list of alpha blending flags.
-SDL SRCALPHA enables alpha blending, and
-SDL RLEACCEL enables RLE acceleration (with the
-same ramifications described under
-SDL SetColorKey).
-alpha—Per-surface alpha value. 255 represents
-complete opacity, and 0 represents complete
-transparency.
+* **Parameters**
+	* surface—The surface to modify.
+	* flags—ORed list of alpha blending flags. SDL_SRCALPHA enables alpha blending, and SDL_RLEACCEL enables RLE acceleration (with the same ramifications described under SDL_SetColorKey).
+	* alpha—Per-surface alpha value. 255 represents complete opacity, and 0 represents complete transparency.
 
-94
-
-CHAPTER 4
-
+```
 The Great Alpha Flip
-SDL used to interpret alpha values as transparency, not opacity (in
-other words, alpha values now mean exactly the opposite of what they
-used to – they now work like the alpha values in nearly every other
-graphics system). The old style was fine within SDL circles, but it made
-porting applications that depended on proper alpha support a serious
-hassle. This idiosyncrasy has been fixed, and it was announced on the
-SDL development mailing list as the Great Alpha Flip.
-This reversal really shouldn’t matter, unless you intend to work with
-truly ancient SDL code that isn’t aware of the change.
 
-The next example demonstrates these two types of alpha blending. Since .bmp
-files do not support an alpha channel,1 we will use the SDL image library to read
-our images from .png (Portable Network Graphic) files instead. Our example
-will require three image files: one 640 by 480 background image, one 100 by 100
-image with an alpha channel, and one 100 by 100 image with no alpha channel.2
-You can get these images from the book’s Web site, or make your own.
-Code Listing 4–5 (alpha-sdl.c)
+SDL used to interpret alpha values as transparency, not opacity (in other words, alpha values now mean exactly the opposite of what they used to – they now work like the alpha values in nearly every other graphics system). The old style was fine within SDL circles, but it made porting applications that depended on proper alpha support a serious hassle. This idiosyncrasy has been fixed, and it was announced on the SDL development mailing list as the Great Alpha Flip.
+
+This reversal really shouldn’t matter, unless you intend to work with truly ancient SDL code that isn’t aware of the change.
+```
+
+The next example demonstrates these two types of alpha blending. Since **.bmp** files do not support an alpha channel,1 we will use the SDL image library to read our images from **.png** (Portable Network Graphic) files instead. Our example will require three image files: one 640 by 480 background image, one 100 by 100 image with an alpha channel, and one 100 by 100 image with no alpha channel.2 You can get these images from the book’s Web site, or make your own.
+
+<-- 排版到这里 2015-11-30 -->
+
+**Code Listing 4–5 (alpha-sdl.c)**
+
+```
 /* Example of alpha blending with SDL. */
+
 #include
 #include
 #include
@@ -3383,6 +1958,7 @@ SDL_FreeSurface(image_with_alpha);
 SDL_FreeSurface(image_without_alpha);
 return 0;
 }
+```
 
 Look closely at the output of this program. Notice that the background shows
 through only the outer edges of the first image, but that it shows through the
@@ -3390,17 +1966,14 @@ entire second image equally. This is due to the fact that the first image uses a
 separate alpha value for each pixel, and the second image uses the same alpha
 value for all of its pixels.
 
-Achieving Smooth Animation with SDL
+### Achieving Smooth Animation with SDL
+
 You can now draw simple bitmapped graphics on SDL surfaces (and you could
 easily learn to do so with other multimedia libraries as well). However, games
 are not made of static displays. Most games make heavy use of animation—that
-
-98
-
-CHAPTER 4
-
 is, the simulation of fluid motion—to provide the player with an enjoyable and
 visually impressive experience.
+
 The basic idea behind computer animation is to rapidly draw a sequence of
 incrementally changing bitmapped images on the screen over a tightly controlled
 time interval. Executed properly, this fools the human eye into perceiving
@@ -3419,16 +1992,15 @@ The code listing that follows uses SDL to animate 100 penguins on the screen.
 These penguins are a bit smaller than the ones in the last example, but they are
 drawn in the same way. Run this example on your computer to provide a basis
 for comparison with subsequent examples.
+
 Code Listing 4–6 (sdl-anim1.c)
+```
 /* Animation with SDL -- first attempt. */
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 #define NUM_PENGUINS
 #define MAX_SPEED
-
-100
-6
 
 /* This structure stores the information for one
 on-screen penguin. */
@@ -3578,6 +2150,7 @@ SDL_FreeSurface(penguin);
 return 0;
 
 }
+```
 
 Although this animation may run smoothly on your particular system, it is not
 optimal for two reasons. First, SDL might or might not be using the video card’s
@@ -3762,7 +2335,8 @@ for our drawing, we are relatively safe from shearing and flicker. Performance i
 now in the hands of the X server (which will vary depending on the underlying
 hardware).
 
-Input and Event Processing
+## Input and Event Processing
+
 SDL uses the notion of events to report the user’s input and
 window-management actions. For instance, events are produced whenever the
 user moves the mouse, presses a key, or resizes the SDL video window. A
@@ -3802,7 +2376,8 @@ another, they are both initialized with the SDL INIT VIDEO parameter to
 SDL Init. It would not make sense to use the event subsystem separately from
 the video subsystem.
 
-Processing Mouse Events
+### Processing Mouse Events
+
 The mouse is a fairly simple input device. A mouse (or trackball) reports
 changes in its position with respect to a fixed unit of measure. For instance, a
 movement of 1 inch forward and 2 inches to the left (with respect to the
@@ -3999,7 +2574,8 @@ It’s possible to have SDL set up a completely separate event-processing
 thread, but this is only partially implemented and generally unportable.
 Your best bet is to handle input processing in your game’s main thread.
 
-Processing Keyboard Events
+### Processing Keyboard Events
+
 SDL’s keyboard event handling is analogous to its mouse event handling, but the
 keyboard event structure is a bit more complex.
 SDL assigns a virtual keysym to each key on the keyboard. These codes map at
@@ -4164,7 +2740,8 @@ numkeys—Pointer to an integer to receive the size of
 the key array. Most programs don’t care about this
 and just pass NULL.
 
-Processing Joystick Events
+### Processing Joystick Events
+
 SDL provides a complete interface for joystick management. A modern game can
 no longer assume that the player will use a traditional two-button, two-axis
 joystick; many joysticks are equipped with programmable buttons, hat switches,
@@ -4306,7 +2883,8 @@ SDL_JoystickClose(js);
 return 0;
 }
 
-Multithreading with SDL
+## Multithreading with SDL
+
 Multithreading is the ability of a program to execute multiple parts of itself
 simultaneously in the same address space. This feature can be useful to game
 developers; for instance, a programmer might elect to use separate threads for
@@ -4553,14 +3131,16 @@ threading toolkit, but this will make your game more difficult to port to other
 platforms. SDL’s threading API is sufficient for almost anything a game might
 need, though.
 
-SDL Audio Programming
+## SDL Audio Programming
+
 An often-overlooked but essential area of game programming is sound.
 Computer sound processing is as much of a science as computer graphics, but
 the basics of format conversion, mixing, and playback are fairly straightforward.
 This section discusses the basics of computer audio and investigates SDL’s
 audio-programming interface.
 
-Representing Sound with PCM
+### Representing Sound with PCM
+
 Computer sound is based on pulse-code modulation, or PCM. As you know,
 pixels in a video surface encode the average color intensities of an optical image
 at regular intervals, and more pixels allow for a closer representation of the
@@ -4713,7 +3293,8 @@ Remember that binary numbers have limits; multiplying a sample by a large
 constant or adding too many samples together is likely to cause an overflow,
 which will result in distorted sound.
 
-Feeding a Sound Card
+### Feeding a Sound Card
+
 A sound card is conceptually simple: it accepts a continuous stream of PCM
 samples and recreates the original sound wave through a set of speakers or
 headphones. Your basic task, then, is to keep the sound card supplied with PCM
@@ -4754,25 +3335,20 @@ smaller sound buffer when you initialize the sound card, but you cannot
 realistically eliminate it (this is usually not a problem in terms of realism; there
 is latency in real life, because light travels much faster than sound).
 
-An Example of SDL Audio Playback
+### An Example of SDL Audio Playback
+
 We have discussed the nuts and bolts of sound programming for long enough; it
 is time for an example. This example is a bit lengthier than our previous
 examples, but the code is fairly straightforward.
 Code Listing 4–12 (audio-sdl.c)
+
+```
 /* Example of audio mixing with SDL. */
-#include
-#include
-#include
-#include
 
-<SDL/SDL.h>
-<stdio.h>
-<stdlib.h>
-<assert.h>
-
-130
-
-CHAPTER 4
+#inlcude <SDL/SDL.h>
+#inlcude <stdio.h>
+#inlcude <stdlib.h>
+#include <assert.h>
 
 /* Structure for loaded sounds. */
 typedef struct sound_s {
@@ -5062,6 +3638,7 @@ return 0;
 137
 
 }
+```
 
 We begin by initializing SDL as usual, adding the SDL INIT AUDIO bit flag to
 specify that SDL should prepare the audio subsystem for use. We also initialize
@@ -5242,7 +3819,8 @@ pointers. However, it is perfectly safe to use free to free sound buffers
 that you have allocated yourself—provided that the buffers are not
 currently playing.
 
-Integrating OpenGL with SDL
+## Integrating OpenGL with SDL
+
 The OpenGL library is the de facto standard for accelerated 3D graphics under
 Linux. Designed by Silicon Graphics as a programming interface for its
 high-performance graphics workstations, OpenGL has been adopted as the
@@ -5407,7 +3985,8 @@ Swaps the front buffer and the back buffer in a double
 buffered SDL OpenGL context. Analogous to
 glutSwapBuffers.
 
-Penguin Warrior
+## Penguin Warrior
+
 You should now be well versed in the mechanics of SDL. You can initialize the
 display, draw pixels, blit bitmaps, and even set up SDL for OpenGL rendering.
 However, these skills are of no use unless you know how to actually use them in
@@ -5449,7 +4028,8 @@ easy to understand rather than easy to market. (However, if you think you can
 make a marketable game out of it, go right ahead!)
 Without further ado, let’s begin.
 
-Creating Graphics
+### Creating Graphics
+
 Any serious game development team should hire at least one artist and probably
 more. A professional artist can almost always produce higher-quality game
 artwork than a programmer. However, it is often useful for programmers to
@@ -5496,7 +4076,8 @@ with POV-Ray. POV-Ray is worth learning. It can be a great tool for creating
 prototype graphics, even if you are not a graphic artist, and it can produce
 amazing images in the hands of a master.
 
-Implementing a Parallaxing Scroller in SDL
+### Implementing a Parallaxing Scroller in SDL
+
 Since this game takes place in outer space, one would expect to see stars in the
 background. These stars should move, or scroll, as the player flies around.
 Although this scrolling bears only a faint resemblance to what a pilot would
@@ -5731,7 +4312,8 @@ If you don’t quite understand how this code works, try charting out the drawin
 process on graph paper. The basic idea is very simple, but it’s easy to make
 mistakes.
 
-A Simple Particle System
+### A Simple Particle System
+
 A particle system is a set of tiny objects, usually drawn with single pixels or
 small alpha-blended images, that move under the control of a simulated system
 of physics. Particle systems can be used for simulated smoke trails, flying sparks,
@@ -5943,7 +4525,8 @@ versions of CreateParticleExplosion to simulate various types of explosions.
 The game Heavy Gear II uses dozens of different types of particle simulations for
 everything from rain to smoke.
 
-Game Timing
+### Game Timing
+
 Try running our SDL animation examples on a computer with a slow video
 system, and then on a computer with a cutting-edge accelerator supported by X.
 You will notice a large speed difference between the two, and this disparity can
@@ -5979,9 +4562,10 @@ lacks sound, other players, and weaponry, but we’ll add these later on. It’s
 to take a break from SDL and Penguin Warrior for a tour of the slightly
 maddening world of Linux audio.
 
-Chapter 5
+# Chapter 5
 
-Linux Audio Programming
+# Linux Audio Programming
+
 Hardware manufacturers are often reluctant to release programming
 specifications to independent developers. This has impeded Linux’s development
 at times and has resulted in less than optimal drivers for certain devices.
@@ -6003,11 +4587,9 @@ integrate sound into a Linux game using any of the major APIs. The chapter
 ends with a discussion of the OpenAL environmental audio library, which is very
 useful for producing realistic sound effects in 3D environments.
 
-162
 
-CHAPTER 5
+## Competing APIs
 
-Competing APIs
 Linux is home to two competing sets of sound drivers. While Linux skeptics are
 likely to shout, “Aha! Fragmentation!” upon hearing this, the competition has
 raised the bar and has resulted in a much higher-quality set of sound drivers.
@@ -6059,7 +4641,8 @@ question, I recommend coding for OSS and then testing with the ALSA
 emulation facility. An alternate approach would be to use a higher-level library
 such as SDL or OpenAL that can work with either interface.
 
-Introducing Multi-Play
+## Introducing Multi-Play
+
 Multi-Play is a simple command-line sound file player. It works with normal
 OSS, OSS using direct DMA buffer access, ESD, and ALSA and supports a large
 number of sound file formats. Since it is designed to clearly demonstrate audio
@@ -6087,7 +4670,8 @@ Experimentation is the best way to learn any new area of programming.
 
 CHAPTER 5
 
-Loading Sound Files
+##Loading Sound Files
+
 SDL provides a convenient SDL LoadWAV function, but it is of little use to
 programs that don’t use SDL, and it reads only the wave (.wav) file format. A
 better option is the libsndfile library maintained by Erik de Castro Lopo, which
@@ -6097,7 +4681,8 @@ restrictive GPL). You might also consider Michael Pruett’s libaudiofile librar
 free implementation of an API originally developed by Silicon Graphics. It is a
 bit less straightforward than libsndfile, however.
 
-Using libsndfile
+### Using libsndfile
+
 The libsndfile library makes it easy to read sample data from a large number of
 sound file formats. Sound files in any supported format are opened with a single
 library function, and individual samples can then be read with a common
@@ -6344,11 +4929,9 @@ for sound playback), our loader converts 8-bit samples to unsigned by adding 128
 handling, since libsndfile returns samples in the host machine’s endianness (little
 endian on Intel-based machines and big endian on many others).
 
-170
 
-CHAPTER 5
+### Other Options
 
-Other Options
 If for some reason libsndfile doesn’t appeal to you, there are several other
 options. You could use the libaudiofile library, which has a slightly different API
 and similar capabilities. libaudiofile has been around for a long time, and it is
@@ -6367,7 +4950,8 @@ compressed to begin with) and that you will have to keep track of the sound’s
 sample format by hand. This is a general nuisance, and so it’s better to use a
 library for loading sound files.
 
-Using OSS
+## Using OSS
+
 The OSS API is based on device files and the ioctl facility. UNIX device files
 are files that represent devices in the system rather than ordinary data storage
 space. To use a device file, an application typically opens it by name with the C
@@ -6579,7 +5163,8 @@ card. We will discuss ways to avoid blocking in the next section.
 When the entire set of samples has been transferred to the sound card, our
 player closes the /dev/dsp device and returns zero.
 
-Reality Check
+### Reality Check
+
 The OSS Web site has two main documents about OSS programming: Audio
 Programming and Making Audio Complicated. The former describes the basic
 method of OSS programming and is fairly simple to understand. The latter is
@@ -6681,7 +5266,8 @@ as many systems as possible and with both ALSA and OSS. Audio
 programming involves a lot of fine-tuning; in a world with thousands of
 different audio cards, it is far from a precise science.
 
-Achieving Higher Performance with Direct DMA Buffer Access
+### Achieving Higher Performance with Direct DMA Buffer Access
+
 Sometimes OSS’s basic mechanism of writing samples to the sound device does
 not provide sufficient performance. OSS provides an alternative, but it is neither
 pretty nor simple. It is possible to use the UNIX mmap function to gain direct
@@ -7045,7 +5631,8 @@ mechanism to use by default.
 That’s it for OSS! It all boils down to configuring a file descriptor with ioctl
 and sending samples with write. See Table 5 for a list of OSS ioctl calls.
 
-Playing Sound with ALSA
+## Playing Sound with ALSA
+
 ALSA is a well-designed API, but unfortunately its design is still in progress.
 The native ALSA API seems to change slightly with each major release, and so
 it’s somewhat of a moving target. We will describe the release that is current at
@@ -7371,7 +5958,8 @@ scratches the surface of its capabilities. It offers a lot to game programmers, 
 unfortunately it’s not supported as universally as OSS just yet. With any luck,
 this API will catch on and we can be free of OSS’s lousy interface forever.4
 
-Sharing the Sound Card with ESD
+## Sharing the Sound Card with ESD
+
 OSS and ALSA share a serious weakness: they allow the sound card to be used
 by only one application at a time. This exclusivity can be quite an annoyance,
 since many users like to listen to MP3 music or streaming radio while they use
@@ -7581,12 +6169,15 @@ Parameters
 
 fd—File descriptor to close.
 
-Building Multi-Play
+## Building Multi-Play
+
 You’ve seen how Multi-Play handles its output; now it’s time to flesh out the
 application. Multi-Play is simple. It comes with almost no frills other than the
 ability to play sound in five different ways. Without further ado, here is the
 main Multi-Play code:
+
 Code Listing 5–6 (multi-play.c)
+```
 /* Multi-Play’s main file. */
 /* Selectively enable compilation of parts of the player. */
 #ifndef DISABLE_OSS
@@ -7596,7 +6187,8 @@ Code Listing 5–6 (multi-play.c)
 #define ENABLE_ESD
 #endif
 
-LINUX AUDIO PROGRAMMING
+LINUX AUDIO PROGRAMMING
+
 #ifndef DISABLE_ALSA
 #define ENABLE_ALSA
 #endif
@@ -7797,6 +6389,7 @@ free(samples);
 }
 return 0;
 }
+```
 
 The main file uses the fairly common technique of selective compilation to allow
 the various back ends to be individually disabled. This is useful, for instance, if
@@ -7839,7 +6432,8 @@ loaded into memory. Streaming might make for an interesting project. We won’t
 discuss Multi-Play further here, since our main coding project in this book is
 Penguin Warrior.
 
-Environmental Audio with OpenAL
+## Environmental Audio with OpenAL
+
 OpenAL (AL for short) is a portable environmental audio library. In addition to
 interacting with the sound card (most likely through another audio API, such as
 OSS), it provides the ability to simulate real-world physics on audio, including
@@ -7866,7 +6460,8 @@ a general-purpose audio library for games. Later in this chapter we’ll use
 OpenAL to add environmental audio and music support to Penguin Warrior.
 First, let’s talk out about the basic terminology and philosophy of OpenAL.
 
-OpenAL Basics
+### OpenAL Basics
+
 OpenAL is an audio rendering library (as opposed to a simple buffer playback
 system like OSS). It plays sound as it would be heard from a certain point,
 known as the listener, in a 3D world. Sounds come from points in space called
@@ -8184,7 +6779,8 @@ free this pointer immediately after the alBufferData
 call.
 size—Size of the sample data, in bytes.
 
-Adding Environmental Audio to Penguin Warrior
+### Adding Environmental Audio to Penguin Warrior
+
 How can Penguin Warrior take advantage of environmental audio? Well, right
 now it’s pretty hard to navigate in the game world. Locating the opponent ship
 can be quite an annoyance, since there’s currently no radar or direction pointer.
@@ -8497,11 +7093,9 @@ Voila! Penguin Warrior now has environmental audio. Give it a try. You should
 be able to locate the opponent without even looking at the screen, especially if
 your sound card supports surround sound. Now for some music.
 
-222
 
-CHAPTER 5
+## Implementing Game Music with Ogg Vorbis
 
-Implementing Game Music with Ogg Vorbis
 Unless you’ve been living under a rock for the past few years, you’ve probably
 heard of MP3. Since high-quality PCM audio data can take up an enormous
 amount of space (over a megabyte every 10 seconds, in some cases), raw PCM
@@ -8555,7 +7149,7 @@ More information on the Ogg Vorbis project is available on the Web at
 http://www.xiph.org/ogg/vorbis/index.html or in #vorbis on
 irc.openprojects.net.
 
-Working with Vorbis Files
+## Working with Vorbis Files
 Although SDL supports Ogg Vorbis music (through the external SDL mixer
 library), this doesn’t help much if you’re using OSS or OpenAL. Fortunately, the
 Vorbis API is straightforward, and a complete Vorbis client can be written in
@@ -8732,7 +7326,8 @@ sampling rate can change between logical bitstreams.
 
 227
 
-Adding Music to Penguin Warrior
+## Adding Music to Penguin Warrior
+
 Penguin Warrior needs some music. Music can add a lot of atmosphere to a
 game, and it can dramatically affect the player’s mood. Would the first level of
 Doom have been quite as exciting without the fast-paced soundtrack, or the first
@@ -8793,6 +7388,8 @@ hold the generated buffer names.
 Now that we have a basic idea of how OpenAL music playback works, let’s dig
 into the Penguin Warrior music code.
 Code Listing 5–8 (music.c)
+
+```
 #include
 #include
 #include
@@ -9024,6 +7621,7 @@ buf_pos = -1;
 }
 }
 }
+```
 
 234
 
@@ -9112,9 +7710,10 @@ me, and then hopefully some fresh air. The next chapter talks about scripting
 systems and what they can do for a game. In it, we’ll put scripting to work by
 adding a scripted opponent to Penguin Warrior.
 
-Chapter 6
+# Chapter 6
 
-Game Scripting Under Linux
+# Game Scripting Under Linux
+
 Games tend to be extremely large these days, and it is usually impractical for
 programmers to worry about the details of level design and character behavior.
 For example, the game Soldier of Fortune (which has been ported to Linux)
@@ -9147,7 +7746,8 @@ language itself. If you’re interested only in learning how to hook up a script
 engine or you happen to have a distaste for Tcl, you may wish to skim over the
 next section.
 
-A Crash Course in Tcl
+## A Crash Course in Tcl
+
 Tcl is an extremely simple language to learn; in fact, the single biggest problem
 with Tcl is that people often try to second-guess its trivial syntax. Once we’ve
 gone over the basics of Tcl syntax, we will examine the embeddable Tcl scripting
@@ -9257,7 +7857,8 @@ http://www.sourceforge.net
 
 241
 
-Built-in Tcl Commands
+### Built-in Tcl Commands
+
 Let’s look at a few of Tcl’s built-in commands. Some of these commands are
 essential and some are just nice to have around. In general, you should use as
 many built-in commands as possible, rather than write your own, since C code
@@ -9453,7 +8054,8 @@ command returns zero if nothing disastrous happens and nonzero if something
 failed. You can even nest catch blocks for fine-grained error detection. Keep in
 mind that catch is just another Tcl command, rather than special syntax.
 
-Interfacing Tcl with C
+## Interfacing Tcl with C
+
 Enough about the Tcl language; our main interest is to add a scripting engine to
 our game. Penguin Warrior is pretty boring at the moment. There’s really
 nothing to do except fly around. It’s now time to add a computer-controlled
@@ -9465,7 +8067,8 @@ interface to create a few Penguin Warrior–specific commands.
 
 CHAPTER 6
 
-Linking Against Tcl
+### Linking Against Tcl
+
 First things first: we need access to the Tcl library before we can use it as an
 extension language. Fortunately, this is pretty easy. Once you’ve installed the
 library and C headers on your system, you can include tcl.h and link your
@@ -9482,7 +8085,8 @@ download one from ftp://ftp.scriptics.com. Follow the installation
 instructions included with the package. The current version at the time of this
 writing is 8.3, but later versions will probably work just as well.
 
-Executing Scripts
+### Executing Scripts
+
 Each Tcl session is represented internally by a Tcl Interp structure. This
 structure keeps track of the script’s text, its activation stack, and its variables.
 Everything in Tcl is dynamically allocated, so there’s no harm in creating as
@@ -9671,7 +8275,8 @@ Parameters
 interp—Tcl interpreter to evaluate the script file in.
 filename—Filename of the script to execute.
 
-Understanding Commands and Objects
+### Understanding Commands and Objects
+
 Tcl represents data as objects (of type Tcl Obj). This abstract structure allows
 Tcl to deal with strings, integers, and floating-point numbers without having to
 convert between types more than necessary. Tcl Obj is an abstract datatype,
@@ -9745,7 +8350,8 @@ require any particular cleanup, just pass NULL.
 Pretty easy, huh? Don’t worry about the details; they’ll become apparent when
 we implement Penguin Warrior’s scripting engine. Let’s do it!
 
-A Simple Scripting Engine
+## A Simple Scripting Engine
+
 It’s time for some results. We know enough about Tcl and its library to create a
 simple but practical scripting interface for our game. We’ll then be able to
 implement the computer player’s brain as an easily modifiable script.
@@ -10009,7 +8615,8 @@ Now let’s talk about creating a decent game script. We won’t quite reach a S
 Trek level of artificial intelligence, but hopefully we can make life difficult for the
 (human) player.
 
-Designing a Game Script
+## Designing a Game Script
+
 Our game script is charged with one simple mission: to track down and blow up
 the player. It has the ability to steer a ship, control its thrust, and activate its
 weapons. It also has access to the player’s current position in the world. At a
@@ -10279,7 +8886,8 @@ pw.tcl), and observe the opponent’s behavior. Much better! Now if there were
 some weapons, it would be a worthy fight. Don’t worry; we’ll add this when we
 finish off Penguin Warrior in Chapter 9.
 
-Applying Scripting to the Real World
+## Applying Scripting to the Real World
+
 Penguin Warrior is a bit of a pedagogical example. Sure, it’s a playable game (or
 will be soon enough), but it’s not something you’d expect to find on the shelf at
 a computer store or given a good review on a gaming site. But the ingredients
@@ -10338,7 +8946,8 @@ Tcl interpreter
 
 Figure 6–2: Several possible scripting models
 
-Single Versus Multiple Contexts
+### Single Versus Multiple Contexts
+
 Suppose that you are making a game similar to StarCraft (a real-time strategy
 game with hundreds of computer-controlled opponents in the world
 simultaneously), and that you want to implement the scripting with Tcl. You’ll
@@ -10368,7 +8977,8 @@ predict how well either scenario will perform; if you’re faced with this quest
 you might want to write some timing code to measure the total amount of time
 spent in the scripting engine per frame.
 
-Can We Trust the Script?
+### Can We Trust the Script?
+
 Security really doesn’t matter for a single-player game; if a player wants to
 cheat, so what? For that matter, you might as well publish a list of cheat codes.
 But it is a huge problem in multiplayer games. You can pretty much count on a
@@ -10389,7 +8999,8 @@ to see and modify. Multiplayer games can avoid this problem by having all
 players connect to a trusted central server. We’ll touch on multiplayer security in
 the next chapter.
 
-Script Performance
+### Script Performance
+
 Script interpreters are usually pretty well optimized, but unless scripts are
 compiled, they are always separated from the processor by at least one layer of
 code. The exact speed ratio of interpreted code to native code varies among
@@ -10422,7 +9033,8 @@ avoid this problem (such as running the scripting system in a separate thread or
 scheduling garbage collection yourself at safe times), but you would do well to
 become informed about these quirks before you try to use one of these libraries.
 
-Who’s Writing the Script?
+### Who’s Writing the Script?
+
 As a final thought, it’s important to note that the people who write game scripts
 often aren’t programmers. Scripting is part of creating maps and characters, and
 this task often falls to artists and game designers. These are smart people, no
@@ -10451,9 +9063,10 @@ professionals.
 
 http://www.gamasutra.com
 
-Chapter 7
+# Chapter 7
 
-Networked Gaming with Linux
+# Networked Gaming with Linux
+
 It all started with id Software’s Doom. Once the number of computers with
 modems (mainly for surfing the bulletin board (BBS) systems of the time) had
 reached critical mass, it became feasible to build multiplayer games in which the
@@ -10489,14 +9102,16 @@ multiplayer games for Linux. We’ll start with a quick tour of TCP/IP and the
 basic layout of the Internet; then we’ll discuss the Linux networking interface.
 Finally, we’ll add two-player network support to Penguin Warrior.
 
-’Tis a Big Net, Quoth the Raven
+## ’Tis a Big Net, Quoth the Raven
+
 If you’re reading this book (which you presumably are, or else I’m talking to
 myself again), there’s a good chance you’re an experienced netizen and are more
 or less familiar with the Internet’s architecture. Or perhaps you’re just getting
 into the whole mess and aren’t familiar with protocols, packets, and routing. In
 any case, a quick refresher won’t hurt.
 
-Internet Protocols
+### Internet Protocols
+
 The Internet is just a bunch of computers that are set up to talk to one another.
 The language of the Internet is TCP/IP, a set of protocols (communications
 standards) that provides reliable data exchange over a wide area. Internet
@@ -10538,7 +9153,8 @@ packet. Even though UDP is unreliable, it’s useful in many cases. We won’t u
 UDP in Penguin Warrior, as it would greatly increase the code’s complexity for
 only marginal performance gains.
 
-Addresses and Ports
+### Addresses and Ports
+
 Every computer on the Internet, whether connected through a high-speed line or
 with a lowly dialup modem, has a unique IP address. This four-byte number
 identifies the computer’s exact network location and provides the underlying IP
@@ -10571,7 +9187,8 @@ networking software sorts them out by port number and sends them to the
 corresponding programs. We’ll see how this works when we dig into some socket
 code later on.
 
-Name Resolution
+### Name Resolution
+
 Humans are better at remembering names than numbers. As a result, IP
 addresses can be hard to keep track of. Domain Name System (DNS) makes the
 Internet easier for humans to grok by associating a short name with an IP
@@ -10602,7 +9219,8 @@ Internet would work just fine without it (but humans would have a lot more
 trouble finding the sites they’re interested in).
 Simple enough? Good, let’s give it a spin.
 
-Socket Programming 101
+## Socket Programming 101
+
 The BSD sockets API is one of the most popular TCP/IP networking interfaces
 today.2 There are others, but BSD sockets has become the de facto standard for
 Linux and UNIX systems. The BSD sockets API isn’t pretty, but it works well
@@ -10610,7 +9228,8 @@ enough to have caught on. (You could also say this about UNIX as a whole.)
 The following is a rather condensed tour. Network programming is a big subject,
 and it’s not really the focus of this book.
 
-Sockets
+### Sockets
+
 A socket is just a file descriptor (similar to one returned by the ordinary open
 function) that represents a networking context. Usually a socket acts as an
 endpoint for a TCP connection, but they’re also useful for UDP transactions.
@@ -10669,7 +9288,8 @@ something. Likewise, a socket is dead in the water until you set up a connection
 either by requesting a new connection to a remote host or by accepting an
 incoming connection. Neither is hard, but the sockets API makes it a bit ugly.
 
-Connecting TCP Sockets
+### Connecting TCP Sockets
+
 To originate an Internet connection, you first need to fill in a sockaddr in
 structure with information about the remote host—most importantly its IP
 address and the desired remote port number. With this information ready, you
@@ -11095,7 +9715,8 @@ buf—Buffer containing the data to send.
 len—Amount of data in the buffer. Be ready for
 write to not handle all of this data at once.
 
-Receiving TCP Connections
+### Receiving TCP Connections
+
 Receiving network connections is just a little trickier than initiating them. First
 you have to create a socket and bind it to an address. Binding simply tells the
 networking software that a socket should be associated with a certain port on
@@ -11419,7 +10040,8 @@ great assistance as I wrote this chapter. Another useful reference is The
 Pocket Guide to TCP/IP Sockets [3], a much smaller and more concise
 treatment of the sockets API.
 
-Working with UDP Sockets
+## Working with UDP Sockets
+
 UDP is a connectionless protocol. While TCP can be compared to a telephone
 conversation, UDP is more like the postal service. It deals with individually
 addressed packets of information that are not part of a larger stream. UDP is
@@ -11809,7 +10431,7 @@ addr len—Size of the address structure. sizeof
 That’s it for UDP! Now it’s time to apply this stuff (TCP at least) to Penguin
 Warrior.
 
-Multiplayer Penguin Warrior
+## Multiplayer Penguin Warrior
 So far, Penguin Warrior has supported only a computer-controlled opponent,
 and a fairly unintelligent one at that. However, it’s a lot more fun to play
 against humans than against Tcl scripts.
@@ -11823,7 +10445,8 @@ Nonetheless, it should give you an idea of what goes into a network-ready game.
 
 301
 
-Network Gaming Models
+### Network Gaming Models
+
 The ultimate goal of a networked game is to allow two or more players to
 participate in a single game universe at the same time. Whether they are
 competing against each other or cooperating in a battle against other opponents
@@ -11899,7 +10522,8 @@ you are concerned about possible cheating, the only real solution is to use a
 design that enforces equality between the players. (Penguin Warrior does not use
 such a design; it would be trivial to cheat in a multiplayer game.)
 
-Penguin Warrior’s Networking System
+### Penguin Warrior’s Networking System
+
 In the interest of simplicity, Penguin Warrior will use the peer-to-peer model.
 One copy of the game will act as a TCP server, and the other will connect as a
 TCP client. It does not matter which role goes to which player; the players are
@@ -12251,7 +10875,8 @@ by the latency of the network). Note also that the player data structures are no
 protected by a mutex so that the network thread and the main loop can safely
 access them without bumping into each other.
 
-Network Game Performance
+## Network Game Performance
+
 Anyone who’s ever played a multiplayer action game has probably felt the
 frustration of lining up for a kill and having the game suddenly slow to an
 unplayable crawl. The Internet is enormous, and its performance range is
@@ -12293,7 +10918,8 @@ during the next update interval, which can make a multiplayer game much
 smoother. Prediction would be overkill for something like Penguin Warrior, but
 Quake and Half-Life make heavy use of this technique.
 
-Security Issues
+## Security Issues
+
 For some reason, many players get a thrill out of disrupting the normal course of
 a game for others. Players of Diablo and Ultima Online have access to any
 number of programs that mess with the underlying game code to give them an
@@ -12338,9 +10964,10 @@ counters. We’ll also combine the code from chapters 5, 6, and this chapter int
 final version with all of the subsystems present. By the end of Chapter 9,
 Penguin Warrior will be a fully operational Linux game.
 
-Chapter 8
+# Chapter 8
 
-Gaming with the Linux Console
+# Gaming with the Linux Console
+
 Although the X Window System is by far the most common graphics system for
 Linux, the Linux 2.2 kernel introduced a new option for game programming. The
 Linux kernel team wanted to port Linux to systems that lacked video adapters
@@ -12381,7 +11008,8 @@ framebuffer. (This could also trash your console, do mean things to the kernel,
 or cause exploding monkeys to overrun your place of residence; do it at your own
 risk. I’ve never had any of these happen, though.)
 
-Pros and Cons of the Linux Framebuffer
+## Pros and Cons of the Linux Framebuffer
+
 The Linux framebuffer device wasn’t designed for gaming. It can be bent to that
 end, but its primary purpose is to support the framebuffer console system. What
 makes it any different from an interface like SDL? Here are a few of the
@@ -12441,7 +11069,8 @@ CHAPTER 8
 mode, you might take a liking to the framebuffer console. Otherwise, your time
 is probably better spent with another interface, such as SDL or GGI.
 
-Setting Up a Framebuffer Device
+## Setting Up a Framebuffer Device
+
 Although kernel configuration is beyond the scope of this book, a few notes are
 in order here.
 At present, the Linux kernel has framebuffer device support for 3Dfx Voodoo3,
@@ -12460,7 +11089,8 @@ to get framebuffer support with the generic VESA 2.0 driver. This doesn’t work
 on all video cards (since many are not VESA 2.0 compliant), but it’s worth a try.
 If the VESA driver doesn’t work, you’re out of luck for now.
 
-A First Foray into Framebuffer Programming
+## A First Foray into Framebuffer Programming
+
 We’ll start with a quick example of how to interact with the framebuffer console.
 This example won’t do anything complicated—it’ll just plot a single white pixel
 in the middle of the framebuffer. We’ll look at mode switching and pixel packing
@@ -12792,7 +11422,8 @@ Once we’ve plotted a single pixel in the middle of the screen (that’s one
 hard-earned pixel!), we unmap the memory-mapped framebuffer with munmap
 and close the framebuffer device. The rest is history.
 
-Setting Framebuffer Video Modes
+## Setting Framebuffer Video Modes
+
 Most graphics interfaces allow programs to change video modes simply by
 specifying the desired resolution and color depth for the new mode. The
 framebuffer device is completely different. To set a new video mode, you have to
@@ -12829,7 +11460,8 @@ Some programs partially overcome the problem by opening a new
 virtual terminal before setting the video mode and then switching back
 to the old one when they exit.
 
-How Video Scanning Works
+### How Video Scanning Works
+
 A video mode can be described by several key properties. Users and even
 programmers usually just speak of video modes in terms of resolution and color
 depth, with an occasional mention of refresh rate.
@@ -12948,7 +11580,8 @@ some applications.
 
 CHAPTER 8
 
-The Mode Database
+### The Mode Database
+
 If the current framebuffer device is capable of mode switching and you know the
 exact timings for the mode you’d like to set, changing video modes is a matter of
 a single ioctl call. You’ll see that in the next example. But finding the right
@@ -12977,7 +11610,8 @@ fbmodedb.c and fbmodedb.h contain code for parsing /etc/fb.modes. You
 can find the code in the listings archive; it’s not interesting enough to include
 here.
 
-An Example
+### An Example
+
 We’re ready to set a video mode. We’ll use fbmodedb.c to handle the
 /etc/fb.modes database, and the FBIOPUT VSCREENINFO ioctl to convey our
 desired mode to the framebuffer driver. Here’s the code:
@@ -13240,7 +11874,8 @@ credit is given in the source code. I originally wrote it for inclusion in SDL.
 and to use a backed-up copy of the fb var screeninfo structure to restore the
 original mode later on.
 
-Use the Source, Luke!
+### Use the Source, Luke!
+
 The Linux framebuffer interface is not very well documented. In order to gain a
 clear enough understanding of the API to write this section of the book, I had to
 read through quite a bit of source code. It was actually rather enjoyable; blazing
@@ -13255,7 +11890,8 @@ interface much easier to understand. If you find yourself in a difficult or obsc
 coding situation, look for some code that already does what you’re trying to
 accomplish. You just might save yourself a considerable amount of time.
 
-Console Input Handling
+## Console Input Handling
+
 In previous chapters we’ve used SDL to manage our input device handling. With
 the framebuffer console, however, we’re distant from such creature comforts.
 Therefore, we need to develop alternate means of accessing the keyboard and
@@ -13271,7 +11907,8 @@ header files and the SDL source code.
 
 CHAPTER 8
 
-Keyboard Input from a Terminal
+### Keyboard Input from a Terminal
+
 When a program runs under the framebuffer console, it is really running under a
 specially configured Linux virtual terminal (VT) and is therefore subject to
 normal terminal keyboard handling. This is fine if we just want to read lines of
@@ -13698,7 +12335,8 @@ switching, but it won’t necessarily preserve the contents of the screen or
 the color palette. If you get stuck, take a look at SDL fbevents.c in
 the SDL source.)
 
-Mouse Input with GPM
+### Mouse Input with GPM
+
 Keyboard input is sufficient for getting your feet wet with fbcon game
 programming, but more advanced projects usually require mouse input as well.
 There are two options: implement a complete mouse driver yourself (reading and
@@ -13913,9 +12551,10 @@ into a final, playable version of Penguin Warrior. We’ll finally add weapons,
 shields, and score counters. At long last, Penguin Warrior will progress from a
 testbed to a full multiplayer game!
 
-Chapter 9
+# Chapter 9
 
-Finishing Penguin Warrior
+# Finishing Penguin Warrior
+
 Over the course of this book, we have developed a small Linux game called
 Penguin Warrior. Right now, however, it lacks many of the features that would
 make it an enjoyable game. Players can fly around a small world, but there’s not
@@ -13925,7 +12564,8 @@ rather short discussion. In the process of finishing Penguin Warrior, we’ll to
 on some topics that don’t really fit anywhere else. We’ll start by adding weapons
 to the game.
 
-Adding Weapons
+## Adding Weapons
+
 What’s a parallaxing shooter without weapons? The ships in Penguin Warrior
 need some phaser cannons. We’ve already added the requisite support to the
 network and audio subsystems, so this feature won’t be difficult to add. We’ll
@@ -13948,7 +12588,8 @@ death ray. It’s annoying enough when robots do this in the game
 MindRover; we won’t allow this in Penguin Warrior.
 We’ll address each of these issues in turn.
 
-Drawing Phasers
+### Drawing Phasers
+
 For our purposes, a phaser beam is a ray (that is, a line that starts at a certain
 point and continues forever in a particular direction).1 To draw these Penguin
 phaser beams, we’ll need a general-purpose line-drawing routine.
@@ -14193,7 +12834,8 @@ algorithm with SDL, and lineclip.c contains the
 ClipLineAgainstRectangle routine. The latter is long and boring, so
 we haven’t included its code in this chapter.
 
-Detecting Phaser Hits
+### Detecting Phaser Hits
+
 Now we need a way to figure out whether a phaser shot met its mark. But what
 exactly is a “hit” and what is a “miss”? A phaser hits its target if the beam
 passes through the target’s bounding circle (a circle that encloses the object).
@@ -14262,7 +12904,8 @@ Target
 
 Figure 9–1: Testing phaser proximity
 
-Imposing a Sane Rate of Fire
+### Imposing a Sane Rate of Fire
+
 As much fun as it would be to lean on the Fire button and project a line of
 death from the front of your ship, this wouldn’t make for a very competitive
 game. To avoid this problem, we’ll implement a phaser “charging” system. A
@@ -14278,14 +12921,11 @@ With a bit more voodoo throughout main.c, network.c, and weapon.c,
 Penguin Warrior now has functional phasers. It’s not finished yet, though—it
 still needs score and weapon charge counters. We’ll add those next.
 
-Creating Status Displays
+## Creating Status Displays
+
 At this point you can fly a ship around the Penguin Warrior world and fire at a
 human or computer opponent. However, unless you keep a console visible behind
 the game’s window, it’s hard to tell what’s going on in the game. Penguin
-
-FINISHING PENGUIN WARRIOR
-
-365
 
 Figure 9–2: The LED simulator
 
@@ -14322,17 +12962,13 @@ by locking the surface and editing its pixels member.
 Listing 9–2 uses the LED simulator to implement a status display system for
 Penguin Warrior.
 Code Listing 9–2 (status.c)
-#include
-#include
-#include
-#include
-#include
 
-<SDL/SDL.h>
-<stdio.h>
-<stdlib.h>
-"gamedefs.h"
-"font5x5.h"
+```
+#include <SDL/SDL.h>
+#inlcude <stdio.h>
+#inlcude <stdlib.h>
+#inlcude "gamedefs.h"
+#include "font5x5.h"
 
 /* A simple 5x5 ASCII font, stored
 as strings of X’s.
@@ -14671,6 +13307,8 @@ LED_DrawDisplay(&status_msg, screen, 96, 0);
 
 }
 
+```
+
 status.c is divided into two parts. The first part implements the LED simulator
 described earlier, and the second part uses the simulator to create game status
 displays for Penguin Warrior. Penguin Warrior’s status display consists of six
@@ -14697,7 +13335,8 @@ Figure 9–3: Penguin Warrior’s status display
 
 could have done differently throughout the project.
 
-In Retrospect
+## In Retrospect
+
 I created Penguin Warrior to demonstrate game programming in the Linux
 environment. I started writing it while I was trying to decide where to go with
 Chapter 4, and I’ve added features throughout the book to demonstrate various
@@ -14708,10 +13347,6 @@ hypocrisy, I strongly recommend that you put considerable thought into the
 design of your games. It’s easy to write games that look good; it’s much harder
 to write games that play well. Admittedly, Penguin Warrior doesn’t have much
 depth.
-
-376
-
-CHAPTER 9
 
 What could I have done differently? Here are a few things that come to mind.
 • I could have used C++ instead of C. C++ lends itself well to game
@@ -14756,9 +13391,10 @@ distributions and package managers you have to contend with, as well as
 FreeBSD portability. It also discusses the Loki Setup tool, a program for
 installing games in a distribution-independent way.
 
-Chapter 10
+# Chapter 10
 
-To Every Man a Linux
+# To Every Man a Linux
+
 Distribution
 You’ve probably noticed that there are a lot of Linux distributions floating
 around the Internet. Some of these are major commercial operations (Red Hat,
@@ -14780,7 +13416,8 @@ well-packaged program can make a good first impression.
 
 CHAPTER 10
 
-Source or Binary?
+## Source or Binary?
+
 The first decision you’ll have to make is whether you want to release the source
 code to your game. Generally speaking, it’s a nice thing to do, and it’s more or
 less a requirement if you’re using libraries covered under the GNU General
@@ -14831,7 +13468,8 @@ of the same library on any given Windows system, and Windows users sometimes run
 
 381
 
-Local Configuration
+## Local Configuration
+
 As we’ve said, each Linux distribution is slightly different, with its own ideas
 about how the Linux filesystem standard should be implemented (more on this
 later), and with a slightly different etc/ directory tree. In addition, users are
@@ -14914,7 +13552,8 @@ plan to make a large source tree available to your users.
 
 383
 
-Linux Isn’t Alone: Supporting FreeBSD
+## Linux Isn’t Alone: Supporting FreeBSD
+
 Linux isn’t the only contender in the free OS arena.6 FreeBSD is a very similar
 system with an active and knowledgeable user community. Although FreeBSD
 can theoretically run Linux binaries out of the box, a few differences sometimes
@@ -14981,7 +13620,8 @@ you with this job. Everyone likes to see new software for his or her favorite
 operating system, and porting a substantial chunk of code to a new platform can
 be very satisfying.
 
-Packaging Systems
+## Packaging Systems
+
 A simple tarball of source code is probably the easiest way to distribute a Linux
 application or game, and this is perfectly acceptable in some cases (especially if
 the project takes advantage of Autoconf). However, source tarballs have several
@@ -15062,7 +13702,8 @@ http://www.debian.org/devel
 
 387
 
-Graphical Installation Goodness: Loki’s Setup
+## Graphical Installation Goodness: Loki’s Setup
+
 Program
 Packages and tarballs are the staples of open source and free software
 distribution, but they might not meet your needs. Off-the-shelf, boxed software
@@ -15284,7 +13925,8 @@ http://www.lokigames.com
 
 393
 
-Understanding the Linux Filesystem Standard
+## Understanding the Linux Filesystem Standard
+
 Linux evolved from Linus Torvald’s pet project into a full-blown multiuser
 operating system, and its filesystem has gone through a long period of evolution.
 A while back people decided that it wouldn’t do for each Linux distribution to
@@ -15500,7 +14142,8 @@ can pick up the rest on your own. Whether or not Linux will become a major
 gaming platform is anyone’s guess, but if we want that to happen, it is our
 responsibility to lead the charge. Happy game hacking.
 
-Glossary of Terms
+# Glossary of Terms
+
 alpha blending
 An operation that combines two pixel values together so as to
 simulate a certain degree of transparency. This is done on a
@@ -15697,7 +14340,8 @@ Voxels are essentially pixels in three-dimensional space, and entire
 scenes of voxels can be rendered extremely quickly if some limits
 are placed on the scene’s geometry.
 
-Bibliography
+# Bibliography
+
 [1] Michael Abrash. Zen of Graphics Programming. The Coriolis Group, second
 edition, 1996. A compendium of loosely related and somewhat revised
 magazine articles written by Mike Abrash, an authority on graphics

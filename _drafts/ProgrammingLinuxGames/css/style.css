@@ -1,6 +1,9 @@
 /* This defines styles and classes used in the book */
 body { margin: 5%; text-align: justify; font-size: medium; }
-code { font-family: monospace; }
+
+code {
+}
+
 ol.toc { padding: 0; margin-left: 1em; }
 ol.toc li { list-style-type: none; margin: 0; padding: 0; }
 a.footnoteRef { vertical-align: super; }
@@ -91,6 +94,6 @@ h6 {
 }
 
 p { 
-	text-indent:2em;
+	/*text-indent:2em; */
 	margin-bottom: 20px;
 }

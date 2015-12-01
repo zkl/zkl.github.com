@@ -1833,746 +1833,561 @@ SDL used to interpret alpha values as transparency, not opacity (in other words,
 This reversal really shouldn’t matter, unless you intend to work with truly ancient SDL code that isn’t aware of the change.
 ```
 
-The next example demonstrates these two types of alpha blending. Since **.bmp** files do not support an alpha channel,1 we will use the SDL image library to read our images from **.png** (Portable Network Graphic) files instead. Our example will require three image files: one 640 by 480 background image, one 100 by 100 image with an alpha channel, and one 100 by 100 image with no alpha channel.2 You can get these images from the book’s Web site, or make your own.
 
-<-- 排版到这里 2015-11-30 -->
+The next example demonstrates these two types of alpha blending. Since **.bmp** files do not support an alpha channel,1 we will use the SDL image library to read our images from **.png** (Portable Network Graphic) files instead. Our example will require three image files: one 640 by 480 background image, one 100 by 100 image with an alpha channel, and one 100 by 100 image with no alpha channel.2 You can get these images from the book’s Web site, or make your own.
 
 **Code Listing 4–5 (alpha-sdl.c)**
 
 ```
 /* Example of alpha blending with SDL. */
 
-#include
-#include
-#include
-#include
-
-<SDL/SDL.h>
-<SDL/SDL_image.h>
-<stdio.h>
-<stdlib.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#inlcude <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
-SDL_Surface *screen;
+	SDL_Surface *screen;
+	SDL_Surface *background;
+	SDL_Surface *image_with_alpha;
+	SDL_Surface *image_without_alpha;
+	SDL_Rect src, dest;
+	
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
 
-1
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
 
-Some variants of .bmp do support an alpha channel, but most image manipulation
-programs do not write this format. SDL may or may not eventually support bitmap files
-with alpha data.
+	/* Attempt to set a 320x200 hicolor (16-bit) video mode. */
+	screen = SDL_SetVideoMode(320, 200, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
 
-2
+	/* Load the bitmap files. The first file was created with
+		an alpha channel, and the second was not. Notice that
+		we are now using IMG_Load instead of SDL_LoadBMP. */
 
-I created these images with the GNU Image Manipulation Program (The GIMP,
-http://www.gimp.org). This is a worthwhile program to learn, even if you’re not an artist.
+	image_with_alpha = IMG_Load("with-alpha.png");
+	if (image_with_alpha == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
 
-MASTERING SDL
-SDL_Surface *background;
-SDL_Surface *image_with_alpha;
-SDL_Surface *image_without_alpha;
-SDL_Rect src, dest;
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
-}
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 320x200 hicolor (16-bit) video mode. */
-screen = SDL_SetVideoMode(320, 200, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Load the bitmap files. The first file was created with
-an alpha channel, and the second was not. Notice that
-we are now using IMG_Load instead of SDL_LoadBMP. */
-image_with_alpha = IMG_Load("with-alpha.png");
-if (image_with_alpha == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-image_without_alpha = IMG_Load("without-alpha.png");
-if (image_without_alpha == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-background = IMG_Load("background.png");
-if (background == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
+	image_without_alpha = IMG_Load("without-alpha.png");
+	if (image_without_alpha == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
 
-95
+	background = IMG_Load("background.png");
+	if (background == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
+	
+	/* Draw the background. */
+	src.x = 0;
+	src.y = 0;
+	src.w = background->w;
+	src.h = background->h;
 
-96
+	dest.x = 0;
+	dest.y = 0;
+	dest.w = background->w;
+	dest.h = background->h;
 
-CHAPTER 4
-/* Draw the background. */
-src.x = 0;
-src.y = 0;
-src.w = background->w;
-src.h = background->h;
-dest.x = 0;
-dest.y = 0;
-dest.w = background->w;
-dest.h = background->h;
-SDL_BlitSurface(background, &src, screen, &dest);
-/* Draw the first image, which has an alpha
-channel. We must specifically enable alpha
-blending. */
-SDL_SetAlpha(image_with_alpha, SDL_SRCALPHA, 0);
-src.w = image_with_alpha->w;
-src.h = image_with_alpha->h;
-dest.w = src.w;
-dest.h = src.h;
-dest.x = 40;
-dest.y = 50;
-SDL_BlitSurface(image_with_alpha, &src, screen, &dest);
-/* Draw the second image, which has no alpha
-channel. Instead, we will set a 50% transparency
-factor for the entire surface. */
-SDL_SetAlpha(image_without_alpha, SDL_SRCALPHA, 128);
-src.w = image_without_alpha->w;
-src.h = image_without_alpha->h;
-dest.w = src.w;
-dest.h = src.h;
-dest.x = 180;
-dest.y = 50;
-SDL_BlitSurface(image_without_alpha, &src, screen, &dest);
-/* Ask SDL to update the entire screen. */
-SDL_UpdateRect(screen, 0, 0, 0, 0);
-/* Pause for a few seconds as the viewer gasps in awe. */
-SDL_Delay(3000);
+	SDL_BlitSurface(background, &src, screen, &dest);
 
-MASTERING SDL
+	/* Draw the first image, which has an alpha channel. We must specifically enable alpha blending. */
+	SDL_SetAlpha(image_with_alpha, SDL_SRCALPHA, 0);
 
-97
+	src.w = image_with_alpha->w;
+	src.h = image_with_alpha->h;
 
-Output of Listing 4–5
+	dest.w = src.w;
+	dest.h = src.h;
+	dest.x = 40;
+	dest.y = 50;
 
-/* Free the memory that was allocated to the bitmaps. */
-SDL_FreeSurface(background);
-SDL_FreeSurface(image_with_alpha);
-SDL_FreeSurface(image_without_alpha);
-return 0;
+	SDL_BlitSurface(image_with_alpha, &src, screen, &dest);
+
+	/* Draw the second image, which has no alpha channel. Instead, we will set a 50% transparency factor for the entire surface. */
+	SDL_SetAlpha(image_without_alpha, SDL_SRCALPHA, 128);
+	src.w = image_without_alpha->w;
+	src.h = image_without_alpha->h;
+
+	dest.w = src.w;
+	dest.h = src.h;
+	dest.x = 180;
+	dest.y = 50;
+
+	SDL_BlitSurface(image_without_alpha, &src, screen, &dest);
+
+	/* Ask SDL to update the entire screen. */
+	SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+	/* Pause for a few seconds as the viewer gasps in awe. */
+	SDL_Delay(3000);
+	
+	/* Free the memory that was allocated to the bitmaps. */
+	SDL_FreeSurface(background);
+	SDL_FreeSurface(image_with_alpha);
+	SDL_FreeSurface(image_without_alpha);
+
+	return 0;
 }
 ```
 
-Look closely at the output of this program. Notice that the background shows
-through only the outer edges of the first image, but that it shows through the
-entire second image equally. This is due to the fact that the first image uses a
-separate alpha value for each pixel, and the second image uses the same alpha
-value for all of its pixels.
+Look closely at the output of this program. Notice that the background shows through only the outer edges of the first image, but that it shows through the entire second image equally. This is due to the fact that the first image uses a separate alpha value for each pixel, and the second image uses the same alpha value for all of its pixels.
 
 ### Achieving Smooth Animation with SDL
 
-You can now draw simple bitmapped graphics on SDL surfaces (and you could
-easily learn to do so with other multimedia libraries as well). However, games
-are not made of static displays. Most games make heavy use of animation—that
-is, the simulation of fluid motion—to provide the player with an enjoyable and
-visually impressive experience.
+You can now draw simple bitmapped graphics on SDL surfaces (and you could easily learn to do so with other multimedia libraries as well). However, games are not made of static displays. Most games make heavy use of *animation*—that is, the simulation of fluid motion—to provide the player with an enjoyable and visually impressive experience.
 
-The basic idea behind computer animation is to rapidly draw a sequence of
-incrementally changing bitmapped images on the screen over a tightly controlled
-time interval. Executed properly, this fools the human eye into perceiving
-smooth movement rather than discrete steps. Each screen update in an
-animation sequence is called a frame, and the number of frames drawn in a set
-period of time is called the framerate. The quality of an animation depends both
-on the framerate and on the distance each animated object moves between
-frames.
-Fooling the eye is not easy. If a bitmap moves too quickly, or if completed frames
-are not displayed frequently enough, the illusion will break down, and the viewer
-will begin to see each frame as a separate image. This “jittery” animation can
-become very distracting and must be avoided at all costs.
+The basic idea behind computer animation is to rapidly draw a sequence of incrementally changing bitmapped images on the screen over a tightly controlled time interval. Executed properly, this fools the human eye into perceiving smooth movement rather than discrete steps. Each screen update in an animation sequence is called a *frame*, and the number of frames drawn in a set period of time is called the *framerate*. The quality of an animation depends both on the framerate and on the distance each animated object moves between frames.
 
-A First Attempt
-The code listing that follows uses SDL to animate 100 penguins on the screen.
-These penguins are a bit smaller than the ones in the last example, but they are
-drawn in the same way. Run this example on your computer to provide a basis
-for comparison with subsequent examples.
+Fooling the eye is not easy. If a bitmap moves too quickly, or if completed frames are not displayed frequently enough, the illusion will break down, and the viewer will begin to see each frame as a separate image. This “jittery” animation can become very distracting and must be avoided at all costs.
 
-Code Listing 4–6 (sdl-anim1.c)
+**A First Attempt**
+
+The code listing that follows uses SDL to animate 100 penguins on the screen.  These penguins are a bit smaller than the ones in the last example, but they are drawn in the same way. Run this example on your computer to provide a basis for comparison with subsequent examples.
+
+**Code Listing 4–6 (sdl-anim1.c)**
+
 ```
 /* Animation with SDL -- first attempt. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #define NUM_PENGUINS
 #define MAX_SPEED
 
-/* This structure stores the information for one
-on-screen penguin. */
-typedef struct penguin_s {
-int x, y;
-/* position on the screen */
+/* This structure stores the information for one on-screen penguin. */
 
-MASTERING SDL
-int dx, dy;
+typedef struct penguin_s {
+	int x, y;   /* position on the screen */
+	int dx, dy; /* movement vector */
 } penguin_t, *penguin_p;
 
-99
-/* movement vector */
 
 /* Array of penguins. */
 static penguin_t penguins[NUM_PENGUINS];
+
 /* These are now global variables, for convenience. */
 static SDL_Surface *screen;
 static SDL_Surface *penguin;
-/* This routine loops through the array of penguins and
-sets each to a random starting position and direction. */
+
+/* This routine loops through the array of penguins and sets each to a random starting position and direction. */
 static void init_penguins()
 {
-int i;
-for (i = 0; i < NUM_PENGUINS; i++) {
-penguins[i].x = rand() % screen->w;
-penguins[i].y = rand() % screen->h;
-penguins[i].dx = (rand() % (MAX_SPEED * 2)) - MAX_SPEED;
-penguins[i].dy = (rand() % (MAX_SPEED * 2)) - MAX_SPEED;
+	int i;
+	for (i = 0; i < NUM_PENGUINS; i++) {
+		penguins[i].x = rand() % screen->w;
+		penguins[i].y = rand() % screen->h;
+		penguins[i].dx = (rand() % (MAX_SPEED * 2)) - MAX_SPEED;
+		penguins[i].dy = (rand() % (MAX_SPEED * 2)) - MAX_SPEED;
+	}
+
 }
-}
+
 /* This routine moves each penguin by its motion vector. */
 static void move_penguins()
 {
-int i;
-for (i = 0; i < NUM_PENGUINS; i++) {
-/* Move the penguin by its motion vector. */
-penguins[i].x += penguins[i].dx;
-penguins[i].y += penguins[i].dy;
-/* Turn the penguin around if it hits the edge
-of the screen. */
-if (penguins[i].x < 0 || penguins[i].x > screen->w - 1)
-penguins[i].dx = -penguins[i].dx;
-if (penguins[i].y < 0 || penguins[i].y > screen->h - 1)
-penguins[i].dy = -penguins[i].dy;
-}
-}
+	int i;
 
-100
+	for (i = 0; i < NUM_PENGUINS; i++) {
+		/* Move the penguin by its motion vector. */
+		penguins[i].x += penguins[i].dx;
+		penguins[i].y += penguins[i].dy;
 
-CHAPTER 4
+		/* Turn the penguin around if it hits the edge of the screen. */
+		if (penguins[i].x < 0 || penguins[i].x > screen->w - 1)
+			penguins[i].dx = -penguins[i].dx;
+
+		if (penguins[i].y < 0 || penguins[i].y > screen->h - 1)
+			penguins[i].dy = -penguins[i].dy;
+	}
+}
 
 /* This routine draws each penguin to the screen surface. */
 static void draw_penguins()
 {
-int i;
-SDL_Rect src, dest;
-for (i = 0; i < NUM_PENGUINS; i++) {
-src.x
-src.y
-src.w
-src.h
+	int i;
+	SDL_Rect src, dest;
 
-=
-=
-=
-=
+	for (i = 0; i < NUM_PENGUINS; i++) {
+		src.x = 0;
+		src.y = 0;
+		src.w = penguin->w;
+		src.h = penguin->h;
+		
+		/* The penguin’s position specifies its center. We subtract half of its width and height to get its upper left corner. */
 
-0;
-0;
-penguin->w;
-penguin->h;
+		dest.x = penguins[i].x - penguin->w / 2;
+		dest.y = penguins[i].y - penguin->h / 2;
+		dest.w = penguin->w;
+		dest.h = penguin->h;
 
-/* The penguin’s position specifies its
-center. We subtract half of its width
-and height to get its upper left corner. */
-dest.x = penguins[i].x - penguin->w / 2;
-dest.y = penguins[i].y - penguin->h / 2;
-dest.w = penguin->w;
-dest.h = penguin->h;
-SDL_BlitSurface(penguin, &src, screen, &dest);
+		SDL_BlitSurface(penguin, &src, screen, &dest);
+	}
 }
-}
+
 int main()
 {
-SDL_Surface *background;
-SDL_Rect src, dest;
-int frames;
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
-}
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
+	SDL_Surface *background;
+	SDL_Rect src, dest;
+	int frames;
 
-MASTERING SDL
-/* Attempt to set a 640x480 hicolor (16-bit) video mode. */
-screen = SDL_SetVideoMode(640, 480, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Load the bitmap files. */
-background = SDL_LoadBMP("background.bmp");
-if (background == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-penguin = SDL_LoadBMP("smallpenguin.bmp");
-if (penguin == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-/* Set the penguin’s colorkey. */
-SDL_SetColorKey(penguin,
-SDL_SRCCOLORKEY,
-(Uint16) SDL_MapRGB(penguin->format,
-0, 0, 255));
-/* Initialize the penguin position data. */
-init_penguins();
-/* Animate 300 frames (approximately 10 seconds). */
-for (frames = 0; frames < 300; frames++) {
-/* Draw the background image. */
-src.x = 0;
-src.y = 0;
-src.w = background->w;
-src.h = background->h;
-dest = src;
-SDL_BlitSurface(background, &src, screen, &dest);
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
 
-101
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
+	
+	/* Attempt to set a 640x480 hicolor (16-bit) video mode. */
+	screen = SDL_SetVideoMode(640, 480, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
 
-102
+	/* Load the bitmap files. */
+	background = SDL_LoadBMP("background.bmp");
+	if (background == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
 
-CHAPTER 4
-/* Put the penguins on the screen. */
-draw_penguins();
-/* Ask SDL to update the entire screen. */
-SDL_UpdateRect(screen, 0, 0, 0, 0);
-/* Move the penguins for the next frame. */
-move_penguins();
-}
-/* Free the memory that was allocated to the bitmap. */
-SDL_FreeSurface(background);
-SDL_FreeSurface(penguin);
-return 0;
+	penguin = SDL_LoadBMP("smallpenguin.bmp");
+	if (penguin == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
 
+	/* Set the penguin’s colorkey. */
+	SDL_SetColorKey(penguin, SDL_SRCCOLORKEY, (Uint16) SDL_MapRGB(penguin->format, 0, 0, 255));
+
+	/* Initialize the penguin position data. */
+	init_penguins();
+
+	/* Animate 300 frames (approximately 10 seconds). */
+	for (frames = 0; frames < 300; frames++) {
+
+		/* Draw the background image. */
+		src.x = 0;
+		src.y = 0;
+		src.w = background->w;
+		src.h = background->h;
+		dest = src;
+		SDL_BlitSurface(background, &src, screen, &dest);
+		
+		/* Put the penguins on the screen. */
+		draw_penguins();
+
+		/* Ask SDL to update the entire screen. */
+		SDL_UpdateRect(screen, 0, 0, 0, 0);
+
+		/* Move the penguins for the next frame. */
+		move_penguins();
+	}
+
+	/* Free the memory that was allocated to the bitmap. */
+	SDL_FreeSurface(background);
+	SDL_FreeSurface(penguin);
+
+	return 0;
 }
 ```
 
-Although this animation may run smoothly on your particular system, it is not
-optimal for two reasons. First, SDL might or might not be using the video card’s
-actual framebuffer for drawing. If it is using the framebuffer, the penguin
-graphics will be drawn directly to the screen, and the monitor’s refresh might
-occur while the frame is being composed. This can lead to half-drawn or even
-missing images on some frames. These problems are known as shearing and
-flicker, respectively, and they are even more distracting than jittery animation.
-Second, the penguin bitmap’s pixels are stored in a different format than the
-screen’s pixels, forcing SDL to convert between pixel formats as it draws the
-images. This is very time-consuming and therefore lowers the framerate of the
-animation.
-The first problem can be solved with a technique known as double buffering. By
-specifying the SDL DOUBLEBUF and SDL HWSURFACE flags to SDL SetVideoMode,
-you can instruct SDL to always use a fake (off-screen) framebuffer, even if a
-direct one is available. This off-screen framebuffer is called a double buffer or
-back buffer. The back buffer can be quickly displayed to the screen with the
-SDL Flip function. (Note that the SDL UpdateRect function is not used with
-double buffering.) Using a second framebuffer for composing the complete frame
-ensures that everything can be drawn to the screen with one carefully timed blit,
-rather than the 100 blits our penguin example performs. Double buffering thus
-significantly mitigates the problems of shearing and flicker.
+Although this animation may run smoothly on your particular system, it is not optimal for two reasons. First, SDL might or might not be using the video card’s actual framebuffer for drawing. If it is using the framebuffer, the penguin graphics will be drawn directly to the screen, and the monitor’s refresh might occur while the frame is being composed. This can lead to half-drawn or even missing images on some frames. These problems are known as *shearing* and *flicker*, respectively, and they are even more distracting than jittery animation.  Second, the penguin bitmap’s pixels are stored in a different format than the screen’s pixels, forcing SDL to convert between pixel formats as it draws the images. This is very time-consuming and therefore lowers the framerate of the animation.
 
-MASTERING SDL
+The first problem can be solved with a technique known as *double buffering*. By specifying the *SDL\_DOUBLEBUF* and *SDL\_HWSURFACE* flags to **SDL\_SetVideoMode**, you can instruct SDL to *always* use a fake (off-screen) framebuffer, even if a direct one is available. This off-screen framebuffer is called a *double buffer* or *back buffer*. The back buffer can be quickly displayed to the screen with the **SDL_Flip** function. (Note that the **SDL_UpdateRect** function is not used with double buffering.) Using a second framebuffer for composing the complete frame ensures that everything can be drawn to the screen with one carefully timed blit, rather than the 100 blits our penguin example performs. Double buffering thus significantly mitigates the problems of shearing and flicker.
 
-103
+* **Function**
+	* SDL Flip(surf)
 
-Function
+* **Synopsis**
+	* Swaps the front buffer and the back buffer on a double buffered SDL display. If the display is not double buffered, SDL Flip just updates the entire screen.
 
-SDL Flip(surf)
+* **Parameters**
+	* surf—Pointer to the main video surface (returned by SDL SetVideoMode).
 
-Synopsis
-
-Swaps the front buffer and the back buffer on a double
-buffered SDL display. If the display is not double
-buffered, SDL Flip just updates the entire screen.
-
-Parameters
-
-surf—Pointer to the main video surface (returned by
-SDL SetVideoMode).
-
+```
 Warning
-The SDL DOUBLEBUF and SDL HWSURFACE flags can actually damage
-performance or introduce new bugs in some cases. It wouldn’t be a bad
-idea to provide a game option for turning off these flags.
 
-The second problem is equally simple to avoid. The SDL DisplayFormat function
-converts an image’s pixels to the correct format for fast blitting. This function
-accepts a surface as input and creates a new surface that can be displayed
-without conversion. The old surface can then be freed with SDL FreeSurface.
-Function
+The SDL\_DOUBLEBUF and SDL\_HWSURFACE flags can actually damage performance or introduce new bugs in some cases. It wouldn’t be a bad idea to provide a game option for turning off these flags.
+```
 
-SDL DisplayFormat(surface)
+The second problem is equally simple to avoid. The **SDL\_DisplayFormat** function converts an image’s pixels to the correct format for fast blitting. This function accepts a surface as input and creates a new surface that can be displayed without conversion. The old surface can then be freed with **SDL\_FreeSurface**.
 
-Synopsis
+* **Function**
+	* SDL DisplayFormat(surface)
 
-Converts an image into an optimal format for fast
-blitting onto the screen.
+* **Synopsis**
+	* Converts an image into an optimal format for fast blitting onto the screen.
 
-Returns
+* **Returns**
+	* Pointer to a newly allocated **SDL\_Surface** on success, NULL on failure. Don’t forget to free the original surface – this function creates a new surface and doesn’t touch the old one. This is a very common memory leak.
 
-Pointer to a newly allocated SDL Surface on success,
-NULL on failure. Don’t forget to free the original
-surface – this function creates a new surface and
-doesn’t touch the old one. This is a very common
-memory leak.
+* **Parameters**
+	* surface—Pointer to the surface to convert.
 
-Parameters
-
-surface—Pointer to the surface to convert.
-
+```
 Warning
-The SDL DisplayFormat function destroys an image’s alpha channel,
-because alpha blending more or less precludes fast blitting (at least
-without hardware acceleration). Do not use this function on images
-intended for alpha blending.
 
-104
+The **SDL\_DisplayFormat** function destroys an image’s alpha channel, because alpha blending more or less precludes fast blitting (at least without hardware acceleration). Do not use this function on images intended for alpha blending.
+```
 
-CHAPTER 4
+[One frame of the penguin animation](none.jpg)
 
-One frame of the penguin animation
+**An Improved Version**
 
-An Improved Version
-Our next example integrates both of these improvements, and the resulting
-animation is considerably smoother. Since the code is largely unchanged, we will
-not repeat the entire example, only the main function.
-Code Listing 4–7 (sdl-anim2.c)
+Our next example integrates both of these improvements, and the resulting animation is considerably smoother. Since the code is largely unchanged, we will not repeat the entire example, only the main function.
+
+**Code Listing 4–7 (sdl-anim2.c)**
+
+```
 int main()
 {
-SDL_Surface *temp;
-SDL_Surface *background;
-SDL_Rect src, dest;
-int frames;
+	SDL_Surface *temp;
+	SDL_Surface *background;
+	SDL_Rect src, dest;
+	int frames;
+	
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
 
-MASTERING SDL
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
+
+	/* Attempt to set a 640x480 hicolor (16-bit) video mode with a double buffer. */
+	screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Load the background image and convert it to the display’s pixel format. This conversion will drastically improve the performance of SDL_BlitSurface, as it will not have to convert the surface on the fly. */
+
+	temp = SDL_LoadBMP("background.bmp");
+	background = SDL_DisplayFormat(temp);
+	if (background == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
+
+	SDL_FreeSurface(temp);
+
+	/* Load the penguin image. */
+	temp = SDL_LoadBMP("smallpenguin.bmp");
+	if (temp == NULL) {
+		printf("Unable to load bitmap.\n");
+		return 1;
+	}
+
+	/* Set the penguin’s colorkey. Ask for RLE acceleration, a technique that can significantly speed up colorkey blits. */
+	SDL_SetColorKey(temp, SDL_SRCCOLORKEY | SDL_RLEACCEL, (Uint16) SDL_MapRGB(temp->format, 0, 0, 255));
+
+	/* Convert the penguin to the display’s format. We do this after we set the colorkey, since colorkey blits can sometimes be optimized for a particular display. */
+
+	penguin = SDL_DisplayFormat(temp);
+	if (penguin == NULL) {
+		printf("Unable to convert bitmap.\n");
+		return 1;
+	}
+
+	SDL_FreeSurface(temp);
+
+	/* Initialize the penguin position data. */
+	init_penguins();
+
+	/* Animate 300 frames (approximately 10 seconds). */
+	for (frames = 0; frames < 300; frames++) {
+
+		/* Draw the background image. */
+		src.x = 0;
+		src.y = 0;
+		src.w = background->w;
+		src.h = background->h;
+
+		dest = src;
+
+		SDL_BlitSurface(background, &src, screen, &dest);
+
+		/* Put the penguins on the screen. */
+		draw_penguins();
+
+		/* Ask SDL to swap the back buffer to the screen. */
+		SDL_Flip(screen);
+
+		/* Move the penguins for the next frame. */
+		move_penguins();
+	}
+
+	/* Free the memory that was allocated to the bitmap. */
+	SDL_FreeSurface(background);
+	SDL_FreeSurface(penguin);
+	return 0;
 }
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
-/* Attempt to set a 640x480 hicolor (16-bit) video mode
-with a double buffer. */
-screen = SDL_SetVideoMode(640, 480, 16, SDL_DOUBLEBUF);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Load the background image and convert it to the display’s
-pixel format. This conversion will drastically improve the
-performance of SDL_BlitSurface, as it will not have to
-convert the surface on the fly. */
-temp = SDL_LoadBMP("background.bmp");
-background = SDL_DisplayFormat(temp);
-if (background == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-SDL_FreeSurface(temp);
-/* Load the penguin image. */
-temp = SDL_LoadBMP("smallpenguin.bmp");
-if (temp == NULL) {
-printf("Unable to load bitmap.\n");
-return 1;
-}
-/* Set the penguin’s colorkey. Ask for RLE acceleration,
-a technique that can significantly speed up colorkey
-blits. */
-SDL_SetColorKey(temp,
-SDL_SRCCOLORKEY | SDL_RLEACCEL,
-(Uint16) SDL_MapRGB(temp->format, 0, 0, 255));
+```
 
-105
-
-106
-
-CHAPTER 4
-
-/* Convert the penguin to the display’s format. We do this after
-we set the colorkey, since colorkey blits can sometimes be
-optimized for a particular display. */
-penguin = SDL_DisplayFormat(temp);
-if (penguin == NULL) {
-printf("Unable to convert bitmap.\n");
-return 1;
-}
-SDL_FreeSurface(temp);
-/* Initialize the penguin position data. */
-init_penguins();
-/* Animate 300 frames (approximately 10 seconds). */
-for (frames = 0; frames < 300; frames++) {
-/* Draw the background image. */
-src.x = 0;
-src.y = 0;
-src.w = background->w;
-src.h = background->h;
-dest = src;
-SDL_BlitSurface(background, &src, screen, &dest);
-/* Put the penguins on the screen. */
-draw_penguins();
-/* Ask SDL to swap the back buffer to the screen. */
-SDL_Flip(screen);
-/* Move the penguins for the next frame. */
-move_penguins();
-}
-/* Free the memory that was allocated to the bitmap. */
-SDL_FreeSurface(background);
-SDL_FreeSurface(penguin);
-return 0;
-}
-
-MASTERING SDL
-
-107
-
-The animation produced by this example is drastically improved, mainly due to
-the much faster blitting. Since we are now explicitly using an off-screen surface
-for our drawing, we are relatively safe from shearing and flicker. Performance is
-now in the hands of the X server (which will vary depending on the underlying
-hardware).
+The animation produced by this example is drastically improved, mainly due to the much faster blitting. Since we are now explicitly using an off-screen surface for our drawing, we are relatively safe from shearing and flicker. Performance is now in the hands of the X server (which will vary depending on the underlying hardware).
 
 ## Input and Event Processing
 
-SDL uses the notion of events to report the user’s input and
-window-management actions. For instance, events are produced whenever the
-user moves the mouse, presses a key, or resizes the SDL video window. A
-program may use an event loop to listen to SDL’s events. SDL stores unprocessed
-events in an internal list known as the event queue. This queue allows SDL to
-collect as many events as possible each time it performs an event update.
-There are four main categories of events: keyboard events, mouse events
-(movement and button clicks), window events (gaining and losing focus, as well
-as “exit” requests), and system-dependent events (raw messages from the
-windowing system that SDL otherwise would ignore). SDL provides a structure
-type for recording each kind of event, and these are wrapped by the SDL Event
-union. The type member indicates the particular type of event stored by a
-SDL Event structure. Most SDL applications use a switch statement to identify
-and process the various types of events.
-Structure
-Synopsis
-Members
+SDL uses the notion of *events* to report the user’s input and window-management actions. For instance, events are produced whenever the user moves the mouse, presses a key, or resizes the SDL video window. A program may use an *event loop* to listen to SDL’s events. SDL stores unprocessed events in an internal list known as the *event queue*. This queue allows SDL to collect as many events as possible each time it performs an event update.
 
-SDL Event
-Structure for receiving events from SDL. More
-specifically, a union of all possible event types.
-type—enum indicating the type of event. Each event
-type corresponds to a specialized event structure in
-the SDL Event union. See SDL events.h in the SDL
-API for a list of event types and their corresponding
-entries in SDL Event; there are quite a few.
+There are four main categories of events: keyboard events, mouse events (movement and button clicks), window events (gaining and losing focus, as well as “exit” requests), and system-dependent events (raw messages from the windowing system that SDL otherwise would ignore). SDL provides a structure type for recording each kind of event, and these are wrapped by the SDL Event union. The type member indicates the particular type of event stored by a SDL Event structure. Most SDL applications use a switch statement to identify and process the various types of events.
 
-Because every event represents some sort of interaction with the application’s
-main window or console, the SDL event subsystem is closely tied to the video
-subsystem. Since the two subsystems cannot logically be separated from one
+* **Structure**
+	* SDL Event
 
-108
+* **Synopsis**
+	* Structure for receiving events from SDL. More specifically, a union of all possible event types.
 
-CHAPTER 4
+* **Members**
+	* type—enum indicating the type of event. Each event type corresponds to a specialized event structure in the SDL\_Event union. See **SDL\_events.h** in the SDL API for a list of event types and their corresponding entries in SDL\_Event; there are quite a few.
 
-another, they are both initialized with the SDL INIT VIDEO parameter to
-SDL Init. It would not make sense to use the event subsystem separately from
-the video subsystem.
+Because every event represents some sort of interaction with the application’s main window or console, the SDL event subsystem is closely tied to the video subsystem. Since the two subsystems cannot logically be separated from one
+
+another, they are both initialized with the SDL\_INIT\_VIDEO parameter to SDL\_Init. It would not make sense to use the event subsystem separately from the video subsystem.
 
 ### Processing Mouse Events
 
-The mouse is a fairly simple input device. A mouse (or trackball) reports
-changes in its position with respect to a fixed unit of measure. For instance, a
-movement of 1 inch forward and 2 inches to the left (with respect to the
-mousepad) might correspond to 400 vertical mouse units and −800 horizontal
-units. These units are called mickeys, and their exact meaning varies from mouse
-to mouse. It is important to realize that, at the lowest level, the mouse has no
-concept of the screen area or the pointer; it simply measures relative motion.
-The code listing that follows demonstrates simple mouse event processing with
-the SDL event interface.
-Code Listing 4–8 (mouse-events-sdl.c)
+The mouse is a fairly simple input device. A mouse (or trackball) reports changes in its position with respect to a fixed unit of measure. For instance, a movement of 1 inch forward and 2 inches to the left (with respect to the mousepad) might correspond to 400 vertical mouse units and −800 horizontal units. These units are called *mickeys*, and their exact meaning varies from mouse to mouse. It is important to realize that, at the lowest level, the mouse has no concept of the screen area or the pointer; it simply measures relative motion.
+
+The code listing that follows demonstrates simple mouse event processing with the SDL event interface.
+
+**Code Listing 4–8 (mouse-events-sdl.c)**
+
+```
 /* Example of simple mouse input with SDL. */
+
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int main()
 {
-SDL_Surface *screen;
-SDL_Event event;
-/* Initialize SDL’s video system and check for errors. */
-if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-printf("Unable to initialize SDL: %s\n", SDL_GetError());
-return 1;
+	SDL_Surface *screen;
+	SDL_Event event;
+
+	/* Initialize SDL’s video system and check for errors. */
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		printf("Unable to initialize SDL: %s\n", SDL_GetError());
+		return 1;
+	}
+
+	/* Make sure SDL_Quit gets called when the program exits! */
+	atexit(SDL_Quit);
+
+	/* Attempt to set a 256x256 hicolor (16-bit) video mode. */
+	screen = SDL_SetVideoMode(256, 256, 16, 0);
+	if (screen == NULL) {
+		printf("Unable to set video mode: %s\n", SDL_GetError());
+		return 1;
+	}
+	/* Start the event loop. Keep reading events until there is an error, or the user presses a mouse button. */
+	while (SDL_WaitEvent(&event) != 0) {
+		/* SDL_WaitEvent has filled in our event structure with the next event. We check its type field to find out what happened. */
+		switch (event.type) {
+			/* The next two event types deal with mouse activity. */
+			case SDL_MOUSEMOTION:
+				printf("Mouse motion. ");
+
+				/* SDL provides the current position. */
+				printf("New position is (%i,%i). ", event.motion.x, event.motion.y);
+
+				/* We can also get relative motion. */
+				printf("That is a (%i,%i) change.\n", event.motion.xrel, event.motion.yrel);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				printf("Mouse button pressed. ");
+				printf("Button %i at (%i,%i)\n",
+				event.button.button,
+				event.button.x, event.button.y);
+				break;
+
+				/* The SDL_QUIT event indicates that the windows "Close" button has been pressed. We can ignore this if we need to, but that tends to make users rather impatient. */
+			case SDL_QUIT:
+				printf("Quit event. Bye.\n");
+				exit(0);
+		}
+	}
+	return 0;
 }
-/* Make sure SDL_Quit gets called when the program exits! */
-atexit(SDL_Quit);
+```
 
-MASTERING SDL
-/* Attempt to set a 256x256 hicolor (16-bit) video mode. */
-screen = SDL_SetVideoMode(256, 256, 16, 0);
-if (screen == NULL) {
-printf("Unable to set video mode: %s\n", SDL_GetError());
-return 1;
-}
-/* Start the event loop. Keep reading events until there
-is an error, or the user presses a mouse button. */
-while (SDL_WaitEvent(&event) != 0) {
-/* SDL_WaitEvent has filled in our event structure
-with the next event. We check its type field to
-find out what happened. */
-switch (event.type) {
-/* The next two event types deal
-with mouse activity. */
-case SDL_MOUSEMOTION:
-printf("Mouse motion. ");
-/* SDL provides the current position. */
-printf("New position is (%i,%i). ",
-event.motion.x, event.motion.y);
-/* We can also get relative motion. */
-printf("That is a (%i,%i) change.\n",
-event.motion.xrel, event.motion.yrel);
-break;
-case SDL_MOUSEBUTTONDOWN:
-printf("Mouse button pressed. ");
-printf("Button %i at (%i,%i)\n",
-event.button.button,
-event.button.x, event.button.y);
-break;
-/* The SDL_QUIT event indicates that
-the windows "Close" button has been
-pressed. We can ignore this if we
-need to, but that tends to make
+This program begins exactly as one of our early SDL video examples did. In fact, it *is* one of our early video examples, minus the drawing code. We need to open a window in order to receive events, but the window’s contents are inconsequential. Once the window is open, the program kicks off the event loops and begins to monitor the mouse.
 
-109
+Suppose that the user quickly moves the mouse from the coordinates (10,10) to (25,30), relative to the position of the window. SDL would report this as an SDL\_MOUSEMOTION event. The event structure’s motion.x and motion.y fields would contain 25 and 30, respectively. The xrel and yrel fields would contain 15 and 20, since the mouse traveled 15 pixels to the right and 20 down. It is possible that this motion would be broken into two or more mouse events (depending on the speed at which the user moved the mouse, among other things), but this can be dealt with by averaging mouse motion over several animation frames.
 
-110
+SDL’s event-processing model is sufficient in most cases, but sometimes a program simply needs to know the current position of the mouse, regardless of how it got there. Programs can bypass the event interface entirely with the **SDL\_GetMouseState** function. Unfortunately, this function does not automatically read the mouse’s current state; it simply reports the most recently read coordinates. If you choose to bypass the event system, you must call the **SDL\_PumpEvents** function periodically to ensure that your program receives up-to-date input device information.
 
-CHAPTER 4
-users rather impatient. */
-case SDL_QUIT:
-printf("Quit event. Bye.\n");
-exit(0);
-}
-}
-return 0;
+* **Function**
+	* SDL_GetMouseState(x, y)
 
-}
+* **Synopsis**
+	* Returns the current coordinates of the mouse pointer.  This is the same information that would be provided through the event interface, but sometimes it’s more convenient to poll input devices rather than collect event.
 
-This program begins exactly as one of our early SDL video examples did. In
-fact, it is one of our early video examples, minus the drawing code. We need to
-open a window in order to receive events, but the window’s contents are
-inconsequential. Once the window is open, the program kicks off the event loops
-and begins to monitor the mouse.
-Suppose that the user quickly moves the mouse from the coordinates (10,10) to
-(25,30), relative to the position of the window. SDL would report this as an
-SDL MOUSEMOTION event. The event structure’s motion.x and motion.y fields
-would contain 25 and 30, respectively. The xrel and yrel fields would contain
-15 and 20, since the mouse traveled 15 pixels to the right and 20 down. It is
-possible that this motion would be broken into two or more mouse events
-(depending on the speed at which the user moved the mouse, among other
-things), but this can be dealt with by averaging mouse motion over several
-animation frames.
-SDL’s event-processing model is sufficient in most cases, but sometimes a
-program simply needs to know the current position of the mouse, regardless of
-how it got there. Programs can bypass the event interface entirely with the
-SDL GetMouseState function. Unfortunately, this function does not
-automatically read the mouse’s current state; it simply reports the most recently
-read coordinates. If you choose to bypass the event system, you must call the
-SDL PumpEvents function periodically to ensure that your program receives
-up-to-date input device information.
+* **Returns**
+	* State of the mouse buttons as a Uint8 (which you can test by ANDing with the SDL\_BUTTON(*num*) macro).  Stores the x and y coordinates of the mouse in the given pointers.
 
-MASTERING SDL
-Function
+* **Parameters**
+	* x—Pointer to the integer that should receive the mouse’s x coordinate.
+	* y—Pointer to the integer that should receive the mouse’s y coordinate.
 
-SDL GetMouseState(x, y)
 
-Synopsis
+* **Function**
+	* SDL\_WaitEvent(event)
 
-Returns the current coordinates of the mouse pointer.
-This is the same information that would be provided
-through the event interface, but sometimes it’s more
-convenient to poll input devices rather than collect
-event.
+* **Synopsis**
+	* Retrieves the next event from SDL’s event queue. If there are no events, waits until one is available or something bad happens. On success, copies the new event into the provided **SDL\_Event** structure.
 
-Returns
+* **Returns**
+	* 1 on success, 0 on failure.
 
-State of the mouse buttons as a Uint8 (which you can
-test by ANDing with the SDL BUTTON(num ) macro).
-Stores the x and y coordinates of the mouse in the
-given pointers.
+* **Parameters**
+	* event—Pointer to the SDL Event structure that should receive the event.
 
-Parameters
+* **Function**
+	* SDL\_PollEvent(event)
 
-x—Pointer to the integer that should receive the
-mouse’s x coordinate.
-y—Pointer to the integer that should receive the
-mouse’s y coordinate.
+* **Synopsis**
+	* Retrieves the next event from SDL’s event queue. If there are no events, returns immediately. On success, copies the new event into the provided **SDL\_Event** structure.
 
-Function
+* **Returns**
+	* 1 if an event was available, 0 otherwise.
 
-SDL WaitEvent(event)
+* **Parameters**
+	* event—Pointer to the SDL Event structure that should receive the event.
 
-Synopsis
+* **Function**
+	* SDL\_PumpEvents()
 
-Retrieves the next event from SDL’s event queue. If
-there are no events, waits until one is available or
-something bad happens. On success, copies the new
-event into the provided SDL Event structure.
+* **Synopsis**
+	* Checks all input devices for new data. You only need to call this if you intend to bypass the normal event system; **SDL\_WaitEvent** and **SDL\_PollEvent** call this automatically. If you don’t call this, SDL GetKeyState and SDL GetMouseState are unlikely to return correct information. It’s common to put this at the top of a game loop.
 
-Returns
-
-1 on success, 0 on failure.
-
-Parameters
-
-event—Pointer to the SDL Event structure that
-should receive the event.
-
-Function
-
-SDL PollEvent(event)
-
-Synopsis
-
-Retrieves the next event from SDL’s event queue. If
-there are no events, returns immediately. On success,
-copies the new event into the provided SDL Event
-structure.
-
-Returns
-
-1 if an event was available, 0 otherwise.
-
-Parameters
-
-event—Pointer to the SDL Event structure that
-should receive the event.
-
-111
-
-112
-
-CHAPTER 4
-Function
-
-SDL PumpEvents()
-
-Synopsis
-
-Checks all input devices for new data. You only need
-to call this if you intend to bypass the normal event
-system; SDL WaitEvent and SDL PollEvent call this
-automatically. If you don’t call this, SDL GetKeyState
-and SDL GetMouseState are unlikely to return correct
-information. It’s common to put this at the top of a
-game loop.
-
+```
 Warning
-SDL’s event processing is not completely thread-safe. In particular,
-functions that collect new input (SDL PollEvent, SDL WaitEvent, and
-SDL PumpEvents) should be called only from the thread that originally
-set the video mode (with SDL SetVideoMode). However, it is safe to call
-the SDL PeepEvents function (not discussed here) from another thread.
-It’s possible to have SDL set up a completely separate event-processing
-thread, but this is only partially implemented and generally unportable.
-Your best bet is to handle input processing in your game’s main thread.
+
+SDL’s event processing is not completely thread-safe. In particular, functions that collect new input (SDL\_PollEvent, SDL\_WaitEvent, and SDL\_PumpEvents) should be called only from the thread that originally set the video mode (with SDL\_SetVideoMode). However, it is safe to call the SDL\_PeepEvents function (not discussed here) from another thread.  It’s possible to have SDL set up a completely separate event-processing thread, but this is only partially implemented and generally unportable.  Your best bet is to handle input processing in your game’s main thread.
+```
 
 ### Processing Keyboard Events
 

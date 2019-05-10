@@ -1,136 +1,70 @@
-# This is the default format. 
-# For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:year/:month/:day/:title 
-markdown: rdiscount
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+# Site settings
+title: Lorem Ipsum - Web Developer
+description: "A blog about lorem ipsum ..."
+baseurl: "/space-jekyll-template" # for test: remove string '/space-jekyll-template' to ''
+url: "http://victorvoid.github.io/space-jekyll-template/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
 
-pygments: true
-mardown: redcarpet
-safe: false
-# Themes are encouraged to use these universal variables 
-# so be sure to set them if your theme uses them.
-#
-title : Daemon' Blog
-tagline: Site Tagline
-author :
-  name : 张昆伦
-  email : zkl.1880@gmail.com
-  github : zkl
-  twitter : username
-  feedburner : feedname
+# User settings
+username: lorem ipsum
+user_title: Lorem Ipsum - FrontEnd
+email: lorem.lorem@ipsum.com
+twitter_username: loremipsum
+github_username:  loremipsum
+gplus_username:  loremipsum
+linkedin_public_url: loremipsum # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
+disqus_username: loremipsum
+profile_picture: https://68.media.tumblr.com/93f384858e9273d5b980b418e2f2f4d5/tumblr_o5i2aybLJG1uapsfmo2_250.png
 
-# The production_url is only used when full-domain names are needed
-# such as sitemap.txt 
-# Most places will/should use BASE_PATH to make the urls
-#
-# If you have set a CNAME (pages.github.com) set your custom domain here.
-# Else if you are pushing to username.github.io, replace with your username.
-# Finally if you are pushing to a GitHub project page, include the project name at the end.
-#
-production_url : http://zkl.github.io/
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
 
-# All Jekyll-Bootstrap specific configurations are namespaced into this hash
-#
-JB :
-  version : 0.3.0
+# html minify
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
 
-  # All links will be namespaced by BASE_PATH if defined.
-  # Links in your website should always be prefixed with {{BASE_PATH}}
-  # however this value will be dynamically changed depending on your deployment situation.
-  #
-  # CNAME (http://yourcustomdomain.com)
-  #   DO NOT SET BASE_PATH 
-  #   (urls will be prefixed with "/" and work relatively)
-  #
-  # GitHub Pages (http://username.github.io)
-  #   DO NOT SET BASE_PATH 
-  #   (urls will be prefixed with "/" and work relatively)
-  #
-  # GitHub Project Pages (http://username.github.io/project-name)
-  #
-  #   A GitHub Project site exists in the `gh-pages` branch of one of your repositories.
-  #  REQUIRED! Set BASE_PATH to: http://username.github.io/project-name
-  #
-  # CAUTION:
-  #   - When in Localhost, your site will run from root "/" regardless of BASE_PATH
-  #   - Only the following values are falsy: ["", null, false]
-  #   - When setting BASE_PATH it must be a valid url.
-  #     This means always setting the protocol (http|https) or prefixing with "/"
-  # BASE_PATH : /
+# Links to include in menu navigation
+links:
+  section_1:
+    - title: home
+      url: /
+      key_trigger: 1
+    - title: my posts
+      url: /posts
+      key_trigger: 2
+    - title: series
+      url: /series
+      key_trigger: 3
+    - title: tags
+      url: /tags
+      key_trigger: 4
+    - title: about me
+      url: /about
+      key_trigger: 5
+  section_2:
+    - title: github
+      url: http://www.github.com/victorvoid
+      new_tab: true
+      key_trigger: g
+    - title: twitter
+      url: http://www.twitter.com/victorvoid
+      key_trigger: t
+    - title: search
+      url: ""
+      key_trigger: s #WARNING: search only works with "s"
 
-  # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
-  # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
-  #
-  # Override this by defining an absolute path to assets here.
-  # ex: 
-  #   http://s3.amazonaws.com/yoursite/themes/watermelon
-  #   /assets
-  #
-  ASSET_PATH : False
+# projects in header index
+projects:
+  - name: fluany
+    url: https://github.com/fluany/fluany
+  - name: vim-frontend
+    url: https://github.com/victorvoid/vim-frontend
+  - name: generator-capybara
+    url: https://github.com/victorvoid/generator-capybara 
 
-  # These paths are to the main pages Jekyll-Bootstrap ships with.
-  # Some JB helpers refer to these paths; change them here if needed.
-  #
-  archive_path: /archive.html
-  categories_path : /categories.html
-  tags_path : /tags.html
-  about_path : /about.html
-  atom_path : /atom.xml
-  rss_path : /rss.xml
-
-  # Settings for comments helper
-  # Set 'provider' to the comment provider you want to use.
-  # Set 'provider' to false to turn commenting off globally.
-  #
-  comments :
-    provider : custom
-    youyan :
-      uid : "1926680"
-      verifyid : "279f65bd6d"
-    disqus :
-      short_name : 
-    livefyre :
-      site_id : 
-    intensedebate :
-      account :
-    facebook :
-      appid : 
-      num_posts:
-      width: 
-      colorscheme: 
-   
-  # Settings for analytics helper
-  # Set 'provider' to the analytics provider you want to use.
-  # Set 'provider' to false to turn analytics off globally.
-  #        
-  analytics :
-    provider : 
-    google : 
-      tracking_id :
-    getclicky :
-      site_id : 
-    mixpanel :
-      token : 
-    piwik :
-      baseURL :  # Piwik installation address (without protocol)
-      idsite :                    # the id of the site on Piwik
-
-  # Settings for sharing helper. 
-  # Sharing is for things like tweet, plusone, like, reddit buttons etc.
-  # Set 'provider' to the sharing provider you want to use.
-  # Set 'provider' to false to turn sharing off globally.
-  #
-  sharing :
-    provider : false
-    
-  # Settings for all other include helpers can be defined by creating 
-  # a hash with key named for the given helper. ex:
-  #
-  #   pages_list :
-  #     provider : "custom"   
-  #
-  # Setting any helper's provider to 'custom' will bypass the helper code
-  # and include your custom code. Your custom file must be defined at:
-  #   ./_includes/custom/[HELPER]
-  # where [HELPER] is the name of the helper you are overriding.
-  
+# exclude my node related stuff
+exclude: ['package.json', 'src', 'node_modules']
